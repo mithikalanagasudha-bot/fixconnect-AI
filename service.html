@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Services | FixConnect AI</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f9ff;
+      color: #102a5c;
+    }
+
+    /* NAVBAR */
+
+    header {
+      background: white;
+      padding: 18px 7%;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: 800;
+      color: #102a5c;
+    }
+
+    .logo span {
+      color: #2563eb;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 25px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover,
+    .nav-links .active {
+      color: #2563eb;
+    }
+
+    .login-btn {
+      background: #102a5c;
+      color: white !important;
+      padding: 10px 18px;
+      border-radius: 8px;
+    }
+
+    .sos-btn {
+      background: #f97316;
+      color: white !important;
+      padding: 10px 17px;
+      border-radius: 8px;
+    }
+
+    /* HERO */
+
+    .hero {
+      text-align: center;
+      padding: 70px 20px 45px;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 span {
+      color: #2563eb;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      color: #64748b;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    /* SERVICES */
+
+    .services {
+      width: 86%;
+      max-width: 1150px;
+      margin: 10px auto 70px;
+
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 22px rgba(30,64,175,0.10);
+      transition: 0.25s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 28px rgba(30,64,175,0.16);
+    }
+
+    .service-card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .service-content {
+      padding: 20px;
+    }
+
+    .service-content h2 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .service-content p {
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .service-content button {
+      border: none;
+      background: #2563eb;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .service-content button:hover {
+      background: #1d4ed8;
+    }
+
+    /* BOTTOM CTA */
+
+    .cta {
+      width: 86%;
+      max-width: 1100px;
+      margin: 0 auto 60px;
+      background: #102a5c;
+      color: white;
+      border-radius: 18px;
+      padding: 35px;
+      text-align: center;
+    }
+
+    .cta h2 {
+      margin-bottom: 10px;
+    }
+
+    .cta p {
+      color: #dbeafe;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .cta button {
+      background: white;
+      color: #102a5c;
+      border: none;
+      padding: 11px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #081a3d;
+      color: white;
+      padding: 35px 7%;
+      text-align: center;
+    }
+
+    footer h3 {
+      margin-bottom: 8px;
+    }
+
+    footer p {
+      color: #a9b9d4;
+      font-size: 12px;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 800px) {
+
+      .nav-links {
+        gap: 10px;
+      }
+
+      .nav-links a {
+        font-size: 11px;
+      }
+
+      .services {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+    }
+
+    @media (max-width: 550px) {
+
+      .nav-links a:nth-child(2),
+      .nav-links a:nth-child(3),
+      .nav-links a:nth-child(4) {
+        display: none;
+      }
+
+      .services {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<header>
+  <nav>
+
+    <div class="logo">
+      FixConnect <span>AI</span>
+    </div>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+
+      <a href="service.html" class="active">
+        Services
+      </a>
+
+      <a href="about.html">
+        About
+      </a>
+
+      <a href="contact.html">
+        Contact
+      </a>
+
+      <a href="login.html" class="login-btn">
+        Login
+      </a>
+
+      <a href="emergency.html" class="sos-btn">
+        Emergency SOS
+      </a>
+    </div>
+
+  </nav>
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <h1>
+    Our <span>Services</span>
+  </h1>
+
+  <p>
+    From everyday repairs to urgent home emergencies,
+    FixConnect AI helps you find trusted technicians
+    quickly and easily.
+  </p>
+
+</section>
+
+
+<!-- SERVICES -->
+
+<section class="services">
+
+
+  <!-- PLUMBING -->
+
+  <div class="service-card">
+
+    <img
+      src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=900&q=85"
+      alt="Plumbing service"
+    >
+
+    <div class="service-content">
+
+      <h2>🔧 Plumbing</h2>
+
+      <p>
+        Pipe leakage, tap repair, sink blockage,
+        bathroom plumbing and water-related repairs.
+      </p>
+
+      <button onclick="requestService('Plumbing')">
+        Request Service
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ELECTRICAL -->
+
+  <div class="service-card">
+
+    <img
+      src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=900&q=85"
+      alt="Electrical service"
+    >
+
+    <div class="service-content">
+
+      <h2>⚡ Electrical</h2>
+
+      <p>
+        Switchboard repairs, wiring issues,
+        electrical inspection and home electrical services.
+      </p>
+
+      <button onclick="requestService('Electrical')">
+        Request Service
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- AC -->
+
+  <div class="service-card">
+
+    <img 
+    src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80"
+                alt="Professional young male technician in a blue-and-white uniform repairing a home system"
+              />
+    
+
+    <div class="service-content">
+
+      <h2>❄️ AC Repair</h2>
+
+      <p>
+        AC servicing, cooling problems,
+        installation support and maintenance.
+      </p>
+
+      <button onclick="requestService('AC Repair')">
+        Request Service
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- APPLIANCE -->
+
+  <div class="service-card">
+
+    <img
+      src="https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=900&q=85"
+      alt="Appliance repair"
+    >
+
+    <div class="service-content">
+
+      <h2>🔌 Appliance Repair</h2>
+
+      <p>
+        Washing machine, refrigerator,
+        microwave and other household appliance repairs.
+      </p>
+
+      <button onclick="requestService('Appliance Repair')">
+        Request Service
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- CLEANING -->
+
+  <div class="service-card">
+
+    <img
+      src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=85"
+      alt="Home cleaning service"
+    >
+
+    <div class="service-content">
+
+      <h2>🧹 Cleaning</h2>
+
+      <p>
+        Home cleaning, kitchen cleaning,
+        bathroom cleaning and maintenance services.
+      </p>
+
+      <button onclick="requestService('Cleaning')">
+        Request Service
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- CARPENTRY -->
+
+  <div class="service-card">
+
+    <img
+      src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=900&q=85"
+      alt="Carpentry service"
+    >
+
+    <div class="service-content">
+
+      <h2>🪚 Carpentry</h2>
+
+      <p>
+        Furniture repair, door repair,
+        shelves, fittings and other carpentry work.
+      </p>
+
+      <button onclick="requestService('Carpentry')">
+        Request Service
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CTA -->
+
+<section class="cta">
+
+  <h2>Need a Technician?</h2>
+
+  <p>
+    Describe your problem and let FixConnect AI
+    help you find the right service provider.
+  </p>
+
+  <button onclick="goToLogin()">
+    Find a Technician
+  </button>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <h3>FixConnect AI</h3>
+
+  <p>
+    Smart Solutions. Trusted Technicians.
+  </p>
+
+  <p style="margin-top:10px;">
+    © 2026 FixConnect AI. All rights reserved.
+  </p>
+
+</footer>
+
+
+<script>
+
+function requestService(service) {
+
+  localStorage.setItem("selectedService", service);
+
+  window.location.href = "login.html";
+
+}
+
+function goToLogin() {
+
+  window.location.href = "login.html";
+
+}
+
+</script>
+
+</body>
+</html>
