@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Emergency SOS | FixConnect AI</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#f5f9ff;
+  color:#102a5c;
+}
+
+/* NAVBAR */
+
+header{
+  background:white;
+  padding:18px 7%;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-size:23px;
+  font-weight:800;
+  color:#102a5c;
+}
+
+.logo span{
+  color:#2563eb;
+}
+
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:24px;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:#334155;
+  font-size:14px;
+  font-weight:600;
+}
+
+.nav-links a:hover,
+.nav-links .active{
+  color:#2563eb;
+}
+
+.login{
+  background:#102a5c;
+  color:white !important;
+  padding:10px 18px;
+  border-radius:8px;
+}
+
+.sos{
+  background:#f97316;
+  color:white !important;
+  padding:10px 17px;
+  border-radius:8px;
+}
+
+/* HERO */
+
+.hero{
+  text-align:center;
+  padding:65px 20px 30px;
+}
+
+.sos-icon{
+  width:82px;
+  height:82px;
+  margin:0 auto 20px;
+
+  background:#fff1f2;
+  border:2px solid #fecdd3;
+  border-radius:50%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:40px;
+}
+
+.hero h1{
+  font-size:40px;
+  margin-bottom:12px;
+}
+
+.hero h1 span{
+  color:#ef4444;
+}
+
+.hero p{
+  max-width:650px;
+  margin:auto;
+  color:#64748b;
+  line-height:1.7;
+  font-size:15px;
+}
+
+/* EMERGENCY OPTIONS */
+
+.emergency-section{
+  width:86%;
+  max-width:1050px;
+  margin:35px auto 60px;
+}
+
+.emergency-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.card{
+  background:white;
+  padding:25px 20px;
+  border-radius:16px;
+  text-align:center;
+  box-shadow:0 6px 22px rgba(30,64,175,.10);
+  border:1px solid #edf2f8;
+}
+
+.card-icon{
+  width:65px;
+  height:65px;
+  margin:0 auto 15px;
+
+  background:#eff6ff;
+  border-radius:15px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:30px;
+}
+
+.card h2{
+  font-size:17px;
+  margin-bottom:8px;
+}
+
+.card p{
+  color:#64748b;
+  font-size:13px;
+  line-height:1.6;
+  margin-bottom:18px;
+}
+
+.card button{
+  border:none;
+  background:#173b8f;
+  color:white;
+  padding:10px 18px;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.card button:hover{
+  background:#2563eb;
+}
+
+/* SOS BOX */
+
+.sos-box{
+  background:#102a5c;
+  color:white;
+  border-radius:18px;
+  padding:35px 25px;
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.sos-box h2{
+  margin-bottom:10px;
+}
+
+.sos-box p{
+  color:#dbeafe;
+  font-size:13px;
+  margin-bottom:20px;
+}
+
+.main-sos{
+  border:none;
+  background:#ef4444;
+  color:white;
+  padding:14px 35px;
+  border-radius:9px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.main-sos:hover{
+  background:#dc2626;
+}
+
+/* NOTICE */
+
+.notice{
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+  border-radius:12px;
+  padding:15px;
+  margin-bottom:35px;
+  color:#9a3412;
+  font-size:12px;
+  text-align:center;
+}
+
+/* FOOTER */
+
+footer{
+  background:#081a3d;
+  color:white;
+  padding:35px 7%;
+  text-align:center;
+}
+
+footer h3{
+  margin-bottom:8px;
+}
+
+footer p{
+  color:#a9b9d4;
+  font-size:12px;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+  .emergency-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .nav-links{
+    gap:10px;
+  }
+
+  .nav-links a{
+    font-size:11px;
+  }
+}
+
+@media(max-width:550px){
+
+  .emergency-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:31px;
+  }
+
+  .nav-links a:nth-child(2),
+  .nav-links a:nth-child(3),
+  .nav-links a:nth-child(4){
+    display:none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<header>
+
+<nav>
+
+<div class="logo">
+FixConnect <span>AI</span>
+</div>
+
+<div class="nav-links">
+
+<a href="index.html">
+Home
+</a>
+
+<a href="service.html">
+Services
+</a>
+
+<a href="about.html">
+About
+</a>
+
+<a href="contact.html">
+Contact
+</a>
+
+<a href="login.html" class="login">
+Login
+</a>
+
+<a href="emergency.html" class="sos active">
+Emergency SOS
+</a>
+
+</div>
+
+</nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="sos-icon">
+🚨
+</div>
+
+<h1>
+Emergency <span>Support</span>
+</h1>
+
+<p>
+Facing an urgent home repair problem?
+FixConnect AI helps you quickly request emergency
+support from available service professionals.
+</p>
+
+</section>
+
+
+<!-- EMERGENCY SERVICES -->
+
+<section class="emergency-section">
+
+<div class="emergency-grid">
+
+
+<div class="card">
+
+<div class="card-icon">
+💧
+</div>
+
+<h2>Water Leakage</h2>
+
+<p>
+Sudden pipe leakage, burst pipes or
+major water problems at home.
+</p>
+
+<button onclick="requestEmergency('Water Leakage')">
+Request Help
+</button>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+⚡
+</div>
+
+<h2>Electrical Emergency</h2>
+
+<p>
+Urgent electrical problems that require
+professional assistance.
+</p>
+
+<button onclick="requestEmergency('Electrical Emergency')">
+Request Help
+</button>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+❄️
+</div>
+
+<h2>AC Emergency</h2>
+
+<p>
+Urgent AC breakdown or cooling problems
+requiring technician support.
+</p>
+
+<button onclick="requestEmergency('AC Emergency')">
+Request Help
+</button>
+
+</div>
+
+</div>
+
+
+<!-- MAIN SOS -->
+
+<div class="sos-box">
+
+<h2>Need Immediate Assistance?</h2>
+
+<p>
+Submit an emergency request and connect
+with the appropriate service support.
+</p>
+
+<button class="main-sos" onclick="activateSOS()">
+🚨 Activate Emergency SOS
+</button>
+
+</div>
+
+
+<div class="notice">
+
+<strong>Safety First:</strong>
+For life-threatening emergencies or situations
+requiring police, fire or medical assistance,
+contact your local emergency services immediately.
+
+</div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<h3>FixConnect AI</h3>
+
+<p>
+Smart Solutions. Trusted Technicians.
+</p>
+
+<p style="margin-top:10px;">
+© 2026 FixConnect AI. All rights reserved.
+</p>
+
+</footer>
+
+
+<script>
+
+function requestEmergency(type){
+
+localStorage.setItem(
+"emergencyType",
+type
+);
+
+alert(
+type + " request selected."
+);
+
+window.location.href="login.html";
+
+}
+
+
+function activateSOS(){
+
+localStorage.setItem(
+"emergencyType",
+"Emergency SOS"
+);
+
+alert(
+"Emergency SOS selected. Please login to continue."
+);
+
+window.location.href="login.html";
+
+}
+
+</script>
+
+</body>
+</html>
