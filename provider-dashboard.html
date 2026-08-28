@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Provider Dashboard | FixConnect AI</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:Arial, sans-serif;
+  background:#f4f7fc;
+  color:#172554;
+}
+
+.layout{display:flex;min-height:100vh}
+
+/* SIDEBAR */
+.sidebar{
+  width:250px;
+  background:#0b2050;
+  color:white;
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  padding:25px 16px;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:800;
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.logo span{color:#60a5fa}
+
+.menu-title{
+  color:#91a4c9;
+  font-size:11px;
+  margin:20px 10px 8px;
+  text-transform:uppercase;
+}
+
+.menu button{
+  width:100%;
+  padding:13px;
+  border:0;
+  background:none;
+  color:#dbeafe;
+  text-align:left;
+  border-radius:9px;
+  margin:3px 0;
+  cursor:pointer;
+  font-size:13px;
+}
+
+.menu button:hover,
+.menu button.active{
+  background:#2563eb;
+  color:white;
+}
+
+.logout{
+  background:#dc2626!important;
+  color:white!important;
+  margin-top:20px!important;
+}
+
+/* MAIN */
+.main{
+  margin-left:250px;
+  width:calc(100% - 250px);
+  padding:28px;
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
+}
+
+.topbar h1{font-size:27px}
+.topbar p{color:#64748b;font-size:13px;margin-top:6px}
+
+.provider{
+  background:white;
+  padding:12px 17px;
+  border-radius:12px;
+  box-shadow:0 4px 15px #dce4f2;
+  font-size:13px;
+  font-weight:bold;
+}
+
+/* SECTIONS */
+.section{display:none}
+.section.active{display:block}
+
+/* STATS */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-bottom:22px;
+}
+
+.stat{
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 5px 18px #dfe6f1;
+}
+
+.stat-icon{
+  font-size:23px;
+  margin-bottom:12px;
+}
+
+.stat p{
+  font-size:12px;
+  color:#64748b;
+  margin-bottom:7px;
+}
+
+.stat h2{font-size:25px}
+
+/* CARD */
+.card{
+  background:white;
+  padding:23px;
+  border-radius:16px;
+  margin-bottom:22px;
+  box-shadow:0 5px 18px #dfe6f1;
+}
+
+.card-head{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+
+.card h2{font-size:18px}
+.card-head p{font-size:12px;color:#64748b;margin-top:5px}
+
+/* REQUEST */
+.item{
+  border:1px solid #e1e8f2;
+  border-radius:12px;
+  padding:17px;
+  margin-bottom:13px;
+}
+
+.item-top{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.item h3{font-size:14px;margin-bottom:7px}
+
+.item p{
+  font-size:12px;
+  color:#64748b;
+  margin:5px 0;
+}
+
+.status{
+  background:#dbeafe;
+  color:#1d4ed8;
+  padding:6px 10px;
+  height:max-content;
+  border-radius:20px;
+  font-size:10px;
+  font-weight:bold;
+  white-space:nowrap;
+}
+
+.buttons{
+  display:flex;
+  gap:8px;
+  margin-top:14px;
+  flex-wrap:wrap;
+}
+
+button.action{
+  border:0;
+  border-radius:8px;
+  padding:9px 13px;
+  cursor:pointer;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.accept{background:#173b8f;color:white}
+.reject{background:#fee2e2;color:#b91c1c}
+.complete{background:#dcfce7;color:#15803d}
+.view{background:#e5efff;color:#1d4ed8}
+
+/* QUICK */
+.quick{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+}
+
+.quick button{
+  background:#f8fbff;
+  border:1px solid #e0e8f3;
+  padding:18px;
+  border-radius:12px;
+  text-align:left;
+  cursor:pointer;
+}
+
+.quick button:hover{border-color:#60a5fa}
+
+.quick span{font-size:24px}
+.quick h3{font-size:13px;margin-top:9px}
+.quick p{font-size:11px;color:#64748b;margin-top:5px}
+
+/* EARNINGS */
+.earnings{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.earning{
+  padding:20px;
+  background:#f8fbff;
+  border:1px solid #e0e8f3;
+  border-radius:12px;
+}
+
+.earning p{
+  font-size:12px;
+  color:#64748b;
+  margin-bottom:8px;
+}
+
+.earning strong{font-size:22px}
+
+/* BAR CHART */
+.chart{
+  display:flex;
+  align-items:end;
+  height:210px;
+  gap:20px;
+  padding:20px;
+  border:1px solid #e1e8f2;
+  border-radius:12px;
+  margin-top:15px;
+}
+
+.bar-wrap{
+  flex:1;
+  text-align:center;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:end;
+}
+
+.bar{
+  width:100%;
+  background:#2563eb;
+  border-radius:6px 6px 0 0;
+  min-height:20px;
+}
+
+.bar-wrap span{
+  font-size:10px;
+  color:#64748b;
+  margin-top:7px;
+}
+
+/* PROFILE */
+.profile{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  margin-bottom:25px;
+}
+
+.profile img{
+  width:85px;
+  height:85px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+.profile h2{font-size:20px}
+.profile p{font-size:12px;color:#64748b;margin-top:5px}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.full{grid-column:1/-1}
+
+label{
+  font-size:12px;
+  font-weight:bold;
+}
+
+input,select,textarea{
+  width:100%;
+  border:1px solid #dbe4ef;
+  padding:12px;
+  border-radius:9px;
+  outline:none;
+  font-family:inherit;
+}
+
+textarea{min-height:100px}
+
+.save{
+  margin-top:17px;
+  border:0;
+  padding:12px 20px;
+  border-radius:9px;
+  background:#173b8f;
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+/* TOGGLE */
+.availability{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-top:18px;
+}
+
+.toggle{
+  width:50px;
+  height:27px;
+  background:#94a3b8;
+  border-radius:30px;
+  cursor:pointer;
+  padding:3px;
+}
+
+.toggle-circle{
+  width:21px;
+  height:21px;
+  background:white;
+  border-radius:50%;
+  transition:.2s;
+}
+
+.toggle.on{background:#16a34a}
+.toggle.on .toggle-circle{margin-left:23px}
+
+/* EMERGENCY */
+.emergency{
+  border:1px solid #fecaca;
+  background:#fffafa;
+}
+
+/* REVIEWS */
+.review{
+  padding:16px;
+  border:1px solid #e1e8f2;
+  border-radius:12px;
+  margin-bottom:12px;
+}
+
+.review h3{font-size:14px}
+.stars{color:#f59e0b;margin:7px 0}
+.review p{font-size:12px;color:#64748b}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  right:25px;
+  bottom:25px;
+  background:#173b8f;
+  color:white;
+  padding:13px 18px;
+  border-radius:9px;
+  display:none;
+  font-size:12px;
+  z-index:100;
+}
+
+/* MOBILE */
+@media(max-width:1000px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .quick{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:700px){
+  .sidebar{
+    position:relative;
+    width:100%;
+  }
+
+  .layout{display:block}
+
+  .main{
+    margin-left:0;
+    width:100%;
+    padding:16px;
+  }
+
+  .stats,
+  .quick,
+  .earnings,
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .full{grid-column:auto}
+
+  .topbar{
+    align-items:flex-start;
+    gap:12px;
+    flex-direction:column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+  <div class="logo">
+    FixConnect <span>AI</span>
+  </div>
+
+  <div class="menu">
+
+    <div class="menu-title">Main</div>
+
+    <button class="active" onclick="showSection('dashboard',this)">
+      🏠 Dashboard
+    </button>
+
+    <button onclick="showSection('requests',this)">
+      📋 Service Requests
+    </button>
+
+    <button onclick="showSection('jobs',this)">
+      🔧 My Jobs
+    </button>
+
+    <button onclick="showSection('bookings',this)">
+      📅 Bookings
+    </button>
+
+    <div class="menu-title">Business</div>
+
+    <button onclick="showSection('emergency',this)">
+      🚨 Emergency Requests
+    </button>
+
+    <button onclick="showSection('reviews',this)">
+      ⭐ Reviews
+    </button>
+
+    <button onclick="showSection('earnings',this)">
+      💰 Earnings
+    </button>
+
+    <div class="menu-title">Account</div>
+
+    <button onclick="showSection('profile',this)">
+      👤 My Profile
+    </button>
+
+    <button class="logout" onclick="logout()">
+      ↩ Logout
+    </button>
+
+  </div>
+</aside>
+
+
+<!-- MAIN -->
+<main class="main">
+
+<div class="topbar">
+
+  <div>
+    <h1>Welcome back, Raj! 👋</h1>
+    <p>Manage your services, jobs and customers.</p>
+  </div>
+
+  <div class="provider">
+    🔧 Verified Service Provider
+  </div>
+
+</div>
+
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="section active">
+
+<div class="stats">
+
+  <div class="stat">
+    <div class="stat-icon">📋</div>
+    <p>New Requests</p>
+    <h2 id="requestCount">4</h2>
+  </div>
+
+  <div class="stat">
+    <div class="stat-icon">🔧</div>
+    <p>Active Jobs</p>
+    <h2>3</h2>
+  </div>
+
+  <div class="stat">
+    <div class="stat-icon">📅</div>
+    <p>Today's Bookings</p>
+    <h2>2</h2>
+  </div>
+
+  <div class="stat">
+    <div class="stat-icon">⭐</div>
+    <p>Average Rating</p>
+    <h2>4.9</h2>
+  </div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-head">
+  <div>
+    <h2>Quick Actions</h2>
+    <p>Manage your work quickly.</p>
+  </div>
+</div>
+
+<div class="quick">
+
+<button onclick="showSection('requests')">
+  <span>📋</span>
+  <h3>Service Requests</h3>
+  <p>View customer requests</p>
+</button>
+
+<button onclick="showSection('jobs')">
+  <span>🔧</span>
+  <h3>My Jobs</h3>
+  <p>Manage active jobs</p>
+</button>
+
+<button onclick="showSection('bookings')">
+  <span>📅</span>
+  <h3>Bookings</h3>
+  <p>View appointments</p>
+</button>
+
+<button onclick="showSection('earnings')">
+  <span>💰</span>
+  <h3>Earnings</h3>
+  <p>Track your income</p>
+</button>
+
+</div>
+</div>
+
+
+<div class="card">
+
+<div class="card-head">
+  <div>
+    <h2>Recent Service Requests</h2>
+    <p>Requests matched by FixConnect AI.</p>
+  </div>
+</div>
+
+<div id="dashboardRequests"></div>
+
+</div>
+
+</section>
+
+
+<!-- REQUESTS -->
+<section id="requests" class="section">
+
+<div class="card">
+
+<div class="card-head">
+  <div>
+    <h2>📋 Service Requests</h2>
+    <p>Customer requests assigned to you.</p>
+  </div>
+</div>
+
+<div id="requestsList"></div>
+
+</div>
+
+</section>
+
+
+<!-- JOBS -->
+<section id="jobs" class="section">
+
+<div class="card">
+
+<div class="card-head">
+  <div>
+    <h2>🔧 My Jobs</h2>
+    <p>Manage your accepted jobs.</p>
+  </div>
+</div>
+
+<div id="jobsList">
+
+<div class="item">
+
+<div class="item-top">
+
+<div>
+<h3>🔧 Bathroom Tap Repair</h3>
+<p>👤 Customer: Priya</p>
+<p>📍 Guntur</p>
+<p>📅 28 August 2026 • 10:30 AM</p>
+</div>
+
+<span class="status">In Progress</span>
+
+</div>
+
+<div class="buttons">
+<button class="action complete" onclick="completeJob(this)">
+Mark Completed
+</button>
+</div>
+
+</div>
+
+
+<div class="item">
+
+<div class="item-top">
+
+<div>
+<h3>🚰 Kitchen Pipe Repair</h3>
+<p>👤 Customer: Anjali</p>
+<p>📍 Guntur</p>
+<p>📅 29 August 2026 • 2:00 PM</p>
+</div>
+
+<span class="status">Accepted</span>
+
+</div>
+
+<div class="buttons">
+<button class="action accept" onclick="startJob(this)">
+Start Job
+</button>
+</div>
+
+</div>
+
+
+<div class="item">
+
+<div class="item-top">
+
+<div>
+<h3>⚡ Electrical Inspection</h3>
+<p>👤 Customer: Sneha</p>
+<p>📍 Guntur</p>
+<p>📅 30 August 2026 • 11:00 AM</p>
+</div>
+
+<span class="status">Scheduled</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- BOOKINGS -->
+<section id="bookings" class="section">
+
+<div class="card">
+
+<div class="card-head">
+  <div>
+    <h2>📅 Bookings</h2>
+    <p>Your upcoming customer appointments.</p>
+  </div>
+</div>
+
+<div class="item">
+
+<div class="item-top">
+<div>
+<h3>🔧 Plumbing Service</h3>
+<p>👤 Customer: Anjali</p>
+<p>📍 Guntur</p>
+<p>📅 28 August 2026</p>
+<p>🕐 10:30 AM</p>
+</div>
+
+<span class="status">Confirmed</span>
+</div>
+
+<div class="buttons">
+<button class="action view" onclick="notify('Booking details opened')">
+View Details
+</button>
+
+<button class="action accept" onclick="notify('Booking confirmed')">
+Confirm
+</button>
+</div>
+
+</div>
+
+
+<div class="item">
+
+<div class="item-top">
+<div>
+<h3>❄️ AC Repair</h3>
+<p>👤 Customer: Rahul</p>
+<p>📍 Guntur</p>
+<p>📅 29 August 2026</p>
+<p>🕐 2:00 PM</p>
+</div>
+
+<span class="status">Confirmed</span>
+</div>
+
+<div class="buttons">
+<button class="action view" onclick="notify('Booking details opened')">
+View Details
+</button>
+
+<button class="action complete" onclick="completeJob(this)">
+Mark Completed
+</button>
+</div>
+
+</div>
+
+
+<div class="item">
+
+<div class="item-top">
+<div>
+<h3>⚡ Electrical Repair</h3>
+<p>👤 Customer: Sneha</p>
+<p>📍 Guntur</p>
+<p>📅 30 August 2026</p>
+<p>🕐 11:00 AM</p>
+</div>
+
+<span class="status">Scheduled</span>
+</div>
+
+<div class="buttons">
+<button class="action view" onclick="notify('Reschedule option opened')">
+Reschedule
+</button>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- EMERGENCY -->
+<section id="emergency" class="section">
+
+<div class="card emergency">
+
+<div class="card-head">
+<div>
+<h2>🚨 Emergency Requests</h2>
+<p>Urgent customer requests requiring quick response.</p>
+</div>
+</div>
+
+<div class="item">
+
+<div class="item-top">
+
+<div>
+<h3>⚠️ Emergency Water Leakage</h3>
+<p>👤 Customer: Rahul</p>
+<p>📍 Guntur</p>
+<p>🕐 Requested: Immediate Assistance</p>
+<p>Problem: Major water leakage in kitchen.</p>
+</div>
+
+<span class="status" style="background:#fee2e2;color:#b91c1c">
+URGENT
+</span>
+
+</div>
+
+<div class="buttons">
+<button class="action accept" onclick="acceptEmergency(this)">
+Accept Emergency
+</button>
+
+<button class="action view" onclick="notify('Emergency details opened')">
+View Details
+</button>
+</div>
+
+</div>
+
+
+<div class="item">
+
+<div class="item-top">
+
+<div>
+<h3>⚡ Electrical Emergency</h3>
+<p>👤 Customer: Kavya</p>
+<p>📍 Guntur</p>
+<p>🕐 Requested: Immediate Assistance</p>
+<p>Problem: Electrical issue requiring urgent inspection.</p>
+</div>
+
+<span class="status" style="background:#fee2e2;color:#b91c1c">
+URGENT
+</span>
+
+</div>
+
+<div class="buttons">
+<button class="action accept" onclick="acceptEmergency(this)">
+Accept Emergency
+</button>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- REVIEWS -->
+<section id="reviews" class="section">
+
+<div class="card">
+
+<div class="card-head">
+<div>
+<h2>⭐ Reviews & Ratings</h2>
+<p>Customer feedback.</p>
+</div>
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<div class="stat-icon">⭐</div>
+<p>Average Rating</p>
+<h2>4.9</h2>
+</div>
+
+<div class="stat">
+<div class="stat-icon">💬</div>
+<p>Total Reviews</p>
+<h2>48</h2>
+</div>
+
+<div class="stat">
+<div class="stat-icon">🏆</div>
+<p>5 Star Reviews</p>
+<h2>42</h2>
+</div>
+
+</div>
+
+
+<div class="review">
+<h3>Anjali</h3>
+<div class="stars">★★★★★</div>
+<p>Very professional service. The technician arrived on time and solved the plumbing issue quickly.</p>
+</div>
+
+<div class="review">
+<h3>Priya</h3>
+<div class="stars">★★★★★</div>
+<p>Excellent work and very polite communication.</p>
+</div>
+
+<div class="review">
+<h3>Sneha</h3>
+<div class="stars">★★★★☆</div>
+<p>Good service and quick response.</p>
+</div>
+
+<div class="review">
+<h3>Rahul</h3>
+<div class="stars">★★★★★</div>
+<p>Very satisfied with the repair service.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- EARNINGS -->
+<section id="earnings" class="section">
+
+<div class="card">
+
+<div class="card-head">
+<div>
+<h2>💰 Earnings</h2>
+<p>Track your service income.</p>
+</div>
+</div>
+
+<div class="earnings">
+
+<div class="earning">
+<p>Total Earnings</p>
+<strong>₹18,500</strong>
+</div>
+
+<div class="earning">
+<p>This Month</p>
+<strong>₹6,800</strong>
+</div>
+
+<div class="earning">
+<p>This Week</p>
+<strong>₹2,450</strong>
+</div>
+
+<div class="earning">
+<p>Pending Amount</p>
+<strong>₹1,200</strong>
+</div>
+
+<div class="earning">
+<p>Completed Jobs</p>
+<strong>24</strong>
+</div>
+
+<div class="earning">
+<p>Average Job Value</p>
+<strong>₹770</strong>
+</div>
+
+</div>
+
+<h3 style="margin-top:25px">Monthly Earnings</h3>
+
+<div class="chart">
+
+<div class="bar-wrap">
+<div class="bar" style="height:45%"></div>
+<span>Mar</span>
+</div>
+
+<div class="bar-wrap">
+<div class="bar" style="height:60%"></div>
+<span>Apr</span>
+</div>
+
+<div class="bar-wrap">
+<div class="bar" style="height:50%"></div>
+<span>May</span>
+</div>
+
+<div class="bar-wrap">
+<div class="bar" style="height:75%"></div>
+<span>Jun</span>
+</div>
+
+<div class="bar-wrap">
+<div class="bar" style="height:65%"></div>
+<span>Jul</span>
+</div>
+
+<div class="bar-wrap">
+<div class="bar" style="height:90%"></div>
+<span>Aug</span>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PROFILE -->
+<section id="profile" class="section">
+
+<div class="card">
+
+<div class="profile">
+
+<img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=300&q=80">
+
+<div>
+<h2>Raj Kumar</h2>
+<p>Professional Plumbing Specialist</p>
+<p>⭐ 4.9 Rating • ✓ Verified Technician</p>
+</div>
+
+</div>
+
+
+<div class="form-grid">
+
+<div class="form-group">
+<label>Full Name</label>
+<input id="name" value="Raj Kumar">
+</div>
+
+<div class="form-group">
+<label>Email</label>
+<input id="email" value="raj@example.com">
+</div>
+
+<div class="form-group">
+<label>Phone</label>
+<input id="phone" value="+91 9876543210">
+</div>
+
+<div class="form-group">
+<label>Service Category</label>
+<select id="category">
+<option>Plumbing</option>
+<option>Electrical</option>
+<option>AC Repair</option>
+<option>Appliance Repair</option>
+<option>Carpentry</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Experience</label>
+<input id="experience" value="5+ Years">
+</div>
+
+<div class="form-group">
+<label>Service Area</label>
+<input id="area" value="Guntur">
+</div>
+
+<div class="form-group full">
+<label>Skills</label>
+<input id="skills" value="Pipe Repair, Tap Repair, Water Leakage, Bathroom Plumbing">
+</div>
+
+<div class="form-group full">
+<label>About Me</label>
+<textarea id="about">Professional plumbing specialist providing reliable and trusted home repair services.</textarea>
+</div>
+
+</div>
+
+
+<div class="availability">
+
+<strong>Availability:</strong>
+
+<div class="toggle on" id="toggle" onclick="toggleAvailability()">
+<div class="toggle-circle"></div>
+</div>
+
+<span id="availabilityText">Available for Jobs</span>
+
+</div>
+
+
+<button class="save" onclick="saveProfile()">
+Save Changes
+</button>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* SECTION NAVIGATION */
+
+function showSection(id,button){
+
+  document.querySelectorAll(".section").forEach(section=>{
+    section.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll(".menu button").forEach(btn=>{
+    btn.classList.remove("active");
+  });
+
+  if(button) button.classList.add("active");
+
+  if(id==="requests"){
+    loadRequests();
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+
+/* SAMPLE REQUESTS */
+
+const requests = [
+
+{
+id:1,
+service:"🔧 Pipe Leakage Repair",
+customer:"Anjali",
+location:"Guntur",
+date:"28 August 2026",
+time:"10:30 AM",
+problem:"Water leakage from kitchen pipe.",
+ai:"AI detected: Plumbing / Pipe Leakage",
+cost:"₹500 - ₹800",
+priority:"Normal",
+status:"New"
+},
+
+{
+id:2,
+service:"🚰 Bathroom Tap Repair",
+customer:"Priya",
+location:"Guntur",
+date:"29 August 2026",
+time:"2:00 PM",
+problem:"Bathroom tap is leaking continuously.",
+ai:"AI detected: Tap Repair",
+cost:"₹300 - ₹600",
+priority:"Normal",
+status:"New"
+},
+
+{
+id:3,
+service:"🚿 Kitchen Sink Repair",
+customer:"Sneha",
+location:"Guntur",
+date:"30 August 2026",
+time:"11:00 AM",
+problem:"Kitchen sink pipe is blocked.",
+ai:"AI detected: Drain / Pipe Blockage",
+cost:"₹400 - ₹700",
+priority:"Normal",
+status:"New"
+},
+
+{
+id:4,
+service:"⚠️ Emergency Water Leakage",
+customer:"Rahul",
+location:"Guntur",
+date:"Today",
+time:"Immediate",
+problem:"Major water leakage at home.",
+ai:"AI detected: Emergency Plumbing",
+cost:"₹800 - ₹1,500",
+priority:"Urgent",
+status:"New"
+}
+
+];
+
+
+/* LOAD REQUESTS */
+
+function loadRequests(){
+
+  const container=document.getElementById("requestsList");
+
+  container.innerHTML="";
+
+  requests.forEach((r,index)=>{
+
+    container.innerHTML += `
+
+    <div class="item" id="request-${r.id}">
+
+      <div class="item-top">
+
+        <div>
+
+          <h3>${r.service}</h3>
+
+          <p>👤 Customer: ${r.customer}</p>
+
+          <p>📍 ${r.location}</p>
+
+          <p>📅 ${r.date} • ${r.time}</p>
+
+          <p>📝 ${r.problem}</p>
+
+          <p>🤖 ${r.ai}</p>
+
+          <p>💰 Estimated Cost: ${r.cost}</p>
+
+          <p>⚡ Priority: ${r.priority}</p>
+
+        </div>
+
+        <span class="status">${r.status}</span>
+
+      </div>
+
+      <div class="buttons">
+
+        <button class="action accept"
+        onclick="acceptRequest(${r.id},this)">
+        Accept
+        </button>
+
+        <button class="action reject"
+        onclick="rejectRequest(${r.id},this)">
+        Reject
+        </button>
+
+        <button class="action view"
+        onclick="notify('Request details opened')">
+        View Details
+        </button>
+
+      </div>
+
+    </div>
+
+    `;
+
+  });
+
+}
+
+
+/* DASHBOARD REQUESTS */
+
+function loadDashboardRequests(){
+
+  const container=document.getElementById("dashboardRequests");
+
+  container.innerHTML="";
+
+  requests.slice(0,3).forEach(r=>{
+
+    container.innerHTML += `
+
+    <div class="item">
+
+      <div class="item-top">
+
+        <div>
+
+          <h3>${r.service}</h3>
+
+          <p>👤 ${r.customer} • 📍 ${r.location}</p>
+
+          <p>📅 ${r.date} • ${r.time}</p>
+
+        </div>
+
+        <span class="status">${r.status}</span>
+
+      </div>
+
+      <div class="buttons">
+
+        <button class="action accept"
+        onclick="acceptRequest(${r.id},this)">
+        Accept
+        </button>
+
+        <button class="action reject"
+        onclick="rejectRequest(${r.id},this)">
+        Reject
+        </button>
+
+      </div>
+
+    </div>
+
+    `;
+
+  });
+
+}
+
+
+/* ACCEPT REQUEST */
+
+function acceptRequest(id,button){
+
+  const request=requests.find(r=>r.id===id);
+
+  if(request){
+
+    request.status="Accepted";
+
+    const item=button.closest(".item");
+
+    const status=item.querySelector(".status");
+
+    status.textContent="Accepted";
+
+    status.style.background="#dcfce7";
+    status.style.color="#15803d";
+
+    button.textContent="Accepted ✓";
+    button.disabled=true;
+
+    notify("Service request accepted successfully!");
+
+    saveData();
+
+  }
+
+}
+
+
+/* REJECT REQUEST */
+
+function rejectRequest(id,button){
+
+  const request=requests.find(r=>r.id===id);
+
+  if(request){
+
+    request.status="Rejected";
+
+    const item=button.closest(".item");
+
+    const status=item.querySelector(".status");
+
+    status.textContent="Rejected";
+
+    status.style.background="#fee2e2";
+    status.style.color="#b91c1c";
+
+    button.textContent="Rejected";
+
+    button.disabled=true;
+
+    notify("Service request rejected.");
+
+    saveData();
+
+  }
+
+}
+
+
+/* START JOB */
+
+function startJob(button){
+
+  const item=button.closest(".item");
+
+  const status=item.querySelector(".status");
+
+  status.textContent="In Progress";
+
+  status.style.background="#dbeafe";
+  status.style.color="#1d4ed8";
+
+  button.textContent="Job In Progress";
+
+  button.disabled=true;
+
+  notify("Job started successfully!");
+
+}
+
+
+/* COMPLETE JOB */
+
+function completeJob(button){
+
+  const item=button.closest(".item");
+
+  const status=item.querySelector(".status");
+
+  status.textContent="Completed";
+
+  status.style.background="#dcfce7";
+  status.style.color="#15803d";
+
+  button.textContent="Completed ✓";
+
+  button.disabled=true;
+
+  notify("Job marked as completed!");
+
+}
+
+
+/* EMERGENCY */
+
+function acceptEmergency(button){
+
+  const item=button.closest(".item");
+
+  const status=item.querySelector(".status");
+
+  status.textContent="Accepted";
+
+  status.style.background="#dcfce7";
+  status.style.color="#15803d";
+
+  button.textContent="Emergency Accepted ✓";
+
+  button.disabled=true;
+
+  notify("Emergency request accepted!");
+
+}
+
+
+/* PROFILE */
+
+function saveProfile(){
+
+  const profile={
+
+    name:document.getElementById("name").value,
+
+    email:document.getElementById("email").value,
+
+    phone:document.getElementById("phone").value,
+
+    category:document.getElementById("category").value,
+
+    experience:document.getElementById("experience").value,
+
+    area:document.getElementById("area").value,
+
+    skills:document.getElementById("skills").value,
+
+    about:document.getElementById("about").value
+
+  };
+
+  localStorage.setItem(
+    "fixconnectProviderProfile",
+    JSON.stringify(profile)
+  );
+
+  notify("Profile saved successfully!");
+
+}
+
+
+/* LOAD PROFILE */
+
+function loadProfile(){
+
+  const saved=
+    localStorage.getItem("fixconnectProviderProfile");
+
+  if(!saved) return;
+
+  const p=JSON.parse(saved);
+
+  document.getElementById("name").value=p.name;
+  document.getElementById("email").value=p.email;
+  document.getElementById("phone").value=p.phone;
+  document.getElementById("category").value=p.category;
+  document.getElementById("experience").value=p.experience;
+  document.getElementById("area").value=p.area;
+  document.getElementById("skills").value=p.skills;
+  document.getElementById("about").value=p.about;
+
+}
+
+
+/* AVAILABILITY */
+
+function toggleAvailability(){
+
+  const toggle=document.getElementById("toggle");
+
+  const text=document.getElementById("availabilityText");
+
+  toggle.classList.toggle("on");
+
+  if(toggle.classList.contains("on")){
+
+    text.textContent="Available for Jobs";
+
+    notify("You are now available for jobs.");
+
+    localStorage.setItem("providerAvailability","available");
+
+  }else{
+
+    text.textContent="Unavailable";
+
+    notify("You are now unavailable for jobs.");
+
+    localStorage.setItem("providerAvailability","unavailable");
+
+  }
+
+}
+
+
+/* LOAD AVAILABILITY */
+
+function loadAvailability(){
+
+  const value=
+    localStorage.getItem("providerAvailability");
+
+  if(value==="unavailable"){
+
+    document.getElementById("toggle")
+      .classList.remove("on");
+
+    document.getElementById("availabilityText")
+      .textContent="Unavailable";
+
+  }
+
+}
+
+
+/* LOGOUT */
+
+function logout(){
+
+  localStorage.removeItem("fixconnectLoggedIn");
+
+  window.location.href="login.html";
+
+}
+
+
+/* TOAST */
+
+function notify(message){
+
+  const toast=document.getElementById("toast");
+
+  toast.textContent=message;
+
+  toast.style.display="block";
+
+  setTimeout(()=>{
+    toast.style.display="none";
+  },2500);
+
+}
+
+
+/* SAVE DEMO DATA */
+
+function saveData(){
+
+  localStorage.setItem(
+    "fixconnectProviderRequests",
+    JSON.stringify(requests)
+  );
+
+}
+
+
+/* INITIALIZE */
+
+loadRequests();
+
+loadDashboardRequests();
+
+loadProfile();
+
+loadAvailability();
+
+</script>
+
+</body>
+</html>

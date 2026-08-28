@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Provider Registration - FixConnect AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="signup.css">
+    
+</head>
+
+<body>
+
+<div class="register-container">
+
+    <div class="register-box provider-box">
+        <h1>FixConnect <span>AI</span></h1>
+        <div class="signup-role-picker">
+    <a href="customer-register.html" class="signup-role">
+        Customer
+    </a>
+
+    <a href="provider-register.html" class="signup-role active">
+        Service Provider
+    </a>
+</div>
+        <h2>Service Provider Registration</h2>
+        <p class="subtitle">
+            Join FixConnect AI and connect with customers.
+        </p>
+
+        <form action="provider-dashboard.html">
+
+            <label>Full Name</label>
+            <input type="text" placeholder="Enter your full name" required>
+
+            <label>Mobile Number</label>
+            <input type="tel" placeholder="Enter mobile number" required>
+
+            <label>Email</label>
+            <input type="email" placeholder="Enter your email" required>
+
+            <label>Service Type</label>
+            <select required>
+                <option value="">Select your service</option>
+                <option>Electrician</option>
+                <option>Plumber</option>
+                <option>AC Technician</option>
+                <option>Carpenter</option>
+                <option>Appliance Repair</option>
+                <option>Painter</option>
+                <option>Other</option>
+            </select>
+
+            <label>Years of Experience</label>
+            <input type="number" min="0" placeholder="Enter experience">
+
+            <label>Service Location</label>
+            <input type="text" placeholder="Enter your service area" required>
+
+            <label>ID Proof</label>
+            <input type="file" accept=".jpg,.jpeg,.png,.pdf">
+
+            <label>Password</label>
+            <input type="password" placeholder="Create password" required>
+
+            <label>Confirm Password</label>
+            <input type="password" placeholder="Confirm password" required>
+
+            <button type="submit">Register as Service Provider</button>
+
+        </form>
+
+        <p class="login-text">
+            Already have an account?
+            <a href="login.html">Login</a>
+        </p>
+
+        <p class="back-text">
+            <a href="login.html">← Back to Login</a>
+        </p>
+    </div>
+
+</div>
+
+</body>
+</html>
