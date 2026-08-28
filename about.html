@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us | FixConnect AI</title>
+    <meta
+      name="description"
+      content="Learn about FixConnect AI's mission to revolutionize home repair through intelligent AI matching, verified professionals, and reliable emergency care."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    
+    <style>
+      /* Base Resets & Global Variables */
+      :root {
+        --primary: #0284c7;
+        --primary-dark: #0369a1;
+        --secondary: #0f172a;
+        --accent: #dc2626;
+        --light-bg: #f8fafc;
+        --card-bg: #ffffff;
+        --text-main: #334155;
+        --text-heading: #0f172a;
+        --text-muted: #64748b;
+        --border-color: #e2e8f0;
+        --max-width: 1200px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        color: var(--text-main);
+        background-color: #ffffff;
+        line-height: 1.6;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      .section-spacing {
+        padding: 5rem 0;
+      }
+
+      .light-panel {
+        background-color: var(--light-bg);
+      }
+
+      /* Typography Helpers */
+      .eyebrow {
+        font-size: 0.875rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .eyebrow-blue { color: var(--primary); }
+      .eyebrow-white { color: #93c5fd; }
+
+      h1 {
+        font-size: 2.75rem;
+        font-weight: 800;
+        color: var(--text-heading);
+        line-height: 1.2;
+        margin-bottom: 1rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text-heading);
+        margin-bottom: 1rem;
+      }
+
+      h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-heading);
+        margin-bottom: 0.5rem;
+      }
+
+      .center-heading {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      /* Header & Navigation */
+      .topbar {
+        background: #ffffff;
+        border-bottom: 1px solid var(--border-color);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .nav-wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 80px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-weight: 800;
+        font-size: 1.25rem;
+        color: var(--text-heading);
+      }
+
+      .brand-mark svg {
+        width: 36px;
+        height: 36px;
+        fill: var(--primary);
+      }
+
+      .main-nav {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        font-weight: 500;
+        font-size: 0.95rem;
+      }
+
+      .main-nav a:hover,
+      .main-nav a.active {
+        color: var(--primary);
+      }
+
+      .nav-button {
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        font-weight: 600;
+        transition: background 0.2s;
+      }
+
+      .nav-button-light {
+        background-color: var(--light-bg);
+        border: 1px solid var(--border-color);
+      }
+
+      .nav-button-light:hover {
+        background-color: #e2e8f0;
+      }
+
+      .nav-button-accent {
+        background-color: var(--accent);
+        color: #ffffff !important;
+      }
+
+      .nav-button-accent:hover {
+        background-color: #b91c1c;
+      }
+
+      /* Buttons */
+      .button {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .button-primary {
+        background-color: var(--primary);
+        color: #ffffff;
+      }
+
+      .button-primary:hover {
+        background-color: var(--primary-dark);
+      }
+
+      .button-secondary {
+        background-color: #ffffff;
+        border: 1px solid var(--border-color);
+        color: var(--text-heading);
+      }
+
+      .button-secondary:hover {
+        background-color: var(--light-bg);
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 4rem 0;
+        background: linear-gradient(180deg, #ffffff 0%, var(--light-bg) 100%);
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+      }
+
+      .hero-text {
+        font-size: 1.125rem;
+        color: var(--text-muted);
+        margin-bottom: 2rem;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .trust-line {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+
+      .trust-line .dot {
+        width: 4px;
+        height: 4px;
+        background-color: var(--border-color);
+        border-radius: 50%;
+      }
+
+      .hero-visual .image-card {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Feature & Steps Grids */
+      .feature-grid, .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+      }
+
+      /* Feature Cards with Images */
+      .feature-card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.08);
+      }
+
+      .feature-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+      }
+
+      .feature-body {
+        padding: 1.5rem;
+        flex-grow: 1;
+      }
+
+      /* Step Cards */
+      .step-card {
+        background: var(--card-bg);
+        padding: 2rem;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+      }
+
+      .step-number {
+        display: inline-block;
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+      }
+
+      /* Emergency CTA Banner */
+      .emergency-cta {
+        padding: 3rem 0;
+      }
+
+      .emergency-box {
+        background-color: var(--secondary);
+        color: #ffffff;
+        border-radius: 16px;
+        padding: 3rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .emergency-box h2 {
+        color: #ffffff;
+        margin-bottom: 0;
+      }
+
+      /* Footer */
+      .site-footer {
+        background-color: var(--secondary);
+        color: #94a3b8;
+        padding-top: 4rem;
+        font-size: 0.95rem;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 3rem;
+        margin-bottom: 3rem;
+      }
+
+      .footer-brand {
+        color: #ffffff;
+        margin-bottom: 1rem;
+      }
+
+      .footer-brand svg {
+        fill: #ffffff;
+      }
+
+      .site-footer h3 {
+        color: #ffffff;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .site-footer ul li {
+        margin-bottom: 0.5rem;
+      }
+
+      .site-footer a:hover {
+        color: #ffffff;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid #1e293b;
+        padding: 1.5rem 0;
+      }
+
+      .footer-bottom-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .legal-links {
+        display: flex;
+        gap: 1.5rem;
+      }
+
+      /* Responsive Layout */
+      @media (max-width: 768px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .main-nav {
+          display: none;
+        }
+
+        .emergency-box {
+          flex-direction: column;
+          gap: 1.5rem;
+          text-align: center;
+        }
+
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container nav-wrap">
+        <a href="index.html" class="brand" aria-label="FixConnect AI home">
+          <span class="brand-mark">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M32 8 12 24v28h40V24L32 8Zm-1 12h2v12h-2V20Zm0 16h2v2h-2v-2Z" />
+            </svg>
+          </span>
+          <span class="brand-text">FixConnect AI</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="service.html">Services</a>
+          <a href="about.html" class="active">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="login.html">Login</a>
+          <a href="signup.html" class="nav-button nav-button-light">Sign Up</a>
+          <a href="emergency.html" class="nav-button nav-button-accent">Emergency SOS</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Our Story &amp; Mission</p>
+            <h1>Redefining Home Repairs with Intelligence &amp; Trust.</h1>
+            <p class="hero-text">
+              FixConnect AI was created to eliminate uncertainty, delays, and friction from home maintenance by leveraging cutting-edge AI matching technology alongside a network of vetted experts.
+            </p>
+
+            <div class="hero-actions">
+              <a href="service.html" class="button button-primary">Explore Services</a>
+              <a href="contact.html" class="button button-secondary">Get in Touch</a>
+            </div>
+
+            <div class="trust-line" aria-label="Key values">
+              <span>Smart Diagnostics</span>
+              <span class="dot"></span>
+              <span>100% Vetted Pros</span>
+              <span class="dot"></span>
+              <span>Rapid Response</span>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-label="Team collaborating on smart home technology">
+            <div class="image-card">
+              <img
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
+                alt="Team working together on technology solutions"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="why-us section-spacing light-panel">
+        <div class="container">
+          <div class="section-heading center-heading">
+            <p class="eyebrow eyebrow-blue">Our Mission &amp; Vision</p>
+            <h2>Built to simplify every home emergency and routine fix.</h2>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card">
+              <img
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80"
+                alt="Data analytics and AI matching visualization"
+              />
+              <div class="feature-body">
+                <h3>Precision Matching</h3>
+                <p>We analyze problem descriptions to connect homeowners with the exact skill set required, eliminating guesswork.</p>
+              </div>
+            </article>
+
+            <article class="feature-card">
+              <img
+                src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80"
+                alt="Verified electrician performing home repairs"
+              />
+              <div class="feature-body">
+                <h3>Safety &amp; Trust</h3>
+                <p>Every technician undergoes comprehensive background verification and continuous quality performance tracking.</p>
+              </div>
+            </article>
+
+            <article class="feature-card">
+              <img
+                src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80"
+                alt="Technician responding quickly to a home service call"
+              />
+              <div class="feature-body">
+                <h3>Speed &amp; Efficiency</h3>
+                <p>Automated scheduling and local zone routing drastically cut down wait times for urgent maintenance issues.</p>
+              </div>
+            </article>
+
+            <article class="feature-card">
+              <img
+                src="https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80"
+                alt="Transparent pricing invoice review on digital tablet"
+              />
+              <div class="feature-body">
+                <h3>Fair Transparency</h3>
+                <p>Upfront estimates, clear feedback loops, and open communication make services trustworthy for everyone.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="process section-spacing">
+        <div class="container">
+          <div class="section-heading center-heading">
+            <p class="eyebrow eyebrow-blue">Our Journey in Numbers</p>
+            <h2>Delivering reliability across modern households.</h2>
+          </div>
+
+          <div class="steps-grid">
+            <div class="step-card">
+              <span class="step-number">10k+</span>
+              <h3>Repairs Completed</h3>
+              <p>Successfully resolved fixes ranging from minor leaks to major electrical updates.</p>
+            </div>
+            <div class="step-card">
+              <span class="step-number">500+</span>
+              <h3>Verified Techs</h3>
+              <p>A growing network of certified, background-checked local service experts.</p>
+            </div>
+            <div class="step-card">
+              <span class="step-number">15m</span>
+              <h3>Avg. Match Time</h3>
+              <p>Industry-leading speed in assigning the ideal technician to your request.</p>
+            </div>
+            <div class="step-card">
+              <span class="step-number">4.9★</span>
+              <h3>User Rating</h3>
+              <p>Consistently high customer satisfaction score based on verified user reviews.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="emergency-cta section-spacing">
+        <div class="container emergency-box">
+          <div>
+            <p class="eyebrow eyebrow-white">Ready to experience AI care?</p>
+            <h2>Get reliable home repair support in just a few clicks.</h2>
+          </div>
+          <a href="service.html" class="button button-primary button-cta">Book a Service</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <a href="index.html" class="brand footer-brand" aria-label="FixConnect AI home">
+            <span class="brand-mark">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <path d="M32 8 12 24v28h40V24L32 8Zm-1 12h2v12h-2V20Zm0 16h2v2h-2v-2Z" />
+              </svg>
+            </span>
+            <span class="brand-text">FixConnect AI</span>
+          </a>
+          <p class="footer-copy">
+            Premium support for modern homes through AI-guided service discovery and skilled repairs.
+          </p>
+        </div>
+
+        <div>
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="service.html">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Services</h3>
+          <ul>
+            <li><a href="service.html">Plumbing</a></li>
+            <li><a href="service.html">Electrical</a></li>
+            <li><a href="service.html">AC Repair</a></li>
+            <li><a href="service.html">Appliance Repair</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Contact</h3>
+          <ul>
+            <li><a href="mailto:support@fixconnectai.com">support@fixconnectai.com</a></li>
+            <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+            <li><span>Hyderabad, India</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="container footer-bottom-inner">
+          <span>© 2026 FixConnect AI</span>
+          <div class="legal-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms &amp; Conditions</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
