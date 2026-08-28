@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | FixConnect AI</title>
+    <meta
+      name="description"
+      content="FixConnect AI login page for customers and service providers."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container nav-wrap">
+        <a href="index.html" class="brand" aria-label="FixConnect AI home">
+          <span class="brand-mark">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M32 8 12 24v28h40V24L32 8Zm-1 12h2v12h-2V20Zm0 16h2v2h-2v-2Z" />
+            </svg>
+          </span>
+          <span class="brand-text">FixConnect AI</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="service.html">Services</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="login.html" class="active">Login</a>
+          <a href="customer-register.html" class="nav-button nav-button-light">Sign Up</a>
+          <a href="emergency.html" class="nav-button nav-button-accent">Emergency SOS</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="auth-page">
+      <div class="auth-shell">
+        <!-- Decorative floating illustrations -->
+        <div class="floating-illustration floating-house" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" fill="currentColor"/>
+          </svg>
+        </div>
+
+        <div class="floating-illustration floating-wrench" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z" fill="currentColor"/>
+          </svg>
+        </div>
+
+        <div class="floating-illustration floating-gear" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5zm0-5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm7.43-2.53c.04-.32.07-.64.07-.97 0-.32-.03-.66-.07-.98l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65c-.04-.24-.25-.42-.5-.42h-4c-.25 0-.46.18-.49.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L2.54 8.5c-.04.32-.07.65-.07.98s.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.03.24.24.42.5.42h4c.25 0 .46-.18.49-.42l.37-2.65c.63-.25 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66zM12 16.5c-2.49 0-4.5-2.01-4.5-4.5s2.01-4.5 4.5-4.5 4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5z" fill="currentColor"/>
+          </svg>
+        </div>
+
+        <div class="floating-illustration floating-shield" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z" fill="currentColor"/>
+          </svg>
+        </div>
+
+        <div class="floating-illustration floating-lightning" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor"/>
+          </svg>
+        </div>
+
+        <div class="floating-illustration floating-sparkle" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" fill="currentColor"/>
+          </svg>
+        </div>
+
+        
+
+        <section class="auth-card" aria-label="Login form">
+          <div class="auth-brand" aria-label="FixConnect AI logo">
+            <span class="brand-mark small-brand-mark">
+              <svg viewBox="0 0 64 64" aria-hidden="true">
+                <path d="M32 8 12 24v28h40V24L32 8Zm-1 12h2v12h-2V20Zm0 16h2v2h-2v-2Z" />
+              </svg>
+            </span>
+            <span class="auth-brand-text">FixConnect AI</span>
+          </div>
+
+          <h1>Welcome Back</h1>
+          <p class="auth-subtitle">
+            Login to connect with trusted technicians and manage your home services.
+          </p>
+          <p id="roleLabel" class="role-label">📋 You are logging in as a Customer</p>
+
+          <div class="role-picker" aria-label="Role selection">
+            <button type="button" class="role-option active" data-role="customer" aria-pressed="true">
+              Customer
+            </button>
+            <button type="button" class="role-option" data-role="provider" aria-pressed="false">
+              Service Provider
+            </button>
+          </div>
+
+          <form id="loginForm" class="login-form" novalidate>
+            <div class="input-group">
+              <label for="email">Email Address</label>
+              <div class="input-wrap">
+                <span class="input-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M3 6.75A2.75 2.75 0 0 1 5.75 4h12.5A2.75 2.75 0 0 1 21 6.75v10.5A2.75 2.75 0 0 1 18.25 20H5.75A2.75 2.75 0 0 1 3 17.25V6.75Zm2.1-.75 6.9 5.1 6.9-5.1H5.1Zm13.15 2.05-6.2 4.59a1 1 0 0 1-1.1 0L5.75 8.1v9.15c0 .41.34.75.75.75h10.99c.41 0 .75-.34.75-.75V8.1Z"/></svg>
+                </span>
+                <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <div class="label-row">
+                <label for="password">Password</label>
+                <a href="#" class="link-muted">Forgot Password?</a>
+              </div>
+              <div class="input-wrap">
+                <span class="input-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M17 9V7A5 5 0 0 0 7 7v2H5.75A1.75 1.75 0 0 0 4 10.75v8.5C4 20.2 4.8 21 5.75 21h12.5c.95 0 1.75-.8 1.75-1.75v-8.5A1.75 1.75 0 0 0 18.25 9H17Zm-8 0V7a3 3 0 0 1 6 0v2H9Zm4 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/></svg>
+                </span>
+                <input id="password" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" />
+                <button type="button" class="toggle-password" aria-label="Show password">
+                  <svg viewBox="0 0 24 24"><path d="M12 5c4.79 0 8.91 3.03 10.95 7-2.04 3.97-6.16 7-10.95 7S3.09 15.97 1.05 12C3.09 8.03 7.21 5 12 5Zm0 2.2A8.66 8.66 0 0 0 4.16 12c1.81 2.35 4.52 3.8 7.84 3.8s6.03-1.45 7.84-3.8A8.66 8.66 0 0 0 12 7.2Zm0 2.2a3.4 3.4 0 1 1 0 6.8 3.4 3.4 0 0 1 0-6.8Z"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <p id="formMessage" class="form-message" aria-live="polite"></p>
+
+            <button type="submit" class="primary-button" id="loginButton">Login</button>
+
+            <div class="divider" aria-label="Separator"><span>OR</span></div>
+
+            <button type="button" class="google-button" aria-label="Continue with Google">
+              <span class="google-mark" aria-hidden="true">
+                <span class="blue">G</span>
+              </span>
+              Continue with Google
+            </button>
+
+            <p class="signup-copy">
+              Don’t have an account?
+              <a href="customer-register.html" id="signupLink">Sign Up</a>
+            </p>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      const form = document.getElementById('loginForm');
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      const loginButton = document.getElementById('loginButton');
+      const signupLink = document.getElementById('signupLink');
+      const formMessage = document.getElementById('formMessage');
+      const roleButtons = document.querySelectorAll('.role-option');
+      const passwordToggle = document.querySelector('.toggle-password');
+      const roleLabel = document.getElementById('roleLabel');
+
+      const roleTargets = {
+        customer: {
+          buttonText: 'Login as Customer',
+          signupHref: 'customer-register.html',
+          signupText: 'Sign Up',
+          roleLabel: '📋 You are logging in as a Customer',
+        },
+        provider: {
+          buttonText: 'Login as Provider',
+          signupHref: 'provider-register.html',
+          signupText: 'Sign Up',
+          roleLabel: '🔧 You are logging in as a Service Provider',
+        },
+      };
+
+      let selectedRole = 'customer';
+
+      function updateRole(role) {
+        selectedRole = role;
+        const target = roleTargets[role];
+
+        loginButton.textContent = target.buttonText;
+        signupLink.href = target.signupHref;
+        signupLink.textContent = target.signupText;
+        roleLabel.textContent = target.roleLabel;
+
+        roleButtons.forEach((button) => {
+          const isActive = button.dataset.role === role;
+          button.classList.toggle('active', isActive);
+          button.setAttribute('aria-pressed', String(isActive));
+        });
+      }
+
+      roleButtons.forEach((button) => {
+        button.addEventListener('click', () => updateRole(button.dataset.role));
+      });
+
+      passwordToggle.addEventListener('click', () => {
+        const isPassword = passwordInput.type === 'password';
+        passwordInput.type = isPassword ? 'text' : 'password';
+        passwordToggle.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+      });
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        if (!email || !password) {
+          formMessage.textContent = 'Please enter both your email and password to continue.';
+          formMessage.classList.add('error');
+          formMessage.classList.remove('success');
+          return;
+        }
+
+        formMessage.textContent = 'Login successful. Redirecting to your dashboard...';
+        formMessage.classList.remove('error');
+        formMessage.classList.add('success');
+
+        const destination = selectedRole === 'customer' ? 'customer-dashboard.html' : 'provider-dashboard.html';
+        window.location.href = destination;
+      });
+
+      updateRole(selectedRole);
+    </script>
+  </body>
+</html>
