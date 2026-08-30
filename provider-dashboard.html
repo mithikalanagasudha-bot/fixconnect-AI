@@ -40,9 +40,8 @@
         <a href="service.html">Services</a>
         <a href="about.html">About</a>
         <a href="contact.html">Contact</a>
-        <a href="login.html" class="nav-button nav-button-light">Login</a>
-        <a href="signup.html" class="nav-button nav-button-light">Sign Up</a>
-        <a href="login.html" class="nav-button nav-button-logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        <a href="provider-dashboard.html" class="nav-button nav-button-light active">Dashboard</a>
+        <a href="provider-profile.html" class="nav-button nav-button-light">Profile</a>
         <a href="emergency.html" class="nav-button nav-button-accent">Emergency SOS</a>
       </nav>
     </div>
@@ -166,7 +165,7 @@
             </a>
           </li>
           <li class="sidebar-nav-item">
-            <a class="sidebar-link" data-section="provider-profile">
+            <a href="provider-profile.html" class="sidebar-link">
               <i class="fa-solid fa-user-gear"></i>
               <span>My Profile</span>
             </a>
@@ -214,9 +213,6 @@
             <button class="btn-primary-custom" onclick="switchSection('requests')">
               <i class="fa-solid fa-inbox"></i> View Requests (7)
             </button>
-            <a href="login.html" class="btn-danger-custom" style="text-decoration: none;">
-              <i class="fa-solid fa-right-from-bracket"></i> Logout
-            </a>
           </div>
         </div>
 
@@ -284,9 +280,9 @@
               </div>
             </div>
             <div class="active-service-actions">
-              <button class="btn-secondary-custom btn-sm" onclick="switchSection('provider-profile')">
+              <a href="provider-profile.html" class="btn-secondary-custom btn-sm" style="text-decoration: none;">
                 <i class="fa-solid fa-user-pen"></i> Edit Profile
-              </button>
+              </a>
             </div>
           </div>
         </div>
