@@ -1,34 +1,350 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>About - FixConnect AI</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>About | FixConnect AI</title>
+
+  <!-- SAME FONT AS HOME -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- HOME PAGE CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- ABOUT PAGE CSS -->
+  <link rel="stylesheet" href="about.css">
 </head>
 
 <body>
 
-    <header>
-        <h2>FixConnect AI</h2>
+<!-- ================= NAVBAR ================= -->
 
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
+    <header class="topbar">
+      <div class="container nav-wrap">
+        <a href="index.html" class="brand" aria-label="FixConnect AI home">
+          <span class="brand-mark">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M32 8 12 24v28h40V24L32 8Zm-1 12h2v12h-2V20Zm0 16h2v2h-2v-2Z" />
+            </svg>
+          </span>
+          <span class="brand-text">FixConnect AI</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="service.html">Service</a>
+          <a href="about.html" class="active">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="login.html" class="nav-button nav-button-light">Login</a>
+          <a href="signup.html" class="nav-button nav-button-light">Sign Up</a>
+          <a href="emergency.html" class="nav-button nav-button-accent">Emergency SOS</a>
         </nav>
+      </div>
     </header>
 
-    <section class="about">
-        <h1>About FixConnect AI</h1>
 
-        <p>
-            FixConnect AI is an AI-based complaint management platform
-            that connects users with nearby verified technicians.
-        </p>
+<!-- ================= ABOUT HERO ================= -->
 
-        <p>
-            Users can report their problems through text or images.
-            AI analyzes the complaint and helps find the right technician.
-        </p>
-    </section>
+<section class="about-hero">
+
+  <div class="about-hero-content">
+
+    <span class="about-label">
+      ABOUT FIXCONNECT AI
+    </span>
+
+    <h1>
+      Smart Repairs.
+      <span>Trusted Technicians.</span>
+    </h1>
+
+    <p>
+      FixConnect AI connects customers with trusted technicians
+      using smart technology, intelligent matching and reliable
+      home repair services.
+    </p>
+
+    <a href="service.html" class="about-btn">
+      Explore Our Services →
+    </a>
+
+  </div>
+
+
+  <div class="about-hero-image">
+
+    <img
+      src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=1000&q=85"
+      alt="Professional technician team repairing home equipment"
+    >
+
+    <div class="image-badge">
+      <span>✓</span>
+      AI-Powered Service
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= WHO WE ARE ================= -->
+
+<section class="who-section">
+
+  <div class="who-image">
+
+    <img
+      src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1000&q=85"
+      alt="Technician working on a home repair"
+    >
+
+    <div class="trust-badge">
+      <strong>✓</strong>
+      <div>
+        <b>Trusted Experts</b>
+        <small>Verified technicians</small>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="who-content">
+
+    <span class="about-label">
+      WHO WE ARE
+    </span>
+
+    <h2>
+      A smarter way to
+      <span>solve home problems.</span>
+    </h2>
+
+    <p>
+      Finding the right technician should be simple.
+      FixConnect AI helps customers describe their problem,
+      understand the required service and connect with a
+      suitable technician.
+    </p>
+
+    <p>
+      Our goal is to make home repair faster, easier
+      and more reliable.
+    </p>
+
+    <div class="mini-points">
+
+      <div>
+        <span>✓</span>
+        <p>Verified Technicians</p>
+      </div>
+
+      <div>
+        <span>✓</span>
+        <p>Smart AI Matching</p>
+      </div>
+
+      <div>
+        <span>✓</span>
+        <p>Reliable Service</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
+
+<section class="features-section">
+
+  <div class="section-title">
+
+    <span class="about-label">
+      WHY FIXCONNECT AI?
+    </span>
+
+    <h2>
+      Technology that makes
+      <span>home repair simple.</span>
+    </h2>
+
+    <p>
+      Everything you need to find the right repair solution.
+    </p>
+
+  </div>
+
+
+  <div class="about-cards">
+
+    <div class="about-card">
+
+      <div class="card-icon">
+        🤖
+      </div>
+
+      <h3>AI Smart Analysis</h3>
+
+      <p>
+        AI helps understand your repair complaint
+        and identify the required service.
+      </p>
+
+    </div>
+
+
+    <div class="about-card">
+
+      <div class="card-icon">
+        ✓
+      </div>
+
+      <h3>Trusted Experts</h3>
+
+      <p>
+        Connect with suitable verified technicians
+        based on skills and service quality.
+      </p>
+
+    </div>
+
+
+    <div class="about-card">
+
+      <div class="card-icon">
+        ⌖
+      </div>
+
+      <h3>Nearby Service</h3>
+
+      <p>
+        Find suitable technicians based on your
+        location and service requirements.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= MISSION ================= -->
+
+<section class="mission-section">
+
+  <div class="mission-content">
+
+    <span class="mission-label">
+      OUR MISSION
+    </span>
+
+    <h2>
+      Making home repair
+      <span>simple and reliable.</span>
+    </h2>
+
+    <p>
+      To make home repair simple, reliable and accessible
+      by connecting customers with the right technicians
+      through intelligent technology.
+    </p>
+
+  </div>
+
+  <div class="mission-icon">
+    ✦
+  </div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section class="about-cta">
+
+  <h2>Need a repair?</h2>
+
+  <p>
+    Let FixConnect AI find the right solution for you.
+  </p>
+
+  <a href="service.html">
+    Get Started →
+  </a>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <a href="index.html" class="brand footer-brand" aria-label="FixConnect AI home">
+        <span class="brand-mark">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <path d="M32 8 12 24v28h40V24L32 8Zm-1 12h2v12h-2V20Zm0 16h2v2h-2v-2Z" />
+          </svg>
+        </span>
+        <span class="brand-text">FixConnect AI</span>
+      </a>
+      <p class="footer-copy">
+        Premium support for modern homes through AI-guided service discovery and skilled repairs.
+      </p>
+    </div>
+
+    <div>
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="service.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Service</h3>
+      <ul>
+        <li><a href="service.html">Plumbing</a></li>
+        <li><a href="service.html">Electrical</a></li>
+        <li><a href="service.html">AC Repair</a></li>
+        <li><a href="service.html">Appliance Repair</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Contact</h3>
+      <ul>
+        <li><a href="mailto:support@fixconnectai.com">support@fixconnectai.com</a></li>
+        <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+        <li><span>Hyderabad, India</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <span>© 2026 FixConnect AI</span>
+      <div class="legal-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>

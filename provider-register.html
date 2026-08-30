@@ -1,87 +1,587 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Service Provider Registration - FixConnect AI</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="signup.css">
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Service Provider Registration | FixConnect AI</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: linear-gradient(180deg, #eef6ff 0%, #f7fbff 100%);
+      color: #071a33;
+      min-height: 100vh;
+    }
+
+    /* ================= PAGE ================= */
+
+    .customer-page {
+      min-height: calc(100vh - 84px);
+      padding: 55px 20px 75px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ================= CARD ================= */
+
+    .customer-card {
+      width: 100%;
+      max-width: 740px;
+
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      padding: 46px 50px;
+
+      border-radius: 28px;
+      border: 1px solid rgba(16, 34, 63, 0.10);
+
+      box-shadow: 0 24px 60px rgba(7, 28, 60, 0.14);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .customer-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .customer-badge {
+      width: 54px;
+      height: 54px;
+
+      margin: 0 auto 18px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 16px;
+
+      background: linear-gradient(
+        135deg,
+        #123d69,
+        #1c6fe5
+      );
+
+      color: white;
+      font-size: 24px;
+      font-weight: 800;
+      box-shadow: 0 8px 20px rgba(28, 111, 229, 0.25);
+    }
+
+    .customer-header h1 {
+      font-size: 32px;
+      margin-bottom: 8px;
+      color: #061a36;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .customer-header h1 span {
+      color: #1c6fe5;
+    }
+
+    .customer-header p {
+      color: #5e6d84;
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    /* ================= ROLE ================= */
+
+    .role-picker {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      background: #f4f9ff;
+      border: 1px solid rgba(18, 46, 82, 0.08);
+      padding: 6px;
+
+      border-radius: 18px;
+      margin-bottom: 32px;
+    }
+
+    .role-picker a {
+      text-align: center;
+      padding: 12px 14px;
+
+      text-decoration: none;
+      color: #5e6d84;
+
+      font-size: 14px;
+      font-weight: 700;
+
+      border-radius: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .role-picker a:hover {
+      background: rgba(28, 111, 229, 0.08);
+      color: #123d69;
+    }
+
+    .role-picker a.active {
+      background: linear-gradient(
+        135deg,
+        #123d69,
+        #1c6fe5
+      );
+      color: white;
+      box-shadow: 0 10px 22px rgba(18, 61, 105, 0.22);
+    }
+
+    /* ================= FORM ================= */
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      margin-bottom: 8px;
+
+      color: #10223f;
+      font-size: 13.5px;
+      font-weight: 700;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+
+      padding: 14px 16px;
+
+      border: 1px solid rgba(17, 40, 68, 0.12);
+      border-radius: 14px;
+
+      background: rgba(255, 255, 255, 0.85);
+
+      color: #10223f;
+      font-family: inherit;
+      font-size: 14.5px;
+
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: rgba(28, 111, 229, 0.45);
+      box-shadow: 0 0 0 4px rgba(28, 111, 229, 0.08);
+      background: white;
+    }
+
+    textarea {
+      min-height: 95px;
+      resize: vertical;
+    }
+
+    /* ================= BUTTON ================= */
+
+    .register-btn {
+      width: 100%;
+
+      margin-top: 25px;
+      padding: 15px;
+
+      border: none;
+      border-radius: 999px;
+
+      background: linear-gradient(
+        135deg,
+        #123d69,
+        #1c6fe5
+      );
+
+      color: white;
+
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+
+      cursor: pointer;
+
+      box-shadow: 0 16px 32px rgba(18, 61, 105, 0.20);
+
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .register-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 34px rgba(18, 61, 105, 0.25);
+    }
+
+    .register-btn:active {
+      transform: translateY(0);
+    }
+
+    /* ================= BOTTOM ================= */
+
+    .login-text {
+      text-align: center;
+      margin-top: 24px;
+
+      color: #5e6d84;
+      font-size: 14px;
+    }
+
+    .login-text a {
+      color: #1c6fe5;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .login-text a:hover {
+      text-decoration: underline;
+    }
+
+    .back-text {
+      text-align: center;
+      margin-top: 14px;
+    }
+
+    .back-text a {
+      color: #5e6d84;
+      font-size: 13px;
+      text-decoration: none;
+    }
+
+    .back-text a:hover {
+      color: #1c6fe5;
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 700px) {
+      .customer-card {
+        padding: 32px 24px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .full {
+        grid-column: auto;
+      }
+
+      .customer-header h1 {
+        font-size: 26px;
+      }
+    }
+
+  </style>
 </head>
 
 <body>
 
-<div class="register-container">
+<!-- ================= NAVBAR ================= -->
 
-    <div class="register-box provider-box">
-        <h1>FixConnect <span>AI</span></h1>
-        <div class="signup-role-picker">
-    <a href="customer-register.html" class="signup-role">
-        Customer
+<header class="topbar">
+  <div class="container nav-wrap">
+    <a href="index.html" class="brand" aria-label="FixConnect AI home">
+      <span class="brand-mark">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M32 8 12 24v28h40V24L32 8Zm-1 12h2v12h-2V20Zm0 16h2v2h-2v-2Z" />
+        </svg>
+      </span>
+      <span class="brand-text">FixConnect AI</span>
     </a>
 
-    <a href="provider-register.html" class="signup-role active">
-        Service Provider
-    </a>
-</div>
-        <h2>Service Provider Registration</h2>
-        <p class="subtitle">
-            Join FixConnect AI and connect with customers.
-        </p>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="service.html">Service</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html" class="nav-button nav-button-light">Login</a>
+      <a href="signup.html" class="nav-button nav-button-light active">Sign Up</a>
+      <a href="emergency.html" class="nav-button nav-button-accent">Emergency SOS</a>
+    </nav>
+  </div>
+</header>
 
-        <form action="provider-dashboard.html">
 
-            <label>Full Name</label>
-            <input type="text" placeholder="Enter your full name" required>
+<!-- ================= SERVICE PROVIDER REGISTRATION ================= -->
 
-            <label>Mobile Number</label>
-            <input type="tel" placeholder="Enter mobile number" required>
+<main class="customer-page">
 
-            <label>Email</label>
-            <input type="email" placeholder="Enter your email" required>
+  <section class="customer-card">
 
-            <label>Service Type</label>
-            <select required>
-                <option value="">Select your service</option>
-                <option>Electrician</option>
-                <option>Plumber</option>
-                <option>AC Technician</option>
-                <option>Carpenter</option>
-                <option>Appliance Repair</option>
-                <option>Painter</option>
-                <option>Other</option>
-            </select>
+    <div class="customer-header">
 
-            <label>Years of Experience</label>
-            <input type="number" min="0" placeholder="Enter experience">
+      <div class="customer-badge">
+        ✓
+      </div>
 
-            <label>Service Location</label>
-            <input type="text" placeholder="Enter your service area" required>
+      <h1>
+        Create Your <span>Account</span>
+      </h1>
 
-            <label>ID Proof</label>
-            <input type="file" accept=".jpg,.jpeg,.png,.pdf">
+      <p>
+        Create your FixConnect AI account and
+        connect with customers who need trusted services.
+      </p>
 
-            <label>Password</label>
-            <input type="password" placeholder="Create password" required>
-
-            <label>Confirm Password</label>
-            <input type="password" placeholder="Confirm password" required>
-
-            <button type="submit">Register as Service Provider</button>
-
-        </form>
-
-        <p class="login-text">
-            Already have an account?
-            <a href="login.html">Login</a>
-        </p>
-
-        <p class="back-text">
-            <a href="login.html">← Back to Login</a>
-        </p>
     </div>
 
-</div>
 
-</body>
+    <!-- ROLE SWITCH -->
+
+    <div class="role-picker">
+
+      <a href="customer-register.html">
+        Customer
+      </a>
+
+      <a href="provider-register.html" class="active">
+        Service Provider
+      </a>
+
+    </div>
+
+
+    <!-- SERVICE PROVIDER FORM -->
+
+    <form action="provider-dashboard.html">
+
+      <div class="form-grid">
+
+        <div class="input-group full">
+
+          <label>Full Name</label>
+
+          <input
+            type="text"
+            placeholder="Enter your full name"
+            required
+          >
+
+        </div>
+
+
+        <div class="input-group">
+
+          <label>Mobile Number</label>
+
+          <input
+            type="tel"
+            placeholder="Enter mobile number"
+            required
+          >
+
+        </div>
+
+
+        <div class="input-group">
+
+          <label>Email Address</label>
+
+          <input
+            type="email"
+            placeholder="Enter your email"
+            required
+          >
+
+        </div>
+
+
+        <div class="input-group">
+
+          <label>Service Type</label>
+
+          <select required>
+
+            <option value="">
+              Select your service
+            </option>
+
+            <option>Electrician</option>
+            <option>Plumber</option>
+            <option>AC Technician</option>
+            <option>Carpenter</option>
+            <option>Appliance Repair</option>
+            <option>Painter</option>
+            <option>Other</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="input-group">
+
+          <label>Years of Experience</label>
+
+          <input
+            type="number"
+            min="0"
+            placeholder="Enter experience"
+            required
+          >
+
+        </div>
+
+
+        <div class="input-group full">
+
+          <label>Service Location</label>
+
+          <input
+            type="text"
+            placeholder="Enter your service area"
+            required
+          >
+
+        </div>
+
+
+        <div class="input-group">
+
+          <label>Password</label>
+
+          <input
+            type="password"
+            placeholder="Create password"
+            required
+          >
+
+        </div>
+
+
+        <div class="input-group">
+
+          <label>Confirm Password</label>
+
+          <input
+            type="password"
+            placeholder="Confirm password"
+            required
+          >
+
+        </div>
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="register-btn"
+      >
+        Register as Service Provider →
+      </button>
+
+    </form>
+
+
+    <p class="login-text">
+
+      Already have an account?
+
+      <a href="login.html">
+        Login
+      </a>
+
+    </p>
+
+
+    <p class="back-text">
+
+      <a href="login.html">
+        ← Back to Login
+      </a>
+
+    </p>
+
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <a href="index.html" class="brand footer-brand" aria-label="FixConnect AI home">
+        <span class="brand-mark">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <path d="M32 8 12 24v28h40V24L32 8Zm-1 12h2v12h-2V20Zm0 16h2v2h-2v-2Z" />
+          </svg>
+        </span>
+        <span class="brand-text">FixConnect AI</span>
+      </a>
+      <p class="footer-copy">
+        Premium support for modern homes through AI-guided service discovery and skilled repairs.
+      </p>
+    </div>
+
+    <div>
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="service.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Service</h3>
+      <ul>
+        <li><a href="service.html">Plumbing</a></li>
+        <li><a href="service.html">Electrical</a></li>
+        <li><a href="service.html">AC Repair</a></li>
+        <li><a href="service.html">Appliance Repair</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h3>Contact</h3>
+      <ul>
+        <li><a href="mailto:support@fixconnectai.com">support@fixconnectai.com</a></li>
+        <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+        <li><span>Hyderabad, India</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <span>© 2026 FixConnect AI</span>
+      <div class="legal-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer></body>
 </html>

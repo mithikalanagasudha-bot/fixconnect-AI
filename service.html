@@ -1,534 +1,1021 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Services | FixConnect AI</title>  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >  <link rel="stylesheet" href="style.css" />  <style>
 
-  <title>Services | FixConnect AI</title>
-
-  <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f9ff;
-      color: #102a5c;
+    html {
+      scroll-behavior: smooth;
     }
 
-    /* NAVBAR */
+    body {
+      font-family: "Inter", sans-serif;
+      background: #f7faff;
+      color: #071a33;
+      line-height: 1.6;
+    }
+
+
+    /* ================= NAVBAR ================= */
 
     header {
-      background: white;
-      padding: 18px 7%;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 1000;
+
+      background: rgba(6, 26, 54, 0.97);
+      backdrop-filter: blur(14px);
+
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
     nav {
+      width: min(1200px, calc(100% - 32px));
+      min-height: 84px;
+
+      margin: auto;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
+
+      gap: 25px;
     }
+
+
+    /* LOGO */
 
     .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      color: white;
+
       font-size: 23px;
       font-weight: 800;
-      color: #102a5c;
+
+      letter-spacing: -0.04em;
+      white-space: nowrap;
     }
 
-    .logo span {
-      color: #2563eb;
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 14px;
+
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.18),
+        rgba(78,165,255,0.35)
+      );
+
+      border: 1px solid rgba(255,255,255,0.18);
     }
+
+    .logo-mark span {
+      color: white;
+      font-size: 20px;
+    }
+
+    .logo-text span {
+      color: #4ea5ff;
+    }
+
+
+    /* NAV LINKS */
 
     .nav-links {
       display: flex;
-      gap: 25px;
       align-items: center;
+      gap: 22px;
     }
 
     .nav-links a {
+      color: rgba(255,255,255,0.88);
+
       text-decoration: none;
-      color: #334155;
-      font-size: 14px;
+
+      font-size: 0.96rem !important;
       font-weight: 600;
+
+      transition: 0.25s ease;
     }
 
     .nav-links a:hover,
-    .nav-links .active {
-      color: #2563eb;
+    .nav-links a.active {
+      color: #ffffff;
     }
+
+
+    /* LOGIN */
 
     .login-btn {
-      background: #102a5c;
-      color: white !important;
       padding: 10px 18px;
-      border-radius: 8px;
+
+      border-radius: 999px;
+
+      background: rgba(255,255,255,0.12);
+
+      border: 1px solid rgba(255,255,255,0.20);
     }
+
+
+    /* SOS */
 
     .sos-btn {
-      background: #f97316;
-      color: white !important;
-      padding: 10px 17px;
-      border-radius: 8px;
+      padding: 10px 18px;
+
+      border-radius: 999px;
+
+      background: linear-gradient(
+        135deg,
+        #ffb703,
+        #ff8a1f
+      );
+
+      color: #071a33 !important;
+
+      box-shadow:
+        0 10px 24px rgba(255,163,26,0.25);
     }
 
-    /* HERO */
+
+    /* ================= HERO ================= */
 
     .hero {
+      position: relative;
+
+      overflow: hidden;
+
+      padding: 90px 20px 75px;
+
       text-align: center;
-      padding: 70px 20px 45px;
+
+      background:
+
+        radial-gradient(
+          circle at top left,
+          rgba(78,165,255,0.18),
+          transparent 35%
+        ),
+
+        linear-gradient(
+          180deg,
+          #f7fbff 0%,
+          #edf5ff 100%
+        );
     }
 
-    .hero h1 {
-      font-size: 42px;
+    .hero::before {
+      content: "";
+
+      position: absolute;
+
+      width: 300px;
+      height: 300px;
+
+      right: -120px;
+      top: -120px;
+
+      background: rgba(78,165,255,0.10);
+
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      position: relative;
+
+      z-index: 1;
+
+      max-width: 760px;
+
+      margin: auto;
+
+      animation: fadeUp 0.8s ease both;
+    }
+
+
+    /* SMALL TITLE */
+
+    .eyebrow {
       margin-bottom: 14px;
+
+      color: #1c6fe5;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      letter-spacing: 0.14em;
+
+      text-transform: uppercase;
+    }
+
+
+    /* HERO TITLE */
+
+    .hero h1 {
+      font-size: clamp(
+        2.5rem,
+        5vw,
+        4.2rem
+      );
+
+      line-height: 1.05;
+
+      letter-spacing: -0.06em;
+
+      margin-bottom: 20px;
+
+      color: #061a36;
     }
 
     .hero h1 span {
-      color: #2563eb;
+      color: #1c6fe5;
     }
 
     .hero p {
       max-width: 650px;
+
       margin: auto;
-      color: #64748b;
-      line-height: 1.7;
-      font-size: 15px;
+
+      color: #5f6f87;
+
+      font-size: 1.05rem;
+
+      line-height: 1.8;
     }
 
-    /* SERVICES */
+
+    /* ================= SERVICES ================= */
+
+    .services-section {
+      padding: 90px 0;
+
+      background: white;
+    }
+
+
+    /* SECTION HEADING */
+
+    .section-heading {
+      width: min(
+        1200px,
+        calc(100% - 32px)
+      );
+
+      margin: 0 auto 42px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(
+        2rem,
+        3vw,
+        3rem
+      );
+
+      line-height: 1.15;
+
+      letter-spacing: -0.05em;
+
+      color: #061a36;
+    }
+
+    .section-heading p {
+      margin-top: 10px;
+
+      color: #687990;
+
+      max-width: 600px;
+    }
+
+
+    /* SERVICE GRID */
 
     .services {
-      width: 86%;
-      max-width: 1150px;
-      margin: 10px auto 70px;
+      width: min(
+        1200px,
+        calc(100% - 32px)
+      );
+
+      margin: auto;
 
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 26px;
     }
 
+
+    /* SERVICE CARD */
+
     .service-card {
-      background: white;
-      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 6px 22px rgba(30,64,175,0.10);
-      transition: 0.25s;
+
+      background: white;
+
+      border: 1px solid #e5edf7;
+
+      border-radius: 22px;
+
+      box-shadow:
+        0 14px 35px
+        rgba(16,43,75,0.09);
+
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+      animation:
+        cardUp 0.7s ease both;
     }
 
     .service-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 28px rgba(30,64,175,0.16);
+      transform: translateY(-8px);
+
+      box-shadow:
+        0 24px 50px
+        rgba(16,43,75,0.15);
     }
+
+
+    /* SERVICE IMAGE */
 
     .service-card img {
       width: 100%;
-      height: 190px;
+
+      height: 210px;
+
       object-fit: cover;
+
       display: block;
+
+      transition:
+        transform 0.4s ease;
     }
+
+    .service-card:hover img {
+      transform: scale(1.04);
+    }
+
+
+    /* SERVICE CONTENT */
 
     .service-content {
-      padding: 20px;
+      padding: 24px;
     }
 
+
+    /* IMPORTANT:
+       NO SERVICE ICONS / BOXES */
+
+    .service-icon {
+      display: none !important;
+    }
+
+
     .service-content h2 {
-      font-size: 18px;
       margin-bottom: 8px;
+
+      color: #061a36;
+
+      font-size: 1.35rem;
+
+      letter-spacing: -0.02em;
     }
 
     .service-content p {
-      color: #64748b;
-      font-size: 13px;
-      line-height: 1.6;
-      margin-bottom: 15px;
+      color: #66778e;
+
+      font-size: 14px;
+
+      line-height: 1.7;
+
+      margin-bottom: 20px;
     }
 
-    .service-content button {
-      border: none;
-      background: #2563eb;
+
+    /* SERVICE BUTTON */
+
+    .service-btn {
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 11px 18px;
+
+      border-radius: 999px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #123d69,
+          #1c6fe5
+        );
+
       color: white;
-      padding: 10px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
+
+      text-decoration: none;
+
+      font-size: 13px;
+
+      font-weight: 700;
+
+      transition: 0.25s ease;
     }
 
-    .service-content button:hover {
-      background: #1d4ed8;
+    .service-btn:hover {
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 10px 22px
+        rgba(28,111,229,0.25);
     }
 
-    /* BOTTOM CTA */
+
+    /* ================= CTA ================= */
+
+    .cta-section {
+      padding: 20px 0 90px;
+
+      background: white;
+    }
 
     .cta {
-      width: 86%;
-      max-width: 1100px;
-      margin: 0 auto 60px;
-      background: #102a5c;
-      color: white;
-      border-radius: 18px;
-      padding: 35px;
+      width: min(
+        1100px,
+        calc(100% - 32px)
+      );
+
+      margin: auto;
+
+      padding: 48px 35px;
+
       text-align: center;
+
+      background:
+
+        radial-gradient(
+          circle at top right,
+          rgba(78,165,255,0.20),
+          transparent 35%
+        ),
+
+        linear-gradient(
+          135deg,
+          #061a36,
+          #123d69
+        );
+
+      color: white;
+
+      border-radius: 28px;
+
+      box-shadow:
+        0 24px 55px
+        rgba(12,40,71,0.18);
     }
 
     .cta h2 {
+      font-size: clamp(
+        1.8rem,
+        3vw,
+        2.6rem
+      );
+
       margin-bottom: 10px;
+
+      letter-spacing: -0.04em;
     }
 
     .cta p {
-      color: #dbeafe;
-      font-size: 13px;
-      margin-bottom: 18px;
+      color: rgba(255,255,255,0.75);
+
+      margin-bottom: 24px;
+
+      font-size: 14px;
     }
 
-    .cta button {
+    .cta-btn {
+      display: inline-flex;
+
+      padding: 12px 23px;
+
+      border-radius: 999px;
+
       background: white;
-      color: #102a5c;
-      border: none;
-      padding: 11px 20px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
+
+      color: #061a36;
+
+      text-decoration: none;
+
+      font-weight: 800;
+
+      font-size: 14px;
+
+      transition: 0.25s ease;
     }
 
-    /* FOOTER */
+    .cta-btn:hover {
+      transform: translateY(-2px);
 
-    footer {
-      background: #081a3d;
-      color: white;
-      padding: 35px 7%;
-      text-align: center;
+      background: #eaf3ff;
     }
 
-    footer h3 {
-      margin-bottom: 8px;
+
+
+
+
+    /* ================= ANIMATIONS ================= */
+
+    @keyframes fadeUp {
+
+      from {
+        opacity: 0;
+
+        transform:
+          translateY(25px);
+      }
+
+      to {
+        opacity: 1;
+
+        transform:
+          translateY(0);
+      }
+
     }
 
-    footer p {
-      color: #a9b9d4;
-      font-size: 12px;
+
+    @keyframes cardUp {
+
+      from {
+        opacity: 0;
+
+        transform:
+          translateY(25px);
+      }
+
+      to {
+        opacity: 1;
+
+        transform:
+          translateY(0);
+      }
+
     }
 
-    /* MOBILE */
 
-    @media (max-width: 800px) {
+    .service-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+
+    .service-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .service-card:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .service-card:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    .service-card:nth-child(5) {
+      animation-delay: 0.5s;
+    }
+
+    .service-card:nth-child(6) {
+      animation-delay: 0.6s;
+    }
+
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 900px) {
+
+      .services {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
 
       .nav-links {
-        gap: 10px;
+        gap: 12px;
       }
 
       .nav-links a {
-        font-size: 11px;
+        font-size: 13px;
       }
 
-      .services {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .hero h1 {
-        font-size: 32px;
-      }
     }
 
-    @media (max-width: 550px) {
 
-      .nav-links a:nth-child(2),
+    @media (max-width: 650px) {
+
+      nav {
+        min-height: 70px;
+      }
+
+      .logo {
+        font-size: 18px;
+      }
+
+      .logo-mark {
+        width: 36px;
+        height: 36px;
+      }
+
+      .nav-links {
+        gap: 8px;
+      }
+
+      .nav-links a:nth-child(1),
       .nav-links a:nth-child(3),
       .nav-links a:nth-child(4) {
         display: none;
       }
 
+      .login-btn,
+      .sos-btn {
+        padding: 8px 10px;
+      }
+
+      .hero {
+        padding: 65px 20px 55px;
+      }
+
+      .services-section {
+        padding: 65px 0;
+      }
+
       .services {
         grid-template-columns: 1fr;
       }
+
+      .service-card img {
+        height: 220px;
+      }
+
+      .cta {
+        padding: 38px 22px;
+      }
+
     }
   </style>
 </head>
-
 <body>
+  <!-- ================= NAVBAR ================= -->
+  <header class="topbar">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand" aria-label="FixConnect AI home">
+        <span class="brand-mark">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <path d="M32 8 12 24v28h40V24L32 8Zm-1 12h2v12h-2V20Zm0 16h2v2h-2v-2Z" />
+          </svg>
+        </span>
+        <span class="brand-text">FixConnect AI</span>
+      </a>
 
-<!-- NAVBAR -->
-
-<header>
-  <nav>
-
-    <div class="logo">
-      FixConnect <span>AI</span>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="service.html" class="active">Service</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html" class="nav-button nav-button-light">Login</a>
+        <a href="signup.html" class="nav-button nav-button-light">Sign Up</a>
+        <a href="emergency.html" class="nav-button nav-button-accent">Emergency SOS</a>
+      </nav>
     </div>
+  </header><!-- ================= HERO ================= --><section class="hero">  <div class="hero-content"><p class="eyebrow">
+  FIXCONNECT AI SERVICES
+</p>
 
-    <div class="nav-links">
-      <a href="index.html">Home</a>
+<h1>
+  Reliable Services.<br>
+  <span>Trusted Experts.</span>
+</h1>
 
-      <a href="service.html" class="active">
-        Services
-      </a>
+<p>
+  From everyday home repairs to urgent problems,
+  FixConnect AI helps you find the right technician
+  quickly, safely, and easily.
+</p>
 
-      <a href="about.html">
-        About
-      </a>
+  </div></section><!-- ================= SERVICES ================= --><section class="services-section">  <div class="section-heading"><p class="eyebrow">
+  OUR SERVICES
+</p>
 
-      <a href="contact.html">
-        Contact
-      </a>
+<h2>
+  Everything your home needs.
+</h2>
 
-      <a href="login.html" class="login-btn">
-        Login
-      </a>
+<p>
+  Choose a service and connect with a suitable
+  technician for your home repair needs.
+</p>
 
-      <a href="emergency.html" class="sos-btn">
-        Emergency SOS
-      </a>
-    </div>
+  </div>  <div class="services"><!-- PLUMBING -->
 
-  </nav>
-</header>
+<div class="service-card">
 
+  <img
+    src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=900&q=85"
+    alt="Professional plumbing service"
+  >
 
-<!-- HERO -->
+  <div class="service-content">
 
-<section class="hero">
+    <h2>
+      Plumbing
+    </h2>
 
-  <h1>
-    Our <span>Services</span>
-  </h1>
+    <p>
+      Pipe leakage, tap repair, sink blockage,
+      bathroom plumbing and water-related repairs.
+    </p>
 
-  <p>
-    From everyday repairs to urgent home emergencies,
-    FixConnect AI helps you find trusted technicians
-    quickly and easily.
-  </p>
-
-</section>
-
-
-<!-- SERVICES -->
-
-<section class="services">
-
-
-  <!-- PLUMBING -->
-
-  <div class="service-card">
-
-    <img
-      src="https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=900&q=85"
-      alt="Plumbing service"
+    <a
+      href="login.html"
+      class="service-btn"
+      onclick="selectService('Plumbing')"
     >
-
-    <div class="service-content">
-
-      <h2>🔧 Plumbing</h2>
-
-      <p>
-        Pipe leakage, tap repair, sink blockage,
-        bathroom plumbing and water-related repairs.
-      </p>
-
-      <button onclick="requestService('Plumbing')">
-        Request Service
-      </button>
-
-    </div>
+      Request Service →
+    </a>
 
   </div>
 
+</div>
 
-  <!-- ELECTRICAL -->
 
-  <div class="service-card">
 
-    <img
-      src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=900&q=85"
-      alt="Electrical service"
+<!-- ELECTRICAL -->
+
+<div class="service-card">
+
+  <img
+    src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=900&q=85"
+    alt="Professional electrical technician"
+  >
+
+  <div class="service-content">
+
+    <h2>
+      Electrical
+    </h2>
+
+    <p>
+      Wiring issues, switchboard repairs,
+      inspections and safe electrical services.
+    </p>
+
+    <a
+      href="login.html"
+      class="service-btn"
+      onclick="selectService('Electrical')"
     >
-
-    <div class="service-content">
-
-      <h2>⚡ Electrical</h2>
-
-      <p>
-        Switchboard repairs, wiring issues,
-        electrical inspection and home electrical services.
-      </p>
-
-      <button onclick="requestService('Electrical')">
-        Request Service
-      </button>
-
-    </div>
+      Request Service →
+    </a>
 
   </div>
 
+</div>
 
-  <!-- AC -->
 
-  <div class="service-card">
 
-    <img 
+<!-- AC REPAIR -->
+
+<div class="service-card">
+
+  <img
     src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80"
-                alt="Professional young male technician in a blue-and-white uniform repairing a home system"
-              />
-    
+    alt="Professional AC technician"
+  >
 
-    <div class="service-content">
+  <div class="service-content">
 
-      <h2>❄️ AC Repair</h2>
+    <h2>
+      AC Repair
+    </h2>
 
-      <p>
-        AC servicing, cooling problems,
-        installation support and maintenance.
-      </p>
+    <p>
+      AC servicing, cooling problems,
+      installation support and maintenance.
+    </p>
 
-      <button onclick="requestService('AC Repair')">
-        Request Service
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- APPLIANCE -->
-
-  <div class="service-card">
-
-    <img
-      src="https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=900&q=85"
-      alt="Appliance repair"
+    <a
+      href="login.html"
+      class="service-btn"
+      onclick="selectService('AC Repair')"
     >
-
-    <div class="service-content">
-
-      <h2>🔌 Appliance Repair</h2>
-
-      <p>
-        Washing machine, refrigerator,
-        microwave and other household appliance repairs.
-      </p>
-
-      <button onclick="requestService('Appliance Repair')">
-        Request Service
-      </button>
-
-    </div>
+      Request Service →
+    </a>
 
   </div>
 
+</div>
 
-  <!-- CLEANING -->
 
-  <div class="service-card">
 
-    <img
-      src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=85"
-      alt="Home cleaning service"
+<!-- APPLIANCE -->
+
+<div class="service-card">
+
+  <img
+    src="https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=900&q=85"
+    alt="Home appliance repair"
+  >
+
+  <div class="service-content">
+
+    <h2>
+      Appliance Repair
+    </h2>
+
+    <p>
+      Washing machine, refrigerator,
+      microwave and household appliance repairs.
+    </p>
+
+    <a
+      href="login.html"
+      class="service-btn"
+      onclick="selectService('Appliance Repair')"
     >
-
-    <div class="service-content">
-
-      <h2>🧹 Cleaning</h2>
-
-      <p>
-        Home cleaning, kitchen cleaning,
-        bathroom cleaning and maintenance services.
-      </p>
-
-      <button onclick="requestService('Cleaning')">
-        Request Service
-      </button>
-
-    </div>
+      Request Service →
+    </a>
 
   </div>
 
+</div>
 
-  <!-- CARPENTRY -->
 
-  <div class="service-card">
 
-    <img
-      src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=900&q=85"
-      alt="Carpentry service"
+<!-- CLEANING -->
+
+<div class="service-card">
+
+  <img
+    src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=85"
+    alt="Professional home cleaning"
+  >
+
+  <div class="service-content">
+
+    <h2>
+      Cleaning
+    </h2>
+
+    <p>
+      Home cleaning, kitchen cleaning,
+      bathroom cleaning and regular maintenance.
+    </p>
+
+    <a
+      href="login.html"
+      class="service-btn"
+      onclick="selectService('Cleaning')"
     >
-
-    <div class="service-content">
-
-      <h2>🪚 Carpentry</h2>
-
-      <p>
-        Furniture repair, door repair,
-        shelves, fittings and other carpentry work.
-      </p>
-
-      <button onclick="requestService('Carpentry')">
-        Request Service
-      </button>
-
-    </div>
+      Request Service →
+    </a>
 
   </div>
 
-</section>
+</div>
 
 
-<!-- CTA -->
 
-<section class="cta">
+<!-- CARPENTRY -->
 
-  <h2>Need a Technician?</h2>
+<div class="service-card">
 
-  <p>
-    Describe your problem and let FixConnect AI
-    help you find the right service provider.
-  </p>
+  <img
+    src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=900&q=85"
+    alt="Professional carpentry service"
+  >
 
-  <button onclick="goToLogin()">
-    Find a Technician
-  </button>
+  <div class="service-content">
 
-</section>
+    <h2>
+      Carpentry
+    </h2>
 
+    <p>
+      Furniture repair, door repair,
+      shelves, fittings and carpentry work.
+    </p>
 
-<!-- FOOTER -->
+    <a
+      href="login.html"
+      class="service-btn"
+      onclick="selectService('Carpentry')"
+    >
+      Request Service →
+    </a>
 
-<footer>
+  </div>
 
-  <h3>FixConnect AI</h3>
+</div>
 
-  <p>
-    Smart Solutions. Trusted Technicians.
-  </p>
+  </div></section><!-- ================= CTA ================= --><section class="cta-section">  <div class="cta"><h2>
+  Need a Technician?
+</h2>
 
-  <p style="margin-top:10px;">
-    © 2026 FixConnect AI. All rights reserved.
-  </p>
+<p>
+  Describe your problem and let FixConnect AI
+  help you find the right service provider.
+</p>
 
-</footer>
+<a
+  href="login.html"
+  class="cta-btn"
+>
+  Find a Technician →
+</a>
 
+  </div></section><!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <a href="index.html" class="brand footer-brand" aria-label="FixConnect AI home">
+        <span class="brand-mark">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <path d="M32 8 12 24v28h40V24L32 8Zm-1 12h2v12h-2V20Zm0 16h2v2h-2v-2Z" />
+          </svg>
+        </span>
+        <span class="brand-text">FixConnect AI</span>
+      </a>
+      <p class="footer-copy">
+        Premium support for modern homes through AI-guided service discovery and skilled repairs.
+      </p>
+    </div>
 
-<script>
+    <div>
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="service.html">Services</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
 
-function requestService(service) {
+    <div>
+      <h3>Service</h3>
+      <ul>
+        <li><a href="service.html">Plumbing</a></li>
+        <li><a href="service.html">Electrical</a></li>
+        <li><a href="service.html">AC Repair</a></li>
+        <li><a href="service.html">Appliance Repair</a></li>
+      </ul>
+    </div>
 
-  localStorage.setItem("selectedService", service);
+    <div>
+      <h3>Contact</h3>
+      <ul>
+        <li><a href="mailto:support@fixconnectai.com">support@fixconnectai.com</a></li>
+        <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+        <li><span>Hyderabad, India</span></li>
+      </ul>
+    </div>
+  </div>
 
-  window.location.href = "login.html";
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <span>© 2026 FixConnect AI</span>
+      <div class="legal-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer><script>
 
-}
+  function selectService(service) {
 
-function goToLogin() {
+    localStorage.setItem(
+      "selectedService",
+      service
+    );
 
-  window.location.href = "login.html";
+  }
 
-}
-
-</script>
-
-</body>
+</script></body>
 </html>

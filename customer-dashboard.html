@@ -1,934 +1,1340 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Customer Dashboard | FixConnect AI</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: "Inter", sans-serif;
-      background: #f4f8ff;
-      color: #172554;
-    }
-
-    .dashboard {
-      display: flex;
-      min-height: 100vh;
-    }
-
-    /* SIDEBAR */
-    .sidebar {
-      width: 250px;
-      background: #0f2457;
-      color: white;
-      padding: 25px 18px;
-      position: fixed;
-      height: 100vh;
-      left: 0;
-      top: 0;
-    }
-
-    .logo {
-      font-size: 21px;
-      font-weight: 800;
-      margin-bottom: 35px;
-      text-align: center;
-    }
-
-    .logo span {
-      color: #60a5fa;
-    }
-
-    .menu button {
-      width: 100%;
-      border: 0;
-      background: transparent;
-      color: #dbeafe;
-      padding: 13px 15px;
-      margin-bottom: 7px;
-      border-radius: 10px;
-      text-align: left;
-      cursor: pointer;
-      font-size: 14px;
-      transition: 0.2s;
-    }
-
-    .menu button:hover,
-    .menu button.active {
-      background: #2563eb;
-      color: white;
-    }
-
-    .logout {
-      position: absolute;
-      bottom: 25px;
-      left: 18px;
-      width: calc(100% - 36px) !important;
-      background: #dc2626 !important;
-      color: white !important;
-    }
-
-    /* MAIN */
-    .main {
-      margin-left: 250px;
-      width: calc(100% - 250px);
-      padding: 30px;
-    }
-
-    .top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 28px;
-    }
-
-    .top h1 {
-      font-size: 28px;
-      margin-bottom: 6px;
-    }
-
-    .top p {
-      color: #64748b;
-      font-size: 14px;
-    }
-
-    .profile {
-      background: white;
-      padding: 10px 15px;
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(15, 36, 87, 0.08);
-      font-weight: 600;
-    }
-
-    /* CARDS */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      margin-bottom: 28px;
-    }
-
-    .stat {
-      background: white;
-      padding: 22px;
-      border-radius: 16px;
-      box-shadow: 0 5px 20px rgba(15, 36, 87, 0.07);
-    }
-
-    .stat h3 {
-      font-size: 13px;
-      color: #64748b;
-      margin-bottom: 10px;
-    }
-
-    .stat strong {
-      font-size: 27px;
-    }
-
-    /* SECTIONS */
-    .section {
-      display: none;
-      background: white;
-      padding: 25px;
-      border-radius: 18px;
-      box-shadow: 0 5px 20px rgba(15, 36, 87, 0.07);
-      margin-bottom: 25px;
-    }
-
-    .section.active {
-      display: block;
-    }
-
-    .section h2 {
-      margin-bottom: 8px;
-    }
-
-    .section-description {
-      color: #64748b;
-      font-size: 14px;
-      margin-bottom: 22px;
-    }
-
-    /* FORM */
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 17px;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-
-    .form-group.full {
-      grid-column: 1 / -1;
-    }
-
-    label {
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    input,
-    select,
-    textarea {
-      width: 100%;
-      padding: 12px 13px;
-      border: 1px solid #dbe4f0;
-      border-radius: 9px;
-      outline: none;
-      font-family: inherit;
-      background: #fbfdff;
-    }
-
-    textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: #2563eb;
-    }
-
-    .primary {
-      border: none;
-      background: #173b8f;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 9px;
-      cursor: pointer;
-      font-weight: 600;
-      margin-top: 18px;
-    }
-
-    .primary:hover {
-      background: #2563eb;
-    }
-
-    /* REQUEST CARDS */
-    .request-card,
-    .booking-card,
-    .technician-card,
-    .history-card {
-      border: 1px solid #e3eaf4;
-      border-radius: 13px;
-      padding: 18px;
-      margin-bottom: 13px;
-    }
-
-    .request-card h3,
-    .booking-card h3,
-    .technician-card h3 {
-      margin-bottom: 7px;
-    }
-
-    .status {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 5px 10px;
-      background: #dbeafe;
-      color: #1d4ed8;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    /* TECHNICIANS */
-    .technicians {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-    }
-
-    .technician-card {
-      margin: 0;
-    }
-
-    .avatar {
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      background: #dbeafe;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 25px;
-      margin-bottom: 12px;
-    }
-
-    .rating {
-      color: #f59e0b;
-      margin: 8px 0;
-    }
-
-    /* PROFILE */
-    .profile-form {
-      max-width: 650px;
-    }
-
-    /* SOS */
-    .sos-box {
-      text-align: center;
-      padding: 35px 20px;
-    }
-
-    .sos-button {
-      border: none;
-      background: #dc2626;
-      color: white;
-      padding: 17px 35px;
-      border-radius: 50px;
-      font-size: 17px;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-
-    .message {
-      margin-top: 15px;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    /* MOBILE */
-    @media (max-width: 900px) {
-      .sidebar {
-        width: 210px;
-      }
-
-      .main {
-        margin-left: 210px;
-        width: calc(100% - 210px);
-      }
-
-      .stats {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .technicians {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 650px) {
-      .sidebar {
-        position: static;
-        width: 100%;
-        height: auto;
-      }
-
-      .dashboard {
-        display: block;
-      }
-
-      .main {
-        margin-left: 0;
-        width: 100%;
-        padding: 18px;
-      }
-
-      .logout {
-        position: static;
-        width: 100% !important;
-        margin-top: 10px;
-      }
-
-      .stats,
-      .technicians,
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .form-group.full {
-        grid-column: auto;
-      }
-
-      .top {
-        align-items: flex-start;
-        gap: 12px;
-        flex-direction: column;
-      }
-    }
-  </style>
+  <meta name="description" content="Manage your home repair services, book verified technicians, and track active requests on FixConnect AI." />
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="dashboard.css" />
 </head>
+<body class="dashboard-page">
 
-<body>
+  <!-- MASTER TOPBAR (Identical to Home Page) -->
+  <header class="topbar">
+    <div class="container nav-wrap">
+      <div class="dashboard-user-bar">
+        <button class="topbar-mobile-toggle" id="sidebarToggle" aria-label="Toggle Navigation Sidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <a href="index.html" class="brand" aria-label="FixConnect AI home">
+          <span class="brand-mark">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M32 8 12 24v28h40V24L32 8Zm-1 12h2v12h-2V20Zm0 16h2v2h-2v-2Z" />
+            </svg>
+          </span>
+          <span class="brand-text">FixConnect AI</span>
+        </a>
+      </div>
 
-<div class="dashboard">
-
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="logo">FixConnect <span>AI</span></div>
-
-    <div class="menu">
-      <button class="active" onclick="showSection('dashboard', this)">🏠 Dashboard</button>
-      <button onclick="showSection('complaint', this)">📝 Raise Complaint</button>
-      <button onclick="showSection('requests', this)">📋 My Requests</button>
-      <button onclick="showSection('technicians', this)">👨‍🔧 Technicians</button>
-      <button onclick="showSection('bookings', this)">📅 Bookings</button>
-      <button onclick="showSection('history', this)">🕘 Service History</button>
-      <button onclick="showSection('reviews', this)">⭐ Reviews</button>
-      <button onclick="showSection('profile', this)">👤 My Profile</button>
-      <button onclick="showSection('sos', this)">🚨 Emergency SOS</button>
-      <button class="logout" onclick="logout()">↩ Logout</button>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="service.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html" class="nav-button nav-button-light">Login</a>
+        <a href="signup.html" class="nav-button nav-button-light">Sign Up</a>
+        <a href="login.html" class="nav-button nav-button-logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        <a href="emergency.html" class="nav-button nav-button-accent">Emergency SOS</a>
+      </nav>
     </div>
-  </aside>
+  </header>
 
-  <!-- MAIN -->
-  <main class="main">
+  <!-- DASHBOARD LAYOUT: SIDEBAR + MAIN CONTENT -->
+  <div class="dashboard-layout">
 
-    <div class="top">
+    <!-- LEFT SIDEBAR WITH 20 CUSTOMER MODULES -->
+    <aside class="sidebar" id="sidebar">
       <div>
-        <h1>Welcome back! 👋</h1>
-        <p>Manage your home services easily with FixConnect AI.</p>
+        <div class="sidebar-header">
+          <span class="sidebar-role-tag">Customer Account</span>
+          <h2 class="sidebar-user-name">Naga Sudha</h2>
+        </div>
+
+        <ul class="sidebar-nav">
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link active" data-section="dashboard">
+              <i class="fa-solid fa-gauge-high"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="request">
+              <i class="fa-solid fa-plus-circle"></i>
+              <span>Request a Service</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="complaints">
+              <i class="fa-solid fa-clipboard-list"></i>
+              <span>My Complaints</span>
+              <span class="nav-badge">2</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="ai-analysis">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span>AI Problem Analysis</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="technicians">
+              <i class="fa-solid fa-user-gear"></i>
+              <span>Find Technicians</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="bookings">
+              <i class="fa-solid fa-calendar-check"></i>
+              <span>My Bookings</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="upcoming">
+              <i class="fa-solid fa-clock"></i>
+              <span>Upcoming Services</span>
+              <span class="nav-badge">2</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="ongoing">
+              <i class="fa-solid fa-spinner"></i>
+              <span>Ongoing Service</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="tracking">
+              <i class="fa-solid fa-location-crosshairs"></i>
+              <span>Live Technician Tracking</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="eta">
+              <i class="fa-solid fa-business-time"></i>
+              <span>ETA / Service Status</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="favourites">
+              <i class="fa-solid fa-heart"></i>
+              <span>Favourite Technicians</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="photos">
+              <i class="fa-solid fa-images"></i>
+              <span>Before &amp; After Photos</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="invoices">
+              <i class="fa-solid fa-file-invoice-dollar"></i>
+              <span>Digital Invoices</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="warranty">
+              <i class="fa-solid fa-shield-halved"></i>
+              <span>Service Warranty</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="rewards">
+              <i class="fa-solid fa-award"></i>
+              <span>Loyalty Rewards</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="notifications">
+              <i class="fa-solid fa-bell"></i>
+              <span>Notifications</span>
+              <span class="nav-badge">3</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="history">
+              <i class="fa-solid fa-history"></i>
+              <span>Service History</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="profile">
+              <i class="fa-solid fa-user"></i>
+              <span>My Profile</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link" data-section="settings">
+              <i class="fa-solid fa-gear"></i>
+              <span>Settings</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a class="sidebar-link sos-link" data-section="emergency">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <span>Emergency SOS</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="login.html" class="sidebar-link logout-link">
+              <i class="fa-solid fa-right-from-bracket"></i>
+              <span>Logout</span>
+            </a>
+          </li>
+        </ul>
       </div>
-      <div class="profile">Customer</div>
-    </div>
 
-    <!-- DASHBOARD -->
-    <section id="dashboard" class="section active">
-      <h2>Dashboard</h2>
-      <p class="section-description">Your service activity at a glance.</p>
-
-      <div class="stats">
-        <div class="stat">
-          <h3>Active Requests</h3>
-          <strong id="requestCount">0</strong>
-        </div>
-
-        <div class="stat">
-          <h3>Upcoming Bookings</h3>
-          <strong id="bookingCount">0</strong>
-        </div>
-
-        <div class="stat">
-          <h3>Completed Services</h3>
-          <strong id="completedCount">0</strong>
-        </div>
-
-        <div class="stat">
-          <h3>Reviews</h3>
-          <strong id="reviewCount">0</strong>
+      <div class="sidebar-footer">
+        <div class="sidebar-status-card">
+          <div class="sidebar-status-info">
+            <span class="status-dot"></span>
+            <span class="status-text">Account Verified</span>
+          </div>
+          <i class="fa-solid fa-circle-check" style="color: var(--green-600);"></i>
         </div>
       </div>
+    </aside>
 
-      <p>Use the menu to raise a complaint, book a technician, check your requests and manage your profile.</p>
-    </section>
+    <!-- RIGHT MAIN CONTENT CONTAINER -->
+    <main class="dashboard-main">
 
-    <!-- COMPLAINT -->
-    <section id="complaint" class="section">
-      <h2>Raise a Complaint</h2>
-      <p class="section-description">Tell us what problem you are facing.</p>
+      <!-- ================= MODULE 1: DASHBOARD HOME ================= -->
+      <section class="dashboard-section active" id="section-dashboard">
+        <div class="section-top-header">
+          <div>
+            <h1>Welcome back, Naga Sudha 👋</h1>
+            <p>Manage home services, track active technicians, and review past visits.</p>
+          </div>
+          <div class="section-actions">
+            <button class="btn-primary-custom" onclick="switchSection('request')">
+              <i class="fa-solid fa-plus"></i> Request Service
+            </button>
+            <a href="login.html" class="btn-danger-custom" style="text-decoration: none;">
+              <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+            <button class="btn-danger-custom" onclick="switchSection('emergency')" style="background: #991b1b;">
+              <i class="fa-solid fa-triangle-exclamation"></i> SOS
+            </button>
+          </div>
+        </div>
 
-      <form id="complaintForm">
-        <div class="form-grid">
-
-          <div class="form-group">
-            <label>Service</label>
-            <select id="service" required>
-              <option value="">Select Service</option>
-              <option>Plumbing</option>
-              <option>Electrical</option>
-              <option>AC Repair</option>
-              <option>Appliance Repair</option>
-              <option>Cleaning</option>
-              <option>Carpentry</option>
-            </select>
+        <!-- STATS CARDS -->
+        <div class="stats-grid-4">
+          <div class="stat-card-modern">
+            <div class="stat-icon-wrapper blue">
+              <i class="fa-solid fa-calendar-check"></i>
+            </div>
+            <div class="stat-content">
+              <label>Active Bookings</label>
+              <strong>02</strong>
+              <span class="stat-subtext">1 ongoing right now</span>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label>Location</label>
-            <input id="location" type="text" placeholder="Enter your location" required>
+          <div class="stat-card-modern">
+            <div class="stat-icon-wrapper amber">
+              <i class="fa-solid fa-clock"></i>
+            </div>
+            <div class="stat-content">
+              <label>Pending Requests</label>
+              <strong>01</strong>
+              <span class="stat-subtext">Awaiting technician</span>
+            </div>
           </div>
 
-          <div class="form-group full">
-            <label>Problem Description</label>
-            <textarea id="description" placeholder="Describe your problem..." required></textarea>
+          <div class="stat-card-modern">
+            <div class="stat-icon-wrapper green">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="stat-content">
+              <label>Services Done</label>
+              <strong>14</strong>
+              <span class="stat-subtext">All time total</span>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label>Preferred Date</label>
-            <input id="date" type="date" required>
+          <div class="stat-card-modern">
+            <div class="stat-icon-wrapper purple">
+              <i class="fa-solid fa-heart"></i>
+            </div>
+            <div class="stat-content">
+              <label>Favourite Techs</label>
+              <strong>06</strong>
+              <span class="stat-subtext">Saved specialists</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CLEAN LIGHT ACTIVE SERVICE CARD -->
+        <div class="active-service-card">
+          <div class="active-service-content">
+            <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=600&q=80" alt="Technician Rahul Kumar" class="active-tech-img" />
+            <div class="active-service-info">
+              <span class="badge-pill-custom badge-ongoing">
+                <i class="fa-solid fa-spinner fa-spin"></i> Ongoing Service
+              </span>
+              <h3>Rahul Kumar · AC Repair &amp; Servicing</h3>
+              <p>Technician is en route to Plot 42, Jubilee Hills. Arriving shortly for split AC diagnostic.</p>
+              <div class="active-service-meta">
+                <span><i class="fa-solid fa-star" style="color: #f59e0b;"></i> 4.9 (126 reviews)</span>
+                <span><i class="fa-solid fa-briefcase"></i> 7+ Yrs Exp</span>
+                <span><i class="fa-solid fa-location-dot"></i> 2.4 km away</span>
+                <span><i class="fa-solid fa-clock"></i> ETA 18 mins</span>
+              </div>
+            </div>
+            <div class="active-service-actions">
+              <button class="btn-primary-custom" onclick="switchSection('tracking')">
+                <i class="fa-solid fa-location-crosshairs"></i> Track Live
+              </button>
+              <a href="tel:+919876543210" class="btn-secondary-custom">
+                <i class="fa-solid fa-phone"></i> Call Tech
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- MAIN DASHBOARD CONTENT GRID -->
+        <div class="grid-main-side">
+          <div>
+            <!-- UPCOMING BOOKINGS SUMMARY -->
+            <div class="dash-card" style="margin-bottom: 24px;">
+              <div class="dash-card-header">
+                <h2 class="dash-card-title"><i class="fa-solid fa-calendar-day"></i> Upcoming Services</h2>
+                <a class="btn-secondary-custom btn-sm" onclick="switchSection('bookings')">View All</a>
+              </div>
+              <div class="dash-table-container">
+                <table class="dash-table">
+                  <thead>
+                    <tr>
+                      <th>Service</th>
+                      <th>Technician</th>
+                      <th>Date &amp; Time</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>AC Repair &amp; Deep Servicing</strong><br><small class="text-muted">HVAC</small></td>
+                      <td>Rahul Kumar</td>
+                      <td>Today, 10:30 AM</td>
+                      <td><span class="badge-pill-custom badge-ongoing">Ongoing</span></td>
+                      <td><button class="btn-secondary-custom btn-sm" onclick="switchSection('tracking')">Track</button></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Electrical Panel Audit</strong><br><small class="text-muted">Electrical</small></td>
+                      <td>Arjun Reddy</td>
+                      <td>02 Sep 2026, 04:00 PM</td>
+                      <td><span class="badge-pill-custom badge-scheduled">Scheduled</span></td>
+                      <td><button class="btn-secondary-custom btn-sm" onclick="switchSection('bookings')">Details</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- RECOMMENDED TECHNICIANS (MULTIPLE DIFFERENT PROFILES & IMAGES) -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h2 class="dash-card-title"><i class="fa-solid fa-user-gear"></i> Top Rated Technicians</h2>
+                <a class="btn-secondary-custom btn-sm" onclick="switchSection('technicians')">Find All</a>
+              </div>
+              <div class="grid-2-col">
+                <!-- Tech 1: Arjun Reddy -->
+                <div class="technician-card-pro">
+                  <div class="tech-card-image-wrap">
+                    <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=600&q=80" alt="Electrician Arjun Reddy" />
+                    <span class="tech-verified-badge"><i class="fa-solid fa-circle-check"></i> Verified</span>
+                  </div>
+                  <div class="tech-card-body">
+                    <span class="tech-category-tag">Electrical</span>
+                    <h3>Arjun Reddy</h3>
+                    <div class="tech-rating-row">
+                      <span class="stars">★★★★★</span>
+                      <strong>4.8</strong>
+                      <span class="reviews-count">(94 reviews)</span>
+                    </div>
+                    <div class="tech-info-pills">
+                      <span class="tech-pill"><i class="fa-solid fa-briefcase"></i> 8+ Yrs Exp</span>
+                      <span class="tech-pill"><i class="fa-solid fa-location-dot"></i> 1.8 km</span>
+                    </div>
+                    <div class="tech-card-footer">
+                      <button class="btn-primary-custom btn-sm" style="width: 100%;" onclick="switchSection('request')">Book Service</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tech 2: Vijay Kumar -->
+                <div class="technician-card-pro">
+                  <div class="tech-card-image-wrap">
+                    <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=600&q=80" alt="Plumber Vijay Kumar" />
+                    <span class="tech-verified-badge"><i class="fa-solid fa-circle-check"></i> Verified</span>
+                  </div>
+                  <div class="tech-card-body">
+                    <span class="tech-category-tag">Plumbing</span>
+                    <h3>Vijay Kumar</h3>
+                    <div class="tech-rating-row">
+                      <span class="stars">★★★★★</span>
+                      <strong>4.9</strong>
+                      <span class="reviews-count">(112 reviews)</span>
+                    </div>
+                    <div class="tech-info-pills">
+                      <span class="tech-pill"><i class="fa-solid fa-briefcase"></i> 10+ Yrs Exp</span>
+                      <span class="tech-pill"><i class="fa-solid fa-location-dot"></i> 3.1 km</span>
+                    </div>
+                    <div class="tech-card-footer">
+                      <button class="btn-primary-custom btn-sm" style="width: 100%;" onclick="switchSection('request')">Book Service</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label>Preferred Time</label>
-            <input id="time" type="time" required>
+          <!-- RIGHT COLUMN SIDEBAR WIDGETS -->
+          <div>
+            <!-- NOTIFICATIONS SNAPSHOT -->
+            <div class="dash-card" style="margin-bottom: 24px;">
+              <div class="dash-card-header">
+                <h2 class="dash-card-title"><i class="fa-solid fa-bell"></i> Notifications</h2>
+                <a class="btn-secondary-custom btn-sm" onclick="switchSection('notifications')">View</a>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div style="display: flex; gap: 10px; font-size: 0.85rem;">
+                  <i class="fa-solid fa-circle-check" style="color: var(--green-600); margin-top: 3px;"></i>
+                  <div>
+                    <strong>Technician Assigned</strong>
+                    <p style="margin: 2px 0 0; color: var(--slate-500); font-size: 0.78rem;">Rahul accepted AC Repair request.</p>
+                    <small style="color: var(--slate-400);">10 mins ago</small>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 10px; font-size: 0.85rem; padding-top: 10px; border-top: 1px solid var(--slate-200);">
+                  <i class="fa-solid fa-calendar-check" style="color: var(--blue-700); margin-top: 3px;"></i>
+                  <div>
+                    <strong>Booking Confirmed</strong>
+                    <p style="margin: 2px 0 0; color: var(--slate-500); font-size: 0.78rem;">Electrical audit scheduled for Sep 2.</p>
+                    <small style="color: var(--slate-400);">1 hour ago</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- QUICK ACCESS LINKS -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <h2 class="dash-card-title"><i class="fa-solid fa-bolt"></i> Quick Links</h2>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <button class="btn-secondary-custom" style="justify-content: flex-start;" onclick="switchSection('ai-analysis')">
+                  <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--blue-700);"></i> AI Problem Diagnostic
+                </button>
+                <button class="btn-secondary-custom" style="justify-content: flex-start;" onclick="switchSection('invoices')">
+                  <i class="fa-solid fa-file-invoice-dollar" style="color: var(--green-600);"></i> Digital Invoices
+                </button>
+                <button class="btn-secondary-custom" style="justify-content: flex-start;" onclick="switchSection('warranty')">
+                  <i class="fa-solid fa-shield-halved" style="color: var(--amber-600);"></i> Service Warranties
+                </button>
+                <button class="btn-secondary-custom" style="justify-content: flex-start;" onclick="switchSection('rewards')">
+                  <i class="fa-solid fa-award" style="color: var(--purple-600);"></i> Loyalty Rewards (240 pts)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ================= MODULE 2: REQUEST A SERVICE ================= -->
+      <section class="dashboard-section" id="section-request">
+        <div class="section-top-header">
+          <div>
+            <h1>Request a Home Service</h1>
+            <p>Select your issue, attach details or photos, and let AI match you with verified technicians.</p>
+          </div>
+        </div>
+
+        <div class="dash-card" style="max-width: 860px;">
+          <form id="serviceRequestForm" onsubmit="handleRequestSubmit(event)">
+            <div class="grid-2-col">
+              <div class="form-group">
+                <label for="serviceCategory">Service Category *</label>
+                <select id="serviceCategory" class="form-control-custom" required>
+                  <option value="">Select Service Category</option>
+                  <option value="AC Repair & Maintenance">AC Repair &amp; Maintenance</option>
+                  <option value="Plumbing Services">Plumbing Services</option>
+                  <option value="Electrical Repair">Electrical Repair</option>
+                  <option value="Appliance Repair">Appliance Repair</option>
+                  <option value="Carpentry & Furniture">Carpentry &amp; Furniture</option>
+                  <option value="House Painting">House Painting</option>
+                  <option value="Home Cleaning">Home Cleaning</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="locationInput">Service Address / Location *</label>
+                <input type="text" id="locationInput" class="form-control-custom" value="Plot 42, Jubilee Hills, Hyderabad" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="complaintDesc">Describe Your Problem / Complaint *</label>
+              <textarea id="complaintDesc" class="form-control-custom" placeholder="Explain what is wrong (e.g. AC cooling not working, water leak under sink...)" required></textarea>
+            </div>
+
+            <!-- PHOTO UPLOAD -->
+            <div class="form-group">
+              <label>Upload Problem Photo (Optional)</label>
+              <div class="upload-dropzone" onclick="document.getElementById('photoInput').click()">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <p><strong>Click to upload</strong> or drag photo here</p>
+                <input type="file" id="photoInput" style="display: none;" accept="image/*" onchange="previewUpload(event)" />
+              </div>
+              <div id="uploadPreview" style="margin-top: 8px; font-weight: 700; color: var(--blue-700); font-size: 0.85rem;"></div>
+            </div>
+
+            <div class="grid-2-col">
+              <div class="form-group">
+                <label for="prefDate">Preferred Service Date *</label>
+                <input type="date" id="prefDate" class="form-control-custom" required />
+              </div>
+
+              <div class="form-group">
+                <label for="prefTime">Preferred Time Slot *</label>
+                <select id="prefTime" class="form-control-custom" required>
+                  <option value="Morning (9 AM - 12 PM)">Morning (9 AM - 12 PM)</option>
+                  <option value="Afternoon (12 PM - 3 PM)">Afternoon (12 PM - 3 PM)</option>
+                  <option value="Evening (3 PM - 6 PM)">Evening (3 PM - 6 PM)</option>
+                  <option value="Immediate Emergency">Immediate Emergency (SOS)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group" style="display: flex; align-items: center; gap: 10px; background: var(--amber-100); padding: 12px; border-radius: var(--radius-md);">
+              <input type="checkbox" id="emergencyPriority" style="width: 18px; height: 18px; accent-color: var(--amber-600);" />
+              <label for="emergencyPriority" style="margin: 0; cursor: pointer; color: var(--navy-900); font-size: 0.88rem;">
+                <strong>Mark as High Emergency Priority</strong> (Dispatch under 30 mins)
+              </label>
+            </div>
+
+            <div style="display: flex; gap: 12px; margin-top: 20px;">
+              <button type="submit" class="btn-primary-custom" style="flex: 1;">
+                <i class="fa-solid fa-paper-plane"></i> Submit Request
+              </button>
+              <button type="button" class="btn-secondary-custom" onclick="switchSection('ai-analysis')">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Run AI Analysis
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+
+      <!-- ================= MODULE 3: MY COMPLAINTS ================= -->
+      <section class="dashboard-section" id="section-complaints">
+        <div class="section-top-header">
+          <div>
+            <h1>My Complaints &amp; Service Tickets</h1>
+            <p>Track reported complaints, diagnosis status, and resolution progress.</p>
+          </div>
+          <button class="btn-primary-custom" onclick="switchSection('request')">New Complaint</button>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-table-container">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Ticket ID</th>
+                  <th>Category</th>
+                  <th>Description</th>
+                  <th>Date Filed</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>#CMP-9042</strong></td>
+                  <td>AC Cooling Failure</td>
+                  <td>Indoor split AC blowing warm air, outdoor unit fan stopped.</td>
+                  <td>30 Aug 2026</td>
+                  <td><span class="badge-pill-custom badge-ongoing">Technician En Route</span></td>
+                  <td><button class="btn-secondary-custom btn-sm" onclick="switchSection('tracking')">Track Live</button></td>
+                </tr>
+                <tr>
+                  <td><strong>#CMP-8810</strong></td>
+                  <td>Plumbing Leakage</td>
+                  <td>Kitchen sink pipe joint leaking water onto cabinets.</td>
+                  <td>18 Aug 2026</td>
+                  <td><span class="badge-pill-custom badge-completed">Resolved</span></td>
+                  <td><button class="btn-secondary-custom btn-sm" onclick="switchSection('invoices')">Invoice</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ================= MODULE 4: AI PROBLEM ANALYSIS ================= -->
+      <section class="dashboard-section" id="section-ai-analysis">
+        <div class="section-top-header">
+          <div>
+            <h1>FixConnect AI Problem Analysis</h1>
+            <p>Describe your issue to receive instant AI root cause predictions and recommended service categories.</p>
+          </div>
+        </div>
+
+        <div class="grid-2-col">
+          <div class="dash-card">
+            <h2 class="dash-card-title" style="margin-bottom: 16px;">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> AI Problem Input
+            </h2>
+            <div class="form-group">
+              <label>Describe Problem Symptoms</label>
+              <textarea id="aiInputText" class="form-control-custom" placeholder="e.g. Fridge is making a loud buzzing sound and not freezing ice cream...">AC unit is leaking water from the front vent and blowing lukewarm air.</textarea>
+            </div>
+            <button class="btn-primary-custom" style="width: 100%; margin-top: 10px;" onclick="runAiDiagnostic()">
+              <i class="fa-solid fa-brain"></i> Analyze Problem Now
+            </button>
           </div>
 
-          <div class="form-group full">
-            <label>Upload Problem Photo</label>
-            <input id="photo" type="file" accept="image/*">
+          <div class="ai-box-container" id="aiResultCard">
+            <div class="ai-header">
+              <div class="ai-icon-sparkle"><i class="fa-solid fa-robot"></i></div>
+              <div>
+                <h3 style="margin: 0; color: var(--navy-900);">AI Diagnostic Result</h3>
+                <small style="color: var(--blue-700); font-weight: 700;">Confidence Score: 96.4%</small>
+              </div>
+            </div>
+            <p id="aiSummaryText" style="color: var(--slate-700); font-size: 0.9rem; line-height: 1.5;">
+              <strong>Detected Issue:</strong> Condensate drain line blockage overflowing internal tray.
+            </p>
+            <div class="ai-result-grid">
+              <div class="ai-result-item">
+                <label>Category</label>
+                <p id="aiCat">HVAC / AC Repair</p>
+              </div>
+              <div class="ai-result-item">
+                <label>Severity</label>
+                <p id="aiSev" style="color: var(--amber-600);">Moderate</p>
+              </div>
+              <div class="ai-result-item">
+                <label>Recommended Specialist</label>
+                <p id="aiTechCat">Certified AC Technician</p>
+              </div>
+              <div class="ai-result-item">
+                <label>Estimated Cost</label>
+                <p id="aiEstCost">₹650 - ₹1,200</p>
+              </div>
+            </div>
+            <button class="btn-primary-custom" style="width: 100%; margin-top: 16px;" onclick="switchSection('request')">
+              <i class="fa-solid fa-circle-check"></i> Book Recommended Technician
+            </button>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ================= MODULE 5: FIND TECHNICIANS (6 MULTIPLE DIFFERENT PROFILES) ================= -->
+      <section class="dashboard-section" id="section-technicians">
+        <div class="section-top-header">
+          <div>
+            <h1>Find &amp; Book Technicians</h1>
+            <p>Browse verified specialists across all categories with realistic ratings and experience.</p>
+          </div>
+        </div>
+
+        <div class="grid-3-col">
+          <!-- Tech 1: Arjun Reddy (Electrician) -->
+          <div class="technician-card-pro">
+            <div class="tech-card-image-wrap">
+              <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=600&q=80" alt="Electrician Arjun Reddy" />
+              <span class="tech-verified-badge"><i class="fa-solid fa-circle-check"></i> Verified</span>
+            </div>
+            <div class="tech-card-body">
+              <span class="tech-category-tag">Electrical</span>
+              <h3>Arjun Reddy</h3>
+              <div class="tech-rating-row">
+                <span class="stars">★★★★★</span> <strong>4.8</strong> <span class="reviews-count">(94 reviews)</span>
+              </div>
+              <div class="tech-info-pills">
+                <span class="tech-pill"><i class="fa-solid fa-briefcase"></i> 8+ Yrs Exp</span>
+                <span class="tech-pill"><i class="fa-solid fa-location-dot"></i> 1.8 km</span>
+                <span class="tech-pill" style="background: var(--green-100); color: var(--green-600);">Available Today</span>
+              </div>
+              <div class="tech-card-footer">
+                <button class="btn-primary-custom btn-sm" style="width: 100%;" onclick="switchSection('request')">Book Service</button>
+              </div>
+            </div>
           </div>
 
-          <div class="form-group full">
-            <label>
-              <input id="emergency" type="checkbox" style="width:auto;">
-              This is an Emergency Request
-            </label>
+          <!-- Tech 2: Rahul Kumar (AC Technician) -->
+          <div class="technician-card-pro">
+            <div class="tech-card-image-wrap">
+              <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=600&q=80" alt="AC Technician Rahul Kumar" />
+              <span class="tech-verified-badge"><i class="fa-solid fa-circle-check"></i> Verified</span>
+            </div>
+            <div class="tech-card-body">
+              <span class="tech-category-tag">AC Technician</span>
+              <h3>Rahul Kumar</h3>
+              <div class="tech-rating-row">
+                <span class="stars">★★★★★</span> <strong>4.9</strong> <span class="reviews-count">(126 reviews)</span>
+              </div>
+              <div class="tech-info-pills">
+                <span class="tech-pill"><i class="fa-solid fa-briefcase"></i> 7+ Yrs Exp</span>
+                <span class="tech-pill"><i class="fa-solid fa-location-dot"></i> 2.4 km</span>
+                <span class="tech-pill" style="background: var(--amber-100); color: var(--amber-600);">On Active Job</span>
+              </div>
+              <div class="tech-card-footer">
+                <button class="btn-primary-custom btn-sm" style="width: 100%;" onclick="switchSection('request')">Book Service</button>
+              </div>
+            </div>
           </div>
 
+          <!-- Tech 3: Vijay Kumar (Plumber) -->
+          <div class="technician-card-pro">
+            <div class="tech-card-image-wrap">
+              <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=600&q=80" alt="Plumber Vijay Kumar" />
+              <span class="tech-verified-badge"><i class="fa-solid fa-circle-check"></i> Verified</span>
+            </div>
+            <div class="tech-card-body">
+              <span class="tech-category-tag">Plumbing Specialist</span>
+              <h3>Vijay Kumar</h3>
+              <div class="tech-rating-row">
+                <span class="stars">★★★★★</span> <strong>4.9</strong> <span class="reviews-count">(112 reviews)</span>
+              </div>
+              <div class="tech-info-pills">
+                <span class="tech-pill"><i class="fa-solid fa-briefcase"></i> 10+ Yrs Exp</span>
+                <span class="tech-pill"><i class="fa-solid fa-location-dot"></i> 3.1 km</span>
+                <span class="tech-pill" style="background: var(--green-100); color: var(--green-600);">Available Now</span>
+              </div>
+              <div class="tech-card-footer">
+                <button class="btn-secondary-custom btn-sm" onclick="switchSection('request')">View Profile</button>
+                <button class="btn-primary-custom btn-sm" style="flex: 1;" onclick="switchSection('request')">Book Service</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tech 4: Ravi Teja (Appliance Technician) -->
+          <div class="technician-card-pro">
+            <div class="tech-card-image-wrap">
+              <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Appliance Repair Ravi Teja" />
+              <span class="tech-verified-badge"><i class="fa-solid fa-circle-check"></i> Verified</span>
+            </div>
+            <div class="tech-card-body">
+              <span class="tech-category-tag">Appliance Technician</span>
+              <h3>Ravi Teja</h3>
+              <div class="tech-rating-row">
+                <span class="stars">★★★★★</span> <strong>4.7</strong> <span class="reviews-count">(88 reviews)</span>
+              </div>
+              <div class="tech-info-pills">
+                <span class="tech-pill"><i class="fa-solid fa-briefcase"></i> 6+ Yrs Exp</span>
+                <span class="tech-pill"><i class="fa-solid fa-location-dot"></i> 2.9 km</span>
+                <span class="tech-pill">Next Slot: 2 PM</span>
+              </div>
+              <div class="tech-card-footer">
+                <button class="btn-primary-custom btn-sm" style="width: 100%;" onclick="switchSection('request')">Book Service</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tech 5: Kiran Kumar (Carpenter) -->
+          <div class="technician-card-pro">
+            <div class="tech-card-image-wrap">
+              <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80" alt="Carpenter Kiran Kumar" />
+              <span class="tech-verified-badge"><i class="fa-solid fa-circle-check"></i> Verified</span>
+            </div>
+            <div class="tech-card-body">
+              <span class="tech-category-tag">Carpenter</span>
+              <h3>Kiran Kumar</h3>
+              <div class="tech-rating-row">
+                <span class="stars">★★★★★</span> <strong>4.9</strong> <span class="reviews-count">(105 reviews)</span>
+              </div>
+              <div class="tech-info-pills">
+                <span class="tech-pill"><i class="fa-solid fa-briefcase"></i> 9+ Yrs Exp</span>
+                <span class="tech-pill"><i class="fa-solid fa-location-dot"></i> 4.2 km</span>
+                <span class="tech-pill" style="background: var(--green-100); color: var(--green-600);">Available Today</span>
+              </div>
+              <div class="tech-card-footer">
+                <button class="btn-primary-custom btn-sm" style="width: 100%;" onclick="switchSection('request')">Book Service</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tech 6: Suresh Kumar (Painter) -->
+          <div class="technician-card-pro">
+            <div class="tech-card-image-wrap">
+              <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80" alt="Painter Suresh Kumar" />
+              <span class="tech-verified-badge"><i class="fa-solid fa-circle-check"></i> Verified</span>
+            </div>
+            <div class="tech-card-body">
+              <span class="tech-category-tag">Painter</span>
+              <h3>Suresh Kumar</h3>
+              <div class="tech-rating-row">
+                <span class="stars">★★★★★</span> <strong>4.8</strong> <span class="reviews-count">(82 reviews)</span>
+              </div>
+              <div class="tech-info-pills">
+                <span class="tech-pill"><i class="fa-solid fa-briefcase"></i> 7+ Yrs Exp</span>
+                <span class="tech-pill"><i class="fa-solid fa-location-dot"></i> 3.8 km</span>
+                <span class="tech-pill" style="background: var(--green-100); color: var(--green-600);">Available Tomorrow</span>
+              </div>
+              <div class="tech-card-footer">
+                <button class="btn-primary-custom btn-sm" style="width: 100%;" onclick="switchSection('request')">Book Service</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ================= MODULE 6: MY BOOKINGS ================= -->
+      <section class="dashboard-section" id="section-bookings">
+        <div class="section-top-header">
+          <div>
+            <h1>My Bookings</h1>
+            <p>View past, ongoing, and upcoming scheduled home repair visits.</p>
+          </div>
         </div>
 
-        <button class="primary" type="submit">Submit Complaint</button>
-        <p id="complaintMessage" class="message"></p>
-      </form>
-    </section>
+        <div class="dash-card">
+          <div class="dash-table-container">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Booking ID</th>
+                  <th>Service</th>
+                  <th>Technician</th>
+                  <th>Date &amp; Time</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>#BK-7721</td>
+                  <td><strong>AC Repair &amp; Servicing</strong></td>
+                  <td>Rahul Kumar</td>
+                  <td>Today, 10:30 AM</td>
+                  <td><span class="badge-pill-custom badge-ongoing">Ongoing</span></td>
+                  <td><button class="btn-primary-custom btn-sm" onclick="switchSection('tracking')">Track Live</button></td>
+                </tr>
+                <tr>
+                  <td>#BK-7640</td>
+                  <td><strong>Electrical Inspection</strong></td>
+                  <td>Arjun Reddy</td>
+                  <td>02 Sep 2026, 4:00 PM</td>
+                  <td><span class="badge-pill-custom badge-scheduled">Scheduled</span></td>
+                  <td><button class="btn-secondary-custom btn-sm">Reschedule</button></td>
+                </tr>
+                <tr>
+                  <td>#BK-7102</td>
+                  <td><strong>Kitchen Pipe Leak Fix</strong></td>
+                  <td>Vijay Kumar</td>
+                  <td>18 Aug 2026</td>
+                  <td><span class="badge-pill-custom badge-completed">Completed</span></td>
+                  <td><button class="btn-secondary-custom btn-sm" onclick="switchSection('invoices')">Invoice</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
 
-    <!-- REQUESTS -->
-    <section id="requests" class="section">
-      <h2>My Requests</h2>
-      <p class="section-description">Track your submitted service requests.</p>
-      <div id="requestList"></div>
-    </section>
 
-    <!-- TECHNICIANS -->
-    <section id="technicians" class="section">
-      <h2>Recommended Technicians</h2>
-      <p class="section-description">Choose a technician for your home service.</p>
-
-      <div class="technicians">
-
-        <div class="technician-card">
-          <div class="avatar">👨‍🔧</div>
-          <h3>Raj Kumar</h3>
-          <p>Plumbing Specialist</p>
-          <div class="rating">★★★★★</div>
-          <p>5+ years experience</p>
-          <button class="primary" onclick="bookTechnician('Raj Kumar','Plumbing')">Book Service</button>
+      <!-- ================= MODULE 7: UPCOMING SERVICES ================= -->
+      <section class="dashboard-section" id="section-upcoming">
+        <div class="section-top-header">
+          <div>
+            <h1>Upcoming Services</h1>
+            <p>Manage your upcoming home appointments.</p>
+          </div>
         </div>
 
-        <div class="technician-card">
-          <div class="avatar">👨‍🔧</div>
-          <h3>Arun Kumar</h3>
-          <p>Electrical Specialist</p>
-          <div class="rating">★★★★☆</div>
-          <p>4+ years experience</p>
-          <button class="primary" onclick="bookTechnician('Arun Kumar','Electrical')">Book Service</button>
+        <div class="grid-2-col">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <span class="badge-pill-custom badge-scheduled">Scheduled</span>
+              <small style="color: var(--slate-400);">ID: #BK-7640</small>
+            </div>
+            <h3>Electrical Inspection &amp; Wiring Audit</h3>
+            <p style="color: var(--slate-500); font-size: 0.88rem;">Technician: Arjun Reddy (8+ Yrs Exp)</p>
+            <div style="display: flex; gap: 16px; margin: 14px 0; font-size: 0.85rem;">
+              <span><i class="fa-solid fa-calendar"></i> 02 Sep 2026</span>
+              <span><i class="fa-solid fa-clock"></i> 04:00 PM</span>
+            </div>
+            <button class="btn-secondary-custom" style="width: 100%;">Reschedule Visit</button>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ================= MODULE 8: ONGOING SERVICE ================= -->
+      <section class="dashboard-section" id="section-ongoing">
+        <div class="section-top-header">
+          <div>
+            <h1>Ongoing Service</h1>
+            <p>Real-time progress monitor for your active service visit.</p>
+          </div>
         </div>
 
-        <div class="technician-card">
-          <div class="avatar">👨‍🔧</div>
-          <h3>Vijay Kumar</h3>
-          <p>AC Repair Specialist</p>
-          <div class="rating">★★★★★</div>
-          <p>6+ years experience</p>
-          <button class="primary" onclick="bookTechnician('Vijay Kumar','AC Repair')">Book Service</button>
+        <div class="active-service-card">
+          <div class="active-service-content">
+            <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=600&q=80" alt="Rahul Kumar" class="active-tech-img" />
+            <div class="active-service-info">
+              <span class="badge-pill-custom badge-ongoing">Repair In Progress</span>
+              <h3>Rahul Kumar · AC Repair &amp; Servicing</h3>
+              <p>Technician has arrived at Plot 42, Jubilee Hills and is conducting pressure testing.</p>
+            </div>
+            <button class="btn-primary-custom" onclick="switchSection('tracking')">Open Live Map</button>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ================= MODULE 9: LIVE TECHNICIAN TRACKING ================= -->
+      <section class="dashboard-section" id="section-tracking">
+        <div class="section-top-header">
+          <div>
+            <h1>Live Technician Tracking</h1>
+            <p>Follow your assigned technician's real-time route.</p>
+          </div>
         </div>
 
-      </div>
+        <div class="tracking-map-box">
+          <div class="map-visual-route"></div>
+          <div class="map-pin" style="top: 25%; left: 30%;">
+            <i class="fa-solid fa-van-shuttle"></i>
+            <span>Tech: Rahul (1.8 km)</span>
+          </div>
+          <div class="map-pin" style="bottom: 25%; right: 30%;">
+            <i class="fa-solid fa-house-chimney-user" style="color: var(--navy-900);"></i>
+            <span>Your Home</span>
+          </div>
 
-      <div id="bookingFormBox"></div>
-    </section>
+          <div class="tracking-overlay-card">
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=600&q=80" alt="Rahul Kumar" style="width: 46px; height: 46px; border-radius: 50%; object-fit: cover;" />
+              <div>
+                <h4 style="margin: 0; color: var(--navy-900); font-size: 0.95rem;">Rahul Kumar (AC Specialist)</h4>
+                <small style="color: var(--blue-700); font-weight: 700;">Status: En Route · ETA 18 mins</small>
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <a href="tel:+919876543210" class="btn-primary-custom btn-sm"><i class="fa-solid fa-phone"></i> Call Tech</a>
+              <button class="btn-secondary-custom btn-sm"><i class="fa-solid fa-message"></i> Message</button>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    <!-- BOOKINGS -->
-    <section id="bookings" class="section">
-      <h2>My Bookings</h2>
-      <p class="section-description">View and manage your bookings.</p>
-      <div id="bookingList"></div>
-    </section>
 
-    <!-- HISTORY -->
-    <!-- SERVICE HISTORY -->
-<section id="history" class="section">
-
-  <div class="card">
-
-    <div class="card-header">
-      <div>
-        <h2>🕘 Service History</h2>
-        <p>View your previously completed home services.</p>
-      </div>
-    </div>
-
-    <div class="booking">
-
-      <div class="booking-top">
-        <div>
-          <h3>🔧 Plumbing Service</h3>
-          <p>Technician: Raj Kumar</p>
-          <p>Date: 10 August 2026</p>
+      <!-- ================= MODULE 10: ETA / SERVICE STATUS ================= -->
+      <section class="dashboard-section" id="section-eta">
+        <div class="section-top-header">
+          <div>
+            <h1>ETA / Service Status</h1>
+            <p>Step-by-step milestones for your active request.</p>
+          </div>
         </div>
 
-        <span class="status">Completed</span>
-      </div>
+        <div class="dash-card">
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; gap: 14px; align-items: center;">
+              <div class="stat-icon-wrapper green"><i class="fa-solid fa-check"></i></div>
+              <div>
+                <strong>Request Accepted</strong>
+                <p style="margin: 0; color: var(--slate-500); font-size: 0.8rem;">Completed at 10:05 AM</p>
+              </div>
+            </div>
+            <div style="display: flex; gap: 14px; align-items: center;">
+              <div class="stat-icon-wrapper blue"><i class="fa-solid fa-van-shuttle"></i></div>
+              <div>
+                <strong>Technician En Route</strong>
+                <p style="margin: 0; color: var(--blue-700); font-weight: 700; font-size: 0.8rem;">In Progress · ETA 18 Mins</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <div class="rating">
-        ★★★★★
-      </div>
 
-    </div>
-
-
-    <div class="booking">
-
-      <div class="booking-top">
-        <div>
-          <h3>❄️ AC Repair</h3>
-          <p>Technician: Vijay Kumar</p>
-          <p>Date: 2 August 2026</p>
+      <!-- ================= MODULE 11: FAVOURITE TECHNICIANS ================= -->
+      <section class="dashboard-section" id="section-favourites">
+        <div class="section-top-header">
+          <div>
+            <h1>Favourite Technicians</h1>
+            <p>Your saved specialists for quick re-booking.</p>
+          </div>
         </div>
 
-        <span class="status">Completed</span>
-      </div>
+        <div class="grid-3-col">
+          <div class="technician-card-pro">
+            <div class="tech-card-image-wrap">
+              <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=600&q=80" alt="Rahul Kumar" />
+              <button class="tech-fav-btn active"><i class="fa-solid fa-heart"></i></button>
+            </div>
+            <div class="tech-card-body">
+              <span class="tech-category-tag">AC Specialist</span>
+              <h3>Rahul Kumar</h3>
+              <p style="font-size: 0.82rem; color: var(--slate-500);">Saved from last AC service.</p>
+              <button class="btn-primary-custom btn-sm" style="width: 100%; margin-top: 8px;" onclick="switchSection('request')">Book Again</button>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <div class="rating">
-        ★★★★☆
-      </div>
 
-    </div>
-
-
-    <div class="booking">
-
-      <div class="booking-top">
-        <div>
-          <h3>⚡ Electrical Service</h3>
-          <p>Technician: Arun Kumar</p>
-          <p>Date: 25 July 2026</p>
+      <!-- ================= MODULE 12: BEFORE & AFTER PHOTOS ================= -->
+      <section class="dashboard-section" id="section-photos">
+        <div class="section-top-header">
+          <div>
+            <h1>Before &amp; After Photos</h1>
+            <p>Proof-of-work inspection photos from technicians.</p>
+          </div>
         </div>
 
-        <span class="status">Completed</span>
-      </div>
+        <div class="before-after-card">
+          <h3 style="margin-top: 0; color: var(--navy-900);">Job #BK-7102: Kitchen Sink Drainage Fix</h3>
+          <div class="before-after-grid" style="margin-top: 14px;">
+            <div class="ba-image-wrap">
+              <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=600&q=80" alt="Before repair" />
+              <span class="ba-label before">Before</span>
+            </div>
+            <div class="ba-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+            <div class="ba-image-wrap">
+              <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=600&q=80" alt="After repair" />
+              <span class="ba-label after">After</span>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <div class="rating">
-        ★★★★★
-      </div>
 
-    </div>
+      <!-- ================= MODULE 13: DIGITAL INVOICES ================= -->
+      <section class="dashboard-section" id="section-invoices">
+        <div class="section-top-header">
+          <div>
+            <h1>Digital Invoices</h1>
+            <p>Transparent billing history for completed jobs.</p>
+          </div>
+        </div>
 
+        <div class="dash-card">
+          <div class="dash-table-container">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Invoice ID</th>
+                  <th>Service</th>
+                  <th>Technician</th>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>#INV-2026-91</strong></td>
+                  <td>Kitchen Pipe Leakage Fix</td>
+                  <td>Vijay Kumar</td>
+                  <td>18 Aug 2026</td>
+                  <td><strong>₹850.00</strong></td>
+                  <td><span class="badge-pill-custom badge-completed">Paid</span></td>
+                  <td><button class="btn-secondary-custom btn-sm" onclick="alert('Downloading invoice PDF...')"><i class="fa-solid fa-download"></i> PDF</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ================= MODULE 14: SERVICE WARRANTY ================= -->
+      <section class="dashboard-section" id="section-warranty">
+        <div class="section-top-header">
+          <div>
+            <h1>Service Warranty</h1>
+            <p>30-day coverage protection for all completed work.</p>
+          </div>
+        </div>
+
+        <div class="dash-card">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+            <div>
+              <span class="badge-pill-custom badge-completed">Active Warranty</span>
+              <h3 style="margin: 6px 0 2px; color: var(--navy-900);">Plumbing Warranty (#WR-4091)</h3>
+              <p style="margin: 0; color: var(--slate-500); font-size: 0.85rem;">Valid through 17 Sep 2026 (18 days left)</p>
+            </div>
+            <button class="btn-primary-custom btn-sm" onclick="alert('Claiming warranty support call...')">Claim Free Repair</button>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ================= MODULE 15: LOYALTY REWARDS ================= -->
+      <section class="dashboard-section" id="section-rewards">
+        <div class="section-top-header">
+          <div>
+            <h1>Loyalty Rewards</h1>
+            <p>Earn points on services and redeem discount vouchers.</p>
+          </div>
+        </div>
+
+        <div class="grid-2-col">
+          <div class="dash-card" style="background: var(--slate-100);">
+            <small style="text-transform: uppercase; font-weight: 800; color: var(--blue-700);">Gold Member</small>
+            <h2 style="font-size: 2rem; margin: 4px 0 0; color: var(--navy-900);">240 <small style="font-size: 0.9rem;">Points</small></h2>
+            <p style="color: var(--slate-500); margin-top: 4px; font-size: 0.85rem;">10 points earned per ₹100 spent.</p>
+          </div>
+
+          <div class="dash-card">
+            <h3>Redeem Voucher</h3>
+            <p style="color: var(--slate-500); font-size: 0.85rem;">Get ₹200 OFF on your next electrical service.</p>
+            <button class="btn-primary-custom" onclick="alert('Voucher Code FC-REWARD200 redeemed!')">Redeem 200 Points</button>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ================= MODULE 16: NOTIFICATIONS ================= -->
+      <section class="dashboard-section" id="section-notifications">
+        <div class="section-top-header">
+          <div>
+            <h1>Notifications</h1>
+            <p>Real-time updates regarding service requests and offers.</p>
+          </div>
+        </div>
+
+        <div class="dash-card">
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <div style="padding-bottom: 10px; border-bottom: 1px solid var(--slate-200);">
+              <strong style="color: var(--navy-900);">Technician Assigned</strong>
+              <p style="margin: 2px 0 0; color: var(--slate-500); font-size: 0.85rem;">Rahul Kumar accepted your AC request.</p>
+              <small style="color: var(--slate-400);">Today, 10:05 AM</small>
+            </div>
+            <div style="padding-bottom: 10px; border-bottom: 1px solid var(--slate-200);">
+              <strong style="color: var(--navy-900);">Seasonal Maintenance Offer</strong>
+              <p style="margin: 2px 0 0; color: var(--slate-500); font-size: 0.85rem;">Enjoy 15% off full home deep cleaning.</p>
+              <small style="color: var(--slate-400);">Yesterday, 3:20 PM</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ================= MODULE 17: SERVICE HISTORY ================= -->
+      <section class="dashboard-section" id="section-history">
+        <div class="section-top-header">
+          <div>
+            <h1>Service History</h1>
+            <p>Archive of all past completed home services.</p>
+          </div>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-table-container">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Service</th>
+                  <th>Technician</th>
+                  <th>Cost</th>
+                  <th>Rating</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>18 Aug 2026</td>
+                  <td>Plumbing Leak Fix</td>
+                  <td>Vijay Kumar</td>
+                  <td>₹850</td>
+                  <td><span class="stars">★★★★★</span> 5.0</td>
+                </tr>
+                <tr>
+                  <td>04 Jun 2026</td>
+                  <td>AC Gas Refill</td>
+                  <td>Rahul Kumar</td>
+                  <td>₹1,400</td>
+                  <td><span class="stars">★★★★★</span> 5.0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ================= MODULE 18: MY PROFILE (CLEAN LIGHT STYLE, NO NAVY BLOCK) ================= -->
+      <section class="dashboard-section" id="section-profile">
+        <div class="section-top-header">
+          <div>
+            <h1>My Profile Details</h1>
+            <p>Manage your account info and primary service address.</p>
+          </div>
+        </div>
+
+        <div class="dash-card" style="max-width: 760px;">
+          <form onsubmit="alert('Profile details updated successfully!'); return false;">
+            <div class="grid-2-col">
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" class="form-control-custom" value="Naga Sudha" required />
+              </div>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" class="form-control-custom" value="+91 98765 43210" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" class="form-control-custom" value="nagasudha@example.com" required />
+            </div>
+            <div class="form-group">
+              <label>Primary Service Address</label>
+              <input type="text" class="form-control-custom" value="Plot 42, Jubilee Hills, Road No. 10, Hyderabad" required />
+            </div>
+            <div style="display: flex; gap: 12px; margin-top: 16px;">
+              <button type="submit" class="btn-primary-custom">Save Profile</button>
+              <button type="button" class="btn-secondary-custom" onclick="switchSection('dashboard')">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+
+      <!-- ================= MODULE 19: SETTINGS ================= -->
+      <section class="dashboard-section" id="section-settings">
+        <div class="section-top-header">
+          <div>
+            <h1>Settings &amp; Preferences</h1>
+            <p>Customize notifications and account preferences.</p>
+          </div>
+        </div>
+
+        <div class="dash-card" style="max-width: 760px;">
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div>
+                <strong>SMS Emergency Alerts</strong>
+                <p style="margin: 0; color: var(--slate-500); font-size: 0.82rem;">Direct SMS alerts for SOS dispatches.</p>
+              </div>
+              <label class="switch-custom">
+                <input type="checkbox" checked />
+                <span class="slider-custom"></span>
+              </label>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--slate-200); padding-top: 14px;">
+              <div>
+                <strong>WhatsApp Status Updates</strong>
+                <p style="margin: 0; color: var(--slate-500); font-size: 0.82rem;">Live tracking updates sent to WhatsApp.</p>
+              </div>
+              <label class="switch-custom">
+                <input type="checkbox" checked />
+                <span class="slider-custom"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ================= MODULE 20: EMERGENCY SOS ================= -->
+      <section class="dashboard-section" id="section-emergency">
+        <div class="section-top-header">
+          <div>
+            <h1 style="color: #dc2626;"><i class="fa-solid fa-triangle-exclamation"></i> Emergency SOS</h1>
+            <p>Priority assistance for urgent home repair emergencies.</p>
+          </div>
+        </div>
+
+        <div class="dash-card" style="background: #fef2f2; border-color: #fee2e2; max-width: 760px;">
+          <h2 style="color: #991b1b; margin-top: 0; font-size: 1.25rem;">Urgent Priority Dispatch</h2>
+          <p style="color: #7f1d1d; line-height: 1.5; font-size: 0.9rem;">
+            Pressing SOS broadcasts an instant priority alert to all available verified technicians within 5 km.
+          </p>
+          <div style="display: flex; gap: 12px; margin-top: 18px;">
+            <button class="btn-danger-custom" onclick="triggerSosAlert()">
+              <i class="fa-solid fa-bolt-lightning"></i> Dispatch SOS Tech
+            </button>
+            <a href="tel:+919876543210" class="btn-secondary-custom" style="border-color: #fca5a5; color: #991b1b;">
+              <i class="fa-solid fa-phone"></i> Emergency Hotline
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
   </div>
 
-</section>
-
-
-    <!-- REVIEWS -->
-    <section id="reviews" class="section">
-      <h2>Reviews</h2>
-      <p class="section-description">Share your experience.</p>
-
-      <form id="reviewForm">
-        <div class="form-group">
-          <label>Rating</label>
-          <select id="rating" required>
-            <option value="">Select Rating</option>
-            <option>5</option>
-            <option>4</option>
-            <option>3</option>
-            <option>2</option>
-            <option>1</option>
-          </select>
-        </div>
-
-        <div class="form-group" style="margin-top:15px;">
-          <label>Your Review</label>
-          <textarea id="reviewText" placeholder="Write your review..." required></textarea>
-        </div>
-
-        <button class="primary" type="submit">Submit Review</button>
-        <p id="reviewMessage" class="message"></p>
-      </form>
-
-      <div id="reviewList" style="margin-top:20px;"></div>
-    </section>
-
-    <!-- PROFILE -->
-    <section id="profile" class="section">
-      <h2>My Profile</h2>
-      <p class="section-description">Update your personal information.</p>
-
-      <form id="profileForm" class="profile-form">
-
-        <div class="form-group">
-          <label>Full Name</label>
-          <input id="profileName" type="text" value="Customer">
-        </div>
-
-        <div class="form-group" style="margin-top:15px;">
-          <label>Email</label>
-          <input id="profileEmail" type="email" placeholder="you@example.com">
-        </div>
-
-        <div class="form-group" style="margin-top:15px;">
-          <label>Phone</label>
-          <input id="profilePhone" type="tel" placeholder="Enter phone number">
-        </div>
-
-        <div class="form-group" style="margin-top:15px;">
-          <label>Address</label>
-          <textarea id="profileAddress" placeholder="Enter your address"></textarea>
-        </div>
-
-        <button class="primary" type="submit">Save Changes</button>
-        <p id="profileMessage" class="message"></p>
-
-      </form>
-    </section>
-
-    <!-- SOS -->
-    <section id="sos" class="section">
-      <div class="sos-box">
-        <h2>Emergency SOS</h2>
-        <p class="section-description">
-          Need urgent home-repair assistance?
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="index.html" class="brand footer-brand" aria-label="FixConnect AI home">
+          <span class="brand-mark">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M32 8 12 24v28h40V24L32 8Zm-1 12h2v12h-2V20Zm0 16h2v2h-2v-2Z" />
+            </svg>
+          </span>
+          <span class="brand-text">FixConnect AI</span>
+        </a>
+        <p class="footer-copy">
+          Premium support for modern homes through AI-guided service discovery and skilled repairs.
         </p>
-
-        <button class="sos-button" onclick="requestEmergency()">
-          🚨 Request Emergency Help
-        </button>
-
-        <p id="sosMessage" class="message"></p>
       </div>
-    </section>
 
-  </main>
-</div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="service.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
 
-<script>
-  let requests = JSON.parse(localStorage.getItem("fixRequests")) || [];
-  let bookings = JSON.parse(localStorage.getItem("fixBookings")) || [];
-  let reviews = JSON.parse(localStorage.getItem("fixReviews")) || [];
+      <div>
+        <h3>Service</h3>
+        <ul>
+          <li><a href="service.html">Plumbing</a></li>
+          <li><a href="service.html">Electrical</a></li>
+          <li><a href="service.html">AC Repair</a></li>
+          <li><a href="service.html">Appliance Repair</a></li>
+        </ul>
+      </div>
 
-  function showSection(id, button) {
-    document.querySelectorAll(".section").forEach(section => {
-      section.classList.remove("active");
-    });
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="mailto:support@fixconnectai.com">support@fixconnectai.com</a></li>
+          <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+          <li><span>Hyderabad, India</span></li>
+        </ul>
+      </div>
+    </div>
 
-    document.getElementById(id).classList.add("active");
-
-    document.querySelectorAll(".menu button").forEach(btn => {
-      btn.classList.remove("active");
-    });
-
-    if (button) {
-      button.classList.add("active");
-    }
-
-    renderAll();
-  }
-
-  /* COMPLAINT */
-  document.getElementById("complaintForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const complaint = {
-      id: Date.now(),
-      service: document.getElementById("service").value,
-      location: document.getElementById("location").value,
-      description: document.getElementById("description").value,
-      date: document.getElementById("date").value,
-      time: document.getElementById("time").value,
-      emergency: document.getElementById("emergency").checked,
-      status: "Pending AI Analysis"
-    };
-
-    requests.push(complaint);
-    localStorage.setItem("fixRequests", JSON.stringify(requests));
-
-    document.getElementById("complaintMessage").textContent =
-      "✓ Complaint submitted successfully. AI analysis started.";
-
-    this.reset();
-    renderAll();
-  });
-
-  /* BOOK TECHNICIAN */
-  function bookTechnician(name, service) {
-    const box = document.getElementById("bookingFormBox");
-
-    box.innerHTML = `
-      <div class="request-card" style="margin-top:20px;">
-        <h3>Book ${name}</h3>
-
-        <div class="form-group" style="margin-top:15px;">
-          <label>Date</label>
-          <input id="bookDate" type="date" required>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>© 2026 FixConnect AI</span>
+        <div class="legal-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms &amp; Conditions</a>
         </div>
-
-        <div class="form-group" style="margin-top:15px;">
-          <label>Time</label>
-          <input id="bookTime" type="time" required>
-        </div>
-
-        <div class="form-group" style="margin-top:15px;">
-          <label>Address</label>
-          <textarea id="bookAddress" placeholder="Enter service address"></textarea>
-        </div>
-
-        <button class="primary" onclick="confirmBooking('${name}','${service}')">
-          Confirm Booking
-        </button>
-
-        <p id="bookingMessage" class="message"></p>
       </div>
-    `;
+    </div>
+  </footer>
 
-    box.scrollIntoView({ behavior: "smooth" });
-  }
-
-  function confirmBooking(name, service) {
-    const date = document.getElementById("bookDate").value;
-    const time = document.getElementById("bookTime").value;
-    const address = document.getElementById("bookAddress").value;
-
-    if (!date || !time || !address) {
-      document.getElementById("bookingMessage").textContent =
-        "Please fill all booking details.";
-      return;
-    }
-
-    const booking = {
-      id: Date.now(),
-      technician: name,
-      service: service,
-      date: date,
-      time: time,
-      address: address,
-      status: "Confirmed"
-    };
-
-    bookings.push(booking);
-    localStorage.setItem("fixBookings", JSON.stringify(bookings));
-
-    document.getElementById("bookingMessage").textContent =
-      "✓ Booking confirmed successfully.";
-
-    renderAll();
-  }
-
-  /* REVIEWS */
-  document.getElementById("reviewForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const review = {
-      rating: document.getElementById("rating").value,
-      text: document.getElementById("reviewText").value
-    };
-
-    reviews.push(review);
-    localStorage.setItem("fixReviews", JSON.stringify(reviews));
-
-    document.getElementById("reviewMessage").textContent =
-      "✓ Review submitted successfully.";
-
-    this.reset();
-    renderAll();
-  });
-
-  /* PROFILE */
-  document.getElementById("profileForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const profile = {
-      name: document.getElementById("profileName").value,
-      email: document.getElementById("profileEmail").value,
-      phone: document.getElementById("profilePhone").value,
-      address: document.getElementById("profileAddress").value
-    };
-
-    localStorage.setItem("fixProfile", JSON.stringify(profile));
-
-    document.getElementById("profileMessage").textContent =
-      "✓ Profile updated successfully.";
-  });
-
-  /* EMERGENCY */
-  function requestEmergency() {
-    document.getElementById("sosMessage").textContent =
-      "✓ Emergency request submitted successfully.";
-  }
-
-  /* LOGOUT */
-  function logout() {
-    window.location.href = "login.html";
-  }
-
-  /* RENDER REQUESTS */
-  function renderRequests() {
-    const list = document.getElementById("requestList");
-
-    if (requests.length === 0) {
-      list.innerHTML = "<p>No service requests yet.</p>";
-      return;
-    }
-
-    list.innerHTML = requests.map(r => `
-      <div class="request-card">
-        <h3>${r.service}</h3>
-        <p>${r.description}</p>
-        <p><strong>Location:</strong> ${r.location}</p>
-        <p><strong>Date:</strong> ${r.date} | ${r.time}</p>
-        <span class="status">${r.status}</span>
-      </div>
-    `).join("");
-  }
-
-  /* RENDER BOOKINGS */
-  function renderBookings() {
-    const list = document.getElementById("bookingList");
-
-    if (bookings.length === 0) {
-      list.innerHTML = "<p>No bookings yet.</p>";
-      return;
-    }
-
-    list.innerHTML = bookings.map(b => `
-      <div class="booking-card">
-        <h3>${b.service}</h3>
-        <p><strong>Technician:</strong> ${b.technician}</p>
-        <p><strong>Date:</strong> ${b.date}</p>
-        <p><strong>Time:</strong> ${b.time}</p>
-        <p><strong>Address:</strong> ${b.address}</p>
-        <span class="status">${b.status}</span>
-      </div>
-    `).join("");
-  }
-
-  /* RENDER REVIEWS */
-  function renderReviews() {
-    const list = document.getElementById("reviewList");
-
-    if (reviews.length === 0) {
-      list.innerHTML = "";
-      return;
-    }
-
-    list.innerHTML = reviews.map(r => `
-      <div class="request-card">
-        <div class="rating">${"★".repeat(Number(r.rating))}</div>
-        <p>${r.text}</p>
-      </div>
-    `).join("");
-  }
-
-  function renderAll() {
-    document.getElementById("requestCount").textContent = requests.length;
-    document.getElementById("bookingCount").textContent = bookings.length;
-    document.getElementById("completedCount").textContent = 0;
-    document.getElementById("reviewCount").textContent = reviews.length;
-
-    renderRequests();
-    renderBookings();
-    renderReviews();
-  }
-
-  renderAll();
-</script>
-
+  <!-- JavaScript Interaction File -->
+  <script src="customer-dashboard.js"></script>
 </body>
 </html>

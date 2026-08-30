@@ -1,506 +1,705 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emergency SOS | FixConnect AI</title>
+  <meta name="description" content="Instant 24/7 Emergency SOS dispatch for home repairs in Hyderabad. Connect with verified emergency technicians in under 30 minutes." />
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
 
-<title>Emergency SOS | FixConnect AI</title>
+  <style>
+    :root {
+      --navy-dark: #0a192f;
+      --navy-main: #102a5c;
+      --red-emergency: #dc2626;
+      --red-hover: #b91c1c;
+      --red-light: #fef2f2;
+      --red-border: #fecdd3;
+      --amber-bg: #fffbe6;
+      --amber-border: #ffe58f;
+      --amber-text: #d46b08;
+      --slate-body: #475569;
+      --slate-bg: #f8fafc;
+      --white: #ffffff;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-sm: 0 4px 20px rgba(16, 42, 92, 0.06);
+      --shadow-md: 0 10px 30px rgba(220, 38, 38, 0.12);
+    }
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--slate-bg);
+      color: var(--navy-dark);
+      margin: 0;
+      padding: 0;
+    }
 
-body{
-  font-family:Arial,sans-serif;
-  background:#f5f9ff;
-  color:#102a5c;
-}
+    /* HERO SECTION */
+    .sos-hero {
+      text-align: center;
+      padding: 60px 20px 40px;
+      background: linear-gradient(180deg, #fff1f2 0%, var(--slate-bg) 100%);
+      border-bottom: 1px solid #ffe4e6;
+    }
 
-/* NAVBAR */
+    .sos-badge-pulse {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 20px;
+      background: var(--red-light);
+      border: 1.5px solid var(--red-border);
+      border-radius: 999px;
+      color: var(--red-emergency);
+      font-size: 0.88rem;
+      font-weight: 800;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 10px rgba(220, 38, 38, 0.1);
+    }
 
-header{
-  background:white;
-  padding:18px 7%;
-  box-shadow:0 2px 12px rgba(0,0,0,.08);
-  position:sticky;
-  top:0;
-  z-index:10;
-}
+    .pulse-dot {
+      width: 10px;
+      height: 10px;
+      background-color: var(--red-emergency);
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+      animation: pulse-red 1.6s infinite;
+    }
 
-nav{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
+    @keyframes pulse-red {
+      0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+      }
+      70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(220, 38, 38, 0);
+      }
+      100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+      }
+    }
 
-.logo{
-  font-size:23px;
-  font-weight:800;
-  color:#102a5c;
-}
+    .sos-hero h1 {
+      font-size: 2.75rem;
+      font-weight: 800;
+      color: var(--navy-main);
+      margin: 0 0 16px;
+      letter-spacing: -0.02em;
+    }
 
-.logo span{
-  color:#2563eb;
-}
+    .sos-hero h1 span {
+      color: var(--red-emergency);
+    }
 
-.nav-links{
-  display:flex;
-  align-items:center;
-  gap:24px;
-}
+    .sos-hero p {
+      max-width: 660px;
+      margin: 0 auto;
+      color: var(--slate-body);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
 
-.nav-links a{
-  text-decoration:none;
-  color:#334155;
-  font-size:14px;
-  font-weight:600;
-}
+    /* MAIN CONTAINER */
+    .sos-container {
+      max-width: 1180px;
+      margin: 40px auto 70px;
+      padding: 0 20px;
+    }
 
-.nav-links a:hover,
-.nav-links .active{
-  color:#2563eb;
-}
+    /* CATEGORY CARDS GRID */
+    .sos-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
 
-.login{
-  background:#102a5c;
-  color:white !important;
-  padding:10px 18px;
-  border-radius:8px;
-}
+    .sos-category-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+      text-align: center;
+      border: 1px solid #e2e8f0;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-.sos{
-  background:#f97316;
-  color:white !important;
-  padding:10px 17px;
-  border-radius:8px;
-}
+    .sos-category-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(16, 42, 92, 0.08);
+      border-color: #cbd5e1;
+    }
 
-/* HERO */
+    .sos-card-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: var(--red-light);
+      color: var(--red-emergency);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      margin-bottom: 20px;
+      border: 1px solid var(--red-border);
+    }
 
-.hero{
-  text-align:center;
-  padding:65px 20px 30px;
-}
+    .sos-category-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--navy-main);
+      margin: 0 0 10px;
+    }
 
-.sos-icon{
-  width:82px;
-  height:82px;
-  margin:0 auto 20px;
+    .sos-category-card p {
+      color: var(--slate-body);
+      font-size: 0.9rem;
+      line-height: 1.55;
+      margin: 0 0 24px;
+      flex: 1;
+    }
 
-  background:#fff1f2;
-  border:2px solid #fecdd3;
-  border-radius:50%;
+    .btn-sos-request {
+      width: 100%;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 999px;
+      background: var(--navy-main);
+      color: var(--white);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+    .btn-sos-request:hover {
+      background: var(--red-emergency);
+    }
 
-  font-size:40px;
-}
+    /* SOS DISPATCH CONTROL BOX */
+    .sos-control-box {
+      background: var(--navy-main);
+      color: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      margin-bottom: 44px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
 
-.hero h1{
-  font-size:40px;
-  margin-bottom:12px;
-}
+    .sos-control-box::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 220px;
+      height: 220px;
+      background: rgba(220, 38, 38, 0.15);
+      border-radius: 50%;
+      pointer-events: none;
+    }
 
-.hero h1 span{
-  color:#ef4444;
-}
+    .sos-control-header {
+      max-width: 600px;
+      margin-bottom: 30px;
+    }
 
-.hero p{
-  max-width:650px;
-  margin:auto;
-  color:#64748b;
-  line-height:1.7;
-  font-size:15px;
-}
+    .sos-control-header h2 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      margin: 0 0 10px;
+      color: var(--white);
+    }
 
-/* EMERGENCY OPTIONS */
+    .sos-control-header p {
+      color: #cbd5e1;
+      font-size: 0.98rem;
+      margin: 0;
+    }
 
-.emergency-section{
-  width:86%;
-  max-width:1050px;
-  margin:35px auto 60px;
-}
+    .sos-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
 
-.emergency-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
+    .sos-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
 
-.card{
-  background:white;
-  padding:25px 20px;
-  border-radius:16px;
-  text-align:center;
-  box-shadow:0 6px 22px rgba(30,64,175,.10);
-  border:1px solid #edf2f8;
-}
+    .sos-form-group label {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #94a3b8;
+    }
 
-.card-icon{
-  width:65px;
-  height:65px;
-  margin:0 auto 15px;
+    .sos-form-group input,
+    .sos-form-group select,
+    .sos-form-group textarea {
+      padding: 13px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--white);
+      font-family: inherit;
+      font-size: 0.95rem;
+      box-sizing: border-box;
+    }
 
-  background:#eff6ff;
-  border-radius:15px;
+    .sos-form-group input:focus,
+    .sos-form-group select:focus,
+    .sos-form-group textarea:focus {
+      outline: none;
+      border-color: #fca5a5;
+      background: rgba(255, 255, 255, 0.14);
+    }
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
+    .sos-form-group select option {
+      background: var(--navy-dark);
+      color: var(--white);
+    }
 
-  font-size:30px;
-}
+    .sos-action-bar {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
 
-.card h2{
-  font-size:17px;
-  margin-bottom:8px;
-}
+    .btn-main-sos-trigger {
+      padding: 16px 36px;
+      border: none;
+      border-radius: 999px;
+      background: var(--red-emergency);
+      color: var(--white);
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4);
+      transition: all 0.2s ease;
+    }
 
-.card p{
-  color:#64748b;
-  font-size:13px;
-  line-height:1.6;
-  margin-bottom:18px;
-}
+    .btn-main-sos-trigger:hover {
+      background: var(--red-hover);
+      transform: scale(1.02);
+      box-shadow: 0 6px 26px rgba(220, 38, 38, 0.5);
+    }
 
-.card button{
-  border:none;
-  background:#173b8f;
-  color:white;
-  padding:10px 18px;
-  border-radius:8px;
-  font-weight:600;
-  cursor:pointer;
-}
+    .sos-hotline-btn {
+      color: #fca5a5;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1rem;
+      padding: 12px 20px;
+      border: 1px solid rgba(252, 165, 165, 0.3);
+      border-radius: 999px;
+      transition: all 0.2s ease;
+    }
 
-.card button:hover{
-  background:#2563eb;
-}
+    .sos-hotline-btn:hover {
+      background: rgba(252, 165, 165, 0.1);
+      color: var(--white);
+    }
 
-/* SOS BOX */
+    /* NEARBY TECHNICIANS SECTION */
+    .technicians-on-call {
+      margin-bottom: 44px;
+    }
 
-.sos-box{
-  background:#102a5c;
-  color:white;
-  border-radius:18px;
-  padding:35px 25px;
-  text-align:center;
-  margin-bottom:25px;
-}
+    .tech-on-call-header {
+      margin-bottom: 24px;
+    }
 
-.sos-box h2{
-  margin-bottom:10px;
-}
+    .tech-on-call-header h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--navy-main);
+      margin: 0 0 6px;
+    }
 
-.sos-box p{
-  color:#dbeafe;
-  font-size:13px;
-  margin-bottom:20px;
-}
+    .tech-on-call-header p {
+      color: var(--slate-body);
+      font-size: 0.95rem;
+      margin: 0;
+    }
 
-.main-sos{
-  border:none;
-  background:#ef4444;
-  color:white;
-  padding:14px 35px;
-  border-radius:9px;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
-}
+    .tech-on-call-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
 
-.main-sos:hover{
-  background:#dc2626;
-}
+    .tech-on-call-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      border: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    }
 
-/* NOTICE */
+    .tech-on-call-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 14px;
+      object-fit: cover;
+      border: 2px solid var(--blue-border);
+      flex-shrink: 0;
+    }
 
-.notice{
-  background:#fff7ed;
-  border:1px solid #fed7aa;
-  border-radius:12px;
-  padding:15px;
-  margin-bottom:35px;
-  color:#9a3412;
-  font-size:12px;
-  text-align:center;
-}
+    .tech-on-call-info h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy-main);
+      margin: 0 0 4px;
+    }
 
-/* FOOTER */
+    .tech-on-call-info p {
+      margin: 0 0 6px;
+      font-size: 0.82rem;
+      color: var(--slate-body);
+    }
 
-footer{
-  background:#081a3d;
-  color:white;
-  padding:35px 7%;
-  text-align:center;
-}
+    .tech-eta-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      background: #f0fdf4;
+      color: #16a34a;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
 
-footer h3{
-  margin-bottom:8px;
-}
+    /* SAFETY NOTICE */
+    .safety-notice-card {
+      background: var(--amber-bg);
+      border: 1px solid var(--amber-border);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--amber-text);
+    }
 
-footer p{
-  color:#a9b9d4;
-  font-size:12px;
-}
+    .safety-notice-card i {
+      font-size: 1.75rem;
+      flex-shrink: 0;
+    }
 
-/* MOBILE */
+    .safety-notice-card p {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
 
-@media(max-width:800px){
+    /* RESPONSIVE */
+    @media (max-width: 992px) {
+      .sos-grid-3,
+      .tech-on-call-grid {
+        grid-template-columns: 1fr;
+      }
+      .sos-form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
 
-  .emergency-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .nav-links{
-    gap:10px;
-  }
-
-  .nav-links a{
-    font-size:11px;
-  }
-}
-
-@media(max-width:550px){
-
-  .emergency-grid{
-    grid-template-columns:1fr;
-  }
-
-  .hero h1{
-    font-size:31px;
-  }
-
-  .nav-links a:nth-child(2),
-  .nav-links a:nth-child(3),
-  .nav-links a:nth-child(4){
-    display:none;
-  }
-}
-</style>
+    @media (max-width: 640px) {
+      .sos-hero h1 {
+        font-size: 2.1rem;
+      }
+      .sos-control-box {
+        padding: 24px;
+      }
+      .btn-main-sos-trigger {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- NAVBAR -->
-
-<header>
-
-<nav>
-
-<div class="logo">
-FixConnect <span>AI</span>
-</div>
-
-<div class="nav-links">
-
-<a href="index.html">
-Home
-</a>
-
-<a href="service.html">
-Services
-</a>
-
-<a href="about.html">
-About
-</a>
-
-<a href="contact.html">
-Contact
-</a>
-
-<a href="login.html" class="login">
-Login
-</a>
-
-<a href="emergency.html" class="sos active">
-Emergency SOS
-</a>
-
-</div>
-
-</nav>
-
-</header>
-
-
-<!-- HERO -->
-
-<section class="hero">
-
-<div class="sos-icon">
-🚨
-</div>
-
-<h1>
-Emergency <span>Support</span>
-</h1>
-
-<p>
-Facing an urgent home repair problem?
-FixConnect AI helps you quickly request emergency
-support from available service professionals.
-</p>
-
-</section>
-
-
-<!-- EMERGENCY SERVICES -->
-
-<section class="emergency-section">
-
-<div class="emergency-grid">
-
-
-<div class="card">
-
-<div class="card-icon">
-💧
-</div>
-
-<h2>Water Leakage</h2>
-
-<p>
-Sudden pipe leakage, burst pipes or
-major water problems at home.
-</p>
-
-<button onclick="requestEmergency('Water Leakage')">
-Request Help
-</button>
-
-</div>
-
-
-<div class="card">
-
-<div class="card-icon">
-⚡
-</div>
-
-<h2>Electrical Emergency</h2>
-
-<p>
-Urgent electrical problems that require
-professional assistance.
-</p>
-
-<button onclick="requestEmergency('Electrical Emergency')">
-Request Help
-</button>
-
-</div>
-
-
-<div class="card">
-
-<div class="card-icon">
-❄️
-</div>
-
-<h2>AC Emergency</h2>
-
-<p>
-Urgent AC breakdown or cooling problems
-requiring technician support.
-</p>
-
-<button onclick="requestEmergency('AC Emergency')">
-Request Help
-</button>
-
-</div>
-
-</div>
-
-
-<!-- MAIN SOS -->
-
-<div class="sos-box">
-
-<h2>Need Immediate Assistance?</h2>
-
-<p>
-Submit an emergency request and connect
-with the appropriate service support.
-</p>
-
-<button class="main-sos" onclick="activateSOS()">
-🚨 Activate Emergency SOS
-</button>
-
-</div>
-
-
-<div class="notice">
-
-<strong>Safety First:</strong>
-For life-threatening emergencies or situations
-requiring police, fire or medical assistance,
-contact your local emergency services immediately.
-
-</div>
-
-</section>
-
-
-<!-- FOOTER -->
-
-<footer>
-
-<h3>FixConnect AI</h3>
-
-<p>
-Smart Solutions. Trusted Technicians.
-</p>
-
-<p style="margin-top:10px;">
-© 2026 FixConnect AI. All rights reserved.
-</p>
-
-</footer>
-
-
-<script>
-
-function requestEmergency(type){
-
-localStorage.setItem(
-"emergencyType",
-type
-);
-
-alert(
-type + " request selected."
-);
-
-window.location.href="login.html";
-
-}
-
-
-function activateSOS(){
-
-localStorage.setItem(
-"emergencyType",
-"Emergency SOS"
-);
-
-alert(
-"Emergency SOS selected. Please login to continue."
-);
-
-window.location.href="login.html";
-
-}
-
-</script>
-
+  <!-- MASTER TOPBAR (Identical to Home Page) -->
+  <header class="topbar">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand" aria-label="FixConnect AI home">
+        <span class="brand-mark">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <path d="M32 8 12 24v28h40V24L32 8Zm-1 12h2v12h-2V20Zm0 16h2v2h-2v-2Z" />
+          </svg>
+        </span>
+        <span class="brand-text">FixConnect AI</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="service.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="login.html" class="nav-button nav-button-light">Login</a>
+        <a href="signup.html" class="nav-button nav-button-light">Sign Up</a>
+        <a href="emergency.html" class="nav-button nav-button-accent active">Emergency SOS</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="sos-hero">
+    <div class="sos-badge-pulse">
+      <span class="pulse-dot"></span> 24/7 Priority Emergency Support
+    </div>
+    <h1>Emergency <span>Home Service SOS</span></h1>
+    <p>
+      Facing an urgent home repair problem like a major pipe burst, electrical breakdown, or AC failure? 
+      FixConnect AI dispatches nearby verified emergency technicians in under 30 minutes.
+    </p>
+  </section>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="sos-container">
+
+    <!-- 3 EMERGENCY CATEGORY CARDS -->
+    <div class="sos-grid-3">
+
+      <!-- CARD 1: WATER LEAKAGE -->
+      <div class="sos-category-card">
+        <div class="sos-card-icon">
+          <i class="fa-solid fa-droplet"></i>
+        </div>
+        <h3>Water Leakage &amp; Burst Pipe</h3>
+        <p>Sudden pipe burst, main line leakage, or severe flooding requiring urgent plumbing intervention.</p>
+        <button class="btn-sos-request" onclick="requestEmergency('Water Leakage')">
+          <i class="fa-solid fa-bolt"></i> Request Plumber (15 min)
+        </button>
+      </div>
+
+      <!-- CARD 2: ELECTRICAL EMERGENCY -->
+      <div class="sos-category-card">
+        <div class="sos-card-icon">
+          <i class="fa-solid fa-bolt-lightning"></i>
+        </div>
+        <h3>Electrical Emergency</h3>
+        <p>Short circuits, main panel trip, burning smells, or complete power failure at your residence.</p>
+        <button class="btn-sos-request" onclick="requestEmergency('Electrical Emergency')">
+          <i class="fa-solid fa-bolt"></i> Request Electrician (15 min)
+        </button>
+      </div>
+
+      <!-- CARD 3: AC & GAS EMERGENCY -->
+      <div class="sos-category-card">
+        <div class="sos-card-icon">
+          <i class="fa-solid fa-snowflake"></i>
+        </div>
+        <h3>AC &amp; Appliance Breakdown</h3>
+        <p>Sudden HVAC breakdown, severe compressor failure, or refrigerant leak needing fast repair.</p>
+        <button class="btn-sos-request" onclick="requestEmergency('AC Emergency')">
+          <i class="fa-solid fa-bolt"></i> Request Technician (18 min)
+        </button>
+      </div>
+
+    </div>
+
+    <!-- MAIN SOS DISPATCH CONTROL BOX -->
+    <div class="sos-control-box">
+      <div class="sos-control-header">
+        <h2><i class="fa-solid fa-triangle-exclamation" style="color: #fca5a5;"></i> Dispatch Priority Emergency SOS</h2>
+        <p>Submit your current location and problem description for immediate AI broadcast to active technicians within 5 km.</p>
+      </div>
+
+      <form id="sosForm" onsubmit="handleSosSubmit(event)">
+        <div class="sos-form-grid">
+          <div class="sos-form-group">
+            <label for="sosCategory">Emergency Type *</label>
+            <select id="sosCategory" required>
+              <option value="Emergency SOS">General Emergency SOS</option>
+              <option value="Water Leakage">Water Leakage / Pipe Burst</option>
+              <option value="Electrical Emergency">Electrical Short Circuit / Fault</option>
+              <option value="AC Emergency">AC Breakdown / Gas Leakage</option>
+              <option value="Locksmith Emergency">Door Lock Jam / Key Failure</option>
+            </select>
+          </div>
+
+          <div class="sos-form-group">
+            <label for="sosLocation">Service Address / Location *</label>
+            <input type="text" id="sosLocation" value="Plot 42, Jubilee Hills, Hyderabad" placeholder="Enter your current location" required />
+          </div>
+        </div>
+
+        <div class="sos-form-group">
+          <label for="sosDescription">Brief Description of Emergency</label>
+          <textarea id="sosDescription" rows="2" placeholder="e.g. Main water pipe burst in kitchen cabinet, water leaking fast..."></textarea>
+        </div>
+
+        <div class="sos-action-bar">
+          <button type="button" class="btn-main-sos-trigger" onclick="activateSOS()">
+            <i class="fa-solid fa-bell"></i> 🚨 Activate Emergency SOS
+          </button>
+          <a href="tel:+919876543210" class="sos-hotline-btn">
+            <i class="fa-solid fa-phone-volume"></i> Call 24/7 Hotline: +91 98765 43210
+          </a>
+        </div>
+      </form>
+    </div>
+
+    <!-- NEARBY VERIFIED EMERGENCY TECHNICIANS ON CALL -->
+    <div class="technicians-on-call">
+      <div class="tech-on-call-header">
+        <h2>On-Call Emergency Specialists Nearby</h2>
+        <p>Active verified technicians ready for immediate dispatch in Jubilee Hills &amp; Banjara Hills.</p>
+      </div>
+
+      <div class="tech-on-call-grid">
+        <div class="tech-on-call-card">
+          <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=600&q=80" alt="Arjun Reddy Electrician" class="tech-on-call-img" />
+          <div class="tech-on-call-info">
+            <h4>Arjun Reddy</h4>
+            <p>Master Electrician · 8+ Yrs Exp</p>
+            <span class="tech-eta-tag"><i class="fa-solid fa-truck-fast"></i> 1.8 km (15 min ETA)</span>
+          </div>
+        </div>
+
+        <div class="tech-on-call-card">
+          <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=600&q=80" alt="Vijay Kumar Plumber" class="tech-on-call-img" />
+          <div class="tech-on-call-info">
+            <h4>Vijay Kumar</h4>
+            <p>Plumbing Specialist · 10+ Yrs Exp</p>
+            <span class="tech-eta-tag"><i class="fa-solid fa-truck-fast"></i> 3.1 km (20 min ETA)</span>
+          </div>
+        </div>
+
+        <div class="tech-on-call-card">
+          <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=600&q=80" alt="Rahul Kumar HVAC" class="tech-on-call-img" />
+          <div class="tech-on-call-info">
+            <h4>Rahul Kumar</h4>
+            <p>AC &amp; Gas Specialist · 7+ Yrs Exp</p>
+            <span class="tech-eta-tag"><i class="fa-solid fa-truck-fast"></i> 2.4 km (18 min ETA)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SAFETY NOTICE -->
+    <div class="safety-notice-card">
+      <i class="fa-solid fa-shield-cat"></i>
+      <p>
+        <strong>Safety First Notice:</strong> FixConnect AI Emergency SOS is designed for urgent home repair situations. 
+        For life-threatening emergencies, fire outbreaks, gas main ruptures, or medical crisis, please immediately contact municipal emergency services (112 / 101 / 102).
+      </p>
+    </div>
+
+  </main>
+
+  <!-- MASTER FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="index.html" class="brand footer-brand" aria-label="FixConnect AI home">
+          <span class="brand-mark">
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+              <path d="M32 8 12 24v28h40V24L32 8Zm-1 12h2v12h-2V20Zm0 16h2v2h-2v-2Z" />
+            </svg>
+          </span>
+          <span class="brand-text">FixConnect AI</span>
+        </a>
+        <p class="footer-copy">
+          Premium support for modern homes through AI-guided service discovery and skilled repairs.
+        </p>
+      </div>
+
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="service.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Service</h3>
+        <ul>
+          <li><a href="service.html">Plumbing</a></li>
+          <li><a href="service.html">Electrical</a></li>
+          <li><a href="service.html">AC Repair</a></li>
+          <li><a href="service.html">Appliance Repair</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="mailto:support@fixconnectai.com">support@fixconnectai.com</a></li>
+          <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+          <li><span>Hyderabad, India</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>© 2026 FixConnect AI</span>
+        <div class="legal-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms &amp; Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- EMERGENCY JAVASCRIPT HANDLERS -->
+  <script>
+    function requestEmergency(type) {
+      localStorage.setItem("emergencyType", type);
+      alert("🚨 " + type + " request selected! Directing to login for instant technician assignment.");
+      window.location.href = "login.html";
+    }
+
+    function activateSOS() {
+      const sosCategory = document.getElementById("sosCategory") ? document.getElementById("sosCategory").value : "Emergency SOS";
+      localStorage.setItem("emergencyType", sosCategory);
+      alert("🚨 Emergency SOS Activated! Dispatch signal sent for " + sosCategory + ". Please login to confirm dispatch.");
+      window.location.href = "login.html";
+    }
+
+    function handleSosSubmit(e) {
+      e.preventDefault();
+      activateSOS();
+    }
+  </script>
 </body>
 </html>
