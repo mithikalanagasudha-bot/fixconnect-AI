@@ -212,83 +212,139 @@
         </div>
       </div>
     </footer>
+    </main>
 
-    <script>
-      const form = document.getElementById('loginForm');
-      const emailInput = document.getElementById('email');
-      const passwordInput = document.getElementById('password');
-      const loginButton = document.getElementById('loginButton');
-      const signupLink = document.getElementById('signupLink');
-      const formMessage = document.getElementById('formMessage');
-      const roleButtons = document.querySelectorAll('.role-option');
-      const passwordToggle = document.querySelector('.toggle-password');
-      const roleLabel = document.getElementById('roleLabel');
+    <footer class="site-footer">
+        </script>
+        <script type="module">
+  import { auth, googleProvider } from "./firebase-config.js";
+  import { signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-      const roleTargets = {
-        customer: {
-          buttonText: 'Login as Customer',
-          signupHref: 'customer-register.html',
-          signupText: 'Sign Up',
-          roleLabel: '📋 You are logging in as a Customer',
-        },
-        provider: {
-          buttonText: 'Login as Provider',
-          signupHref: 'provider-register.html',
-          signupText: 'Sign Up',
-          roleLabel: '🔧 You are logging in as a Service Provider',
-        },
-      };
+  const form = document.getElementById("loginForm");
+  const emailInput = document.getElementById("email");
+  const passwordInput = document.getElementById("password");
+  const loginButton = document.getElementById("loginButton");
+  const signupLink = document.getElementById("signupLink");
+  const formMessage = document.getElementById("formMessage");
+  const roleButtons = document.querySelectorAll(".role-option");
+  const passwordToggle = document.querySelector(".toggle-password");
+  const roleLabel = document.getElementById("roleLabel");
+  const googleButton = document.querySelector(".google-button");
 
-      let selectedRole = 'customer';
+  const roleTargets = {
+    customer: {
+      buttonText: "Login as Customer",
+      signupHref: "customer-register.html",
+      roleLabel: "📋 You are logging in as a Customer"
+    },
+    provider: {
+      buttonText: "Login as Provider",
+      signupHref: "provider-register.html",
+      roleLabel: "🔧 You are logging in as a Service Provider"
+    }
+  };
 
-      function updateRole(role) {
-        selectedRole = role;
-        const target = roleTargets[role];
+  let selectedRole = "customer";
 
-        loginButton.textContent = target.buttonText;
-        signupLink.href = target.signupHref;
-        signupLink.textContent = target.signupText;
-        roleLabel.textContent = target.roleLabel;
+  function updateRole(role) {
+    selectedRole = role;
+    const target = roleTargets[role];
 
-        roleButtons.forEach((button) => {
-          const isActive = button.dataset.role === role;
-          button.classList.toggle('active', isActive);
-          button.setAttribute('aria-pressed', String(isActive));
-        });
-      }
+    loginButton.textContent = target.buttonText;
+    signupLink.href = target.signupHref;
+    roleLabel.textContent = target.roleLabel;
 
-      roleButtons.forEach((button) => {
-        button.addEventListener('click', () => updateRole(button.dataset.role));
-      });
+    roleButtons.forEach((button) => {
+      const isActive = button.dataset.role === role;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+  }
 
-      passwordToggle.addEventListener('click', () => {
-        const isPassword = passwordInput.type === 'password';
-        passwordInput.type = isPassword ? 'text' : 'password';
-        passwordToggle.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
-      });
+  // Customer / Provider selection
+  roleButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      updateRole(button.dataset.role);
+    });
+  });
 
-      form.addEventListener('submit', (event) => {
-        event.preventDefault();
+  // Show / Hide password
+  passwordToggle.addEventListener("click", () => {
+    const isPassword = passwordInput.type === "password";
 
-        const email = emailInput.value.trim();
-        const password = passwordInput.value.trim();
+    passwordInput.type = isPassword ? "text" : "password";
 
-        if (!email || !password) {
-          formMessage.textContent = 'Please enter both your email and password to continue.';
-          formMessage.classList.add('error');
-          formMessage.classList.remove('success');
-          return;
-        }
+    passwordToggle.setAttribute(
+      "aria-label",
+      isPassword ? "Hide password" : "Show password"
+    );
+  });
 
-        formMessage.textContent = 'Login successful. Redirecting to your profile...';
-        formMessage.classList.remove('error');
-        formMessage.classList.add('success');
+  // Normal login
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-        const destination = selectedRole === 'customer' ? 'customer-profile.html' : 'provider-profile.html';
-        window.location.href = destination;
-      });
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
 
-      updateRole(selectedRole);
-    </script>
+    if (!email || !password) {
+      formMessage.textContent =
+        "Please enter both your email and password to continue.";
+
+      formMessage.classList.add("error");
+      formMessage.classList.remove("success");
+      return;
+    }
+
+    formMessage.textContent =
+      "Login successful. Redirecting to your profile...";
+
+    formMessage.classList.remove("error");
+    formMessage.classList.add("success");
+
+    const destination =
+      selectedRole === "customer"
+        ? "customer-profile.html"
+        : "provider-profile.html";
+
+    setTimeout(() => {
+      window.location.href = destination;
+    }, 500);
+  });
+
+  // Google Login
+  googleButton.addEventListener("click", async () => {
+    try {
+      googleButton.disabled = true;
+      googleButton.textContent = "Signing in...";
+
+      const result = await signInWithPopup(auth, googleProvider);
+
+      console.log("Google login successful:", result.user);
+
+      const destination =
+        selectedRole === "customer"
+          ? "customer-profile.html"
+          : "provider-profile.html";
+
+      window.location.href = destination;
+
+    } catch (error) {
+      console.error("Google login error:", error);
+
+      googleButton.disabled = false;
+      googleButton.innerHTML =
+        '<span class="google-mark" aria-hidden="true"><span class="blue">G</span></span> Continue with Google';
+
+      formMessage.textContent =
+        "Google login failed. Please try again.";
+
+      formMessage.classList.add("error");
+      formMessage.classList.remove("success");
+    }
+  });
+
+  updateRole(selectedRole);
+</script>
   </body>
 </html>
