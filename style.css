@@ -98,6 +98,7 @@ img {
 
 .brand-text {
   font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+    white-space: nowrap;
 }
 
 .main-nav {
@@ -1216,4 +1217,5 @@ body {
   font-family: "Inter", sans-serif !important;
   font-size: 0.96rem !important;
   font-weight: 600 !important;
+  white-space: nowrap;
 }
