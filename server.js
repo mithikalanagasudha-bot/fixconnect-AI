@@ -6,7 +6,19 @@ const nodemailer = require("nodemailer");
 const app = express();
 
 // Middleware
-app.use(cors());
+// Replace app.use(cors()); with this:
+app.use(
+  cors({
+    origin: [
+      "https://mithikalanagasudha-bot.github.io",
+      "http://localhost:5000",
+      "http://127.0.0.1:5000"
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
+  })
+);
 app.use(express.json());
 
 // In-memory store for OTPs (Use Redis or a database in production)
