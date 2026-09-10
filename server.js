@@ -152,7 +152,7 @@ app.post("/api/auth/reset-password", (req, res) => {
 });
 
 // Start Server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`FixConnect Backend running on port ${PORT}`);
 });
